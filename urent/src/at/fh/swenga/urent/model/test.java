@@ -4,4 +4,5 @@ public class test {
 
 	
 	public String buchsi;
+	public String jonas; 
 }
