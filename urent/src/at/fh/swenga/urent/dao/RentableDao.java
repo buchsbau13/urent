@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.dao.DataAccessException;
@@ -18,24 +18,23 @@ public class RentableDao {
 
 	@PersistenceContext
 	protected EntityManager entityManager;
-	
+
 	public List<Rentable> getRentables() {
-		TypedQuery<Rentable> typedQuery = entityManager.createQuery(
-				"select r from Rentable r", Rentable.class);
-		List<Rentable> typedResultList = typedQuery.getResultList();
-		return typedResultList;
+		Query query = entityManager.createQuery("select r from Rentable r");
+		List<Rentable> resultList = query.getResultList();
+		return resultList;
 	}
-	
+
 	public Rentable getRentable(int i) throws DataAccessException {
 		return entityManager.find(Rentable.class, i);
 	}
 
 	public void persist(Rentable rentable) {
-		entityManager.persist(rentable); 
+		entityManager.persist(rentable);
 	}
 
 	public Rentable merge(Rentable rentable) {
-		return entityManager.merge(rentable); 
+		return entityManager.merge(rentable);
 	}
 
 	public void delete(Rentable rentable) {
