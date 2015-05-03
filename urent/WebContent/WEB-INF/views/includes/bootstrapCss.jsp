@@ -9,9 +9,20 @@
 <!-- Latest compiled and minified JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
 <style type="text/css">
 .container {
 	width: 960px;
+}
+
+.picture-grid {
+	margin-right: 15px;
+	margin-left: 15px;
+}
+
+.table-index {
+	width: 600px;
 }
 
 .masthead {
@@ -34,6 +45,12 @@
 	font-weight: bold;
 	color: white;
 }
+
+.navbar {
+    margin-bottom:0;
+  }
+
+
 }
 }
 </style>
