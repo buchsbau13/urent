@@ -1,6 +1,5 @@
 package at.fh.swenga.urent.model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -12,19 +11,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 @Entity
-public class Category implements Serializable {
-
-	private static final long serialVersionUID = -6101910788088567320L;
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id; 
-	
-	private String name; 
-	
+	private int id;
+
+	private String name;
+
 	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-	private Set<Rentable> rentables; 
-	
+	private Set<Rentable> rentables;
+
 	@Version
 	private long version;
 
@@ -59,10 +56,5 @@ public class Category implements Serializable {
 	public void setRentables(Set<Rentable> rentables) {
 		this.rentables = rentables;
 	}
-	
-	
-	
-	
-	
-	
+
 }

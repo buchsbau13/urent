@@ -1,9 +1,8 @@
 package at.fh.swenga.urent.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,37 +39,19 @@ public class IndexController {
 
 	}
 
-	@RequestMapping("/fill")
-	@Transactional
-	public String fillData(Model model) {
-		Category sport = categoryDao.getCategory("Sport");
-		if (sport == null)
-			sport = new Category("Sport");
-
-		Category music = categoryDao.getCategory("Music");
-		if (music == null)
-			music = new Category("Music");
-
-		Category hobbies = categoryDao.getCategory("Hobbies");
-		if (hobbies == null)
-			hobbies = new Category("Hobbies");
-
-		Rentable rentable01 = new Rentable("Test1", "Test Test Test", 25.55);
-		rentable01.setCategory(hobbies);
-		rentableDao.persist(rentable01);
-
-		return "forward:/list";
-	}
-
 	@RequestMapping(value = "/newRentable", method = RequestMethod.GET)
 	public String showNewRentableForm(Model model) {
+
+		List<Category> categories = new ArrayList<Category>();
+
+		categories.add(new Category("Hobby"));
+		categories.add(new Category("Sport"));
+		categories.add(new Category("Music"));
+		model.addAttribute("categories", categories);
+
 		return "newRentable";
 	}
 
-	/**
-	 * Get data from web page (post-request), create an Employee model and save
-	 * it
-	 */
 	@RequestMapping(value = "/newRentable", method = RequestMethod.POST)
 	public String newRentable(@Valid @ModelAttribute Rentable newRentable,
 			BindingResult bindingResult, Model model) {
@@ -90,8 +71,8 @@ public class IndexController {
 			model.addAttribute("errorMessage", "Rentable already exists!<br>");
 		} else {
 			rentableDao.persist(newRentable);
-			model.addAttribute("message",
-					"New Rentable " + newRentable.getId() + " added.");
+			model.addAttribute("message", "New Rentable " + newRentable.getId()
+					+ " added.");
 		}
 
 		return "forward:/list";

@@ -26,6 +26,7 @@ public class Rentable implements Serializable {
 
 	// private String owner;
 
+
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Category category;
 
@@ -37,8 +38,9 @@ public class Rentable implements Serializable {
 
 	// Bild
 
-	/*@OneToOne
-	private Rating rating;*/
+	/*
+	 * @OneToOne private Rating rating;
+	 */
 
 	@Column(nullable = false)
 	private double price;
@@ -48,12 +50,14 @@ public class Rentable implements Serializable {
 	public Rentable() {
 	}
 
-	public Rentable(String title, String description, double price) {
-		super();;
+	public Rentable(Category category, String title, String description, double price) {
+		super();
+		this.category = category; 
 		this.title = title;
 		this.description = description;
 		this.price = price;
 	}
+	
 
 	public int getId() {
 		return id;
@@ -87,13 +91,11 @@ public class Rentable implements Serializable {
 		this.description = description;
 	}
 
-	/*public Rating getRating() {
-		return rating;
-	}
-
-	public void setRating(Rating rating) {
-		this.rating = rating;
-	}*/
+	/*
+	 * public Rating getRating() { return rating; }
+	 * 
+	 * public void setRating(Rating rating) { this.rating = rating; }
+	 */
 
 	public double getPrice() {
 		return price;

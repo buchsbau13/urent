@@ -13,22 +13,26 @@
 <title>u.rent</title>
 </head>
 <body>
-<!-- 	<div class="masthead"> -->
-<!-- 		<div class="container"> -->
+	<!-- 	<div class="masthead"> -->
+	<!-- 		<div class="container"> -->
 
-			<nav class="navbar navbar-inverse"> 
-			<div class="container-fluid">
-			<div class="navbar-header">
-			<a class="navbar-brand" href="#">uRent</a></div>
-			<div>
-			<ul class="nav navbar-nav navbar-right">
-			<li><a href="./login" class="nav-item"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-			<li><a href="Sign Up" class="nav-item"><span class="glyphicon glyphicon-user"></span> Sign Up</a> </li>
-			<li><a href="./newRentable" class="nav-item"><span class="glyphicon glyphicon-plus"></span> New Rentable</a></li>
-			</ul>
-			</nav>
-			</ul>
+	<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">uRent</a>
 		</div>
+		<div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="./login" class="nav-item"><span
+						class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+				<li><a href="Sign Up" class="nav-item"><span
+						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="./newRentable" class="nav-item"><span
+						class="glyphicon glyphicon-plus"></span> New Rentable</a></li>
+			</ul>
+	</nav>
+	</ul>
+	</div>
 
 
 
@@ -65,12 +69,6 @@
 		</div>
 	</div>
 	<center>
-
-		<br>
-
-		<button type="button" class="btn btn-warning btn-lg">
-			<a href="fill">Fill Sample Data</a>
-		</button>
 
 		<!--  list all persons ----------------------------------------------------------- -->
 		<h1>Rentables</h1>
