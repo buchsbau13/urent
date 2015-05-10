@@ -1,8 +1,8 @@
 package at.fh.swenga.urent.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ import at.fh.swenga.urent.dao.CategoryDao;
 import at.fh.swenga.urent.dao.RentableDao;
 import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
+import at.fh.swenga.urent.model.RentableForm;
 
 @Controller
 public class IndexController {
@@ -39,21 +40,41 @@ public class IndexController {
 
 	}
 
+	@RequestMapping("/init")
+	@Transactional
+	public String init(Model model) {
+
+		Category hobby = categoryDao.getCategory("Hobby");
+		if (hobby == null)
+			hobby = new Category("Hobby");
+		categoryDao.persist(hobby);
+
+		Category sport = categoryDao.getCategory("Sport");
+		if (sport == null)
+			sport = new Category("Sport");
+		categoryDao.persist(sport);
+
+		Category music = categoryDao.getCategory("Music");
+		if (music == null)
+			music = new Category("Music");
+		categoryDao.persist(music);
+
+		return "forward:/list";
+
+	}
+
 	@RequestMapping(value = "/newRentable", method = RequestMethod.GET)
 	public String showNewRentableForm(Model model) {
 
-		List<Category> categories = new ArrayList<Category>();
-
-		categories.add(new Category("Hobby"));
-		categories.add(new Category("Sport"));
-		categories.add(new Category("Music"));
+		List<Category> categories = categoryDao.getCategories();
 		model.addAttribute("categories", categories);
-
+		model.addAttribute("command", new RentableForm());
 		return "newRentable";
 	}
 
 	@RequestMapping(value = "/newRentable", method = RequestMethod.POST)
-	public String newRentable(@Valid @ModelAttribute Rentable newRentable,
+	public String newRentable(
+			@Valid @ModelAttribute RentableForm newRentableForm,
 			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
@@ -65,17 +86,26 @@ public class IndexController {
 			return "forward:/list";
 		}
 
-		Rentable rentable = rentableDao.getRentable(newRentable.getId());
-
-		if (rentable != null) {
-			model.addAttribute("errorMessage", "Rentable already exists!<br>");
-		} else {
-			rentableDao.persist(newRentable);
-			model.addAttribute("message", "New Rentable " + newRentable.getId()
-					+ " added.");
-		}
+		Rentable rentable = new Rentable();
+		rentable.setTitle(newRentableForm.getTitle());
+		Category category = categoryDao.getCategoryId(newRentableForm
+				.getCategoryId());
+		rentable.setCategory(category);
+		rentable.setDescription(newRentableForm.getDescription());
+		rentable.setPrice(newRentableForm.getPrice());
+		rentableDao.persist(rentable);
 
 		return "forward:/list";
+	}
+
+	@RequestMapping("/categorySport")
+	public String showCategorySport(Model model) {
+
+		List<Rentable> rentables = rentableDao.searchRentables("Sport");
+		model.addAttribute("rentables", rentables);
+
+		return "categorySport";
+
 	}
 
 	@RequestMapping("/delete")

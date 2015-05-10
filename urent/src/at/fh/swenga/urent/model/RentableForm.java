@@ -2,21 +2,16 @@ package at.fh.swenga.urent.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
-@Entity
-public class Rentable implements Serializable {
+public class RentableForm implements Serializable{
 
-	private static final long serialVersionUID = -2890486897223592187L;
-
+	private static final long serialVersionUID = 5881114270120151424L;
+	
 	@Version
 	private long version;
 
@@ -24,38 +19,35 @@ public class Rentable implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	// private String owner;
-
-	@ManyToOne(cascade = CascadeType.MERGE)
-	private Category category;
-
+	private int categoryId; 
+	
 	@Column(nullable = false, length = 50)
 	private String title;
 
 	@Column(nullable = false)
 	private String description;
-
-	// Bild
-
-	/*
-	 * @OneToOne private Rating rating;
-	 */
-
+	
 	@Column(nullable = false)
 	private double price;
 
-	// Verfügbarkeit
-
-	public Rentable() {
+	public RentableForm() {
 	}
 
-	public Rentable(Category category, String title, String description,
+	public RentableForm(int categoryId, String title, String description,
 			double price) {
 		super();
-		this.category = category;
+		this.categoryId = categoryId;
 		this.title = title;
 		this.description = description;
 		this.price = price;
+	}
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
 	}
 
 	public int getId() {
@@ -66,12 +58,12 @@ public class Rentable implements Serializable {
 		this.id = id;
 	}
 
-	public Category getCategory() {
-		return category;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getTitle() {
@@ -90,12 +82,6 @@ public class Rentable implements Serializable {
 		this.description = description;
 	}
 
-	/*
-	 * public Rating getRating() { return rating; }
-	 * 
-	 * public void setRating(Rating rating) { this.rating = rating; }
-	 */
-
 	public double getPrice() {
 		return price;
 	}
@@ -103,5 +89,8 @@ public class Rentable implements Serializable {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	
+	
 
 }

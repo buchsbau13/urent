@@ -5,11 +5,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
 
 @Repository
@@ -37,6 +39,7 @@ public class RentableDao {
 		return entityManager.merge(rentable);
 	}
 
+
 	public void delete(Rentable rentable) {
 		entityManager.remove(rentable);
 	}
@@ -51,6 +54,16 @@ public class RentableDao {
 		Rentable rentable = getRentable(id);
 		if (rentable != null)
 			delete(rentable);
+	}
+	
+	public List<Rentable> searchRentables(String category) {
+		TypedQuery<Rentable> typedQuery = entityManager
+				.createQuery(
+						"select r from Rentable r where r.category.name like :search",
+						Rentable.class);
+		typedQuery.setParameter("search", category);
+		List<Rentable> typedResultList = typedQuery.getResultList();
+		return typedResultList;
 	}
 
 }

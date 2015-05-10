@@ -43,4 +43,13 @@ public class CategoryDao {
 		}
 	}
 
+	public void persist(Category category) {
+		entityManager.persist(category);
+
+	}
+
+	public Category getCategoryId(int categoryId) {
+		return entityManager.getReference(Category.class, categoryId); 
+	}
+
 }

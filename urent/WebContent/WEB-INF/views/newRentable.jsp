@@ -4,8 +4,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,7 +19,7 @@
 
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<form class="form-horizontal" method="post" action="${formAction}">
+			<form:form class="form-horizontal" method="post" action="${formAction}">
 				<fieldset>
 					<legend>${legend}</legend>
 
@@ -27,8 +28,9 @@
 						<label for="inputCategory" class="col-md-2 control-label">Category</label>
 						<div class="col-md-10">
 
-							<form:select path="categories">
-								<form:option value="NONE" label="--- Select ---" />
+
+							<form:select path="categoryId">
+								<form:option value="0" label="--- Select ---" />
 								<form:options items="${categories}" itemValue="id"
 									itemLabel="name" />
 							</form:select>
@@ -74,7 +76,7 @@
 				</fieldset>
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
-			</form>
+			</form:form>
 		</div>
 	</div>
 
