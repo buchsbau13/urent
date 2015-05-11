@@ -30,13 +30,10 @@
 				<li><a href="./newRentable" class="nav-item"><span
 						class="glyphicon glyphicon-plus"></span> New Rentable</a></li>
 			</ul>
+		</div>
+	</div>
 	</nav>
-	</ul>
-	</div>
 
-
-
-	</div>
 	<div class="jumbotron">
 		<div class="container">
 			<div class="page-header">
@@ -117,8 +114,8 @@
 
 		<div class="row">
 			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categorySport"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
+				<a href="./categorySport"> <img
+					src="http://placehold.it/800x600" class="thumbnail img-responsive">
 				</a>
 			</div>
 			<div class="col-lg-4 col-sm-6 col-xs-12">

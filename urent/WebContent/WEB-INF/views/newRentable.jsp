@@ -6,7 +6,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,9 +17,28 @@
 </head>
 <body>
 
+	<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">uRent</a>
+		</div>
+		<div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="./login" class="nav-item"><span
+						class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+				<li><a href="Sign Up" class="nav-item"><span
+						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				<li><a href="./newRentable" class="nav-item"><span
+						class="glyphicon glyphicon-plus"></span> New Rentable</a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<form:form class="form-horizontal" method="post" action="${formAction}">
+			<form:form class="form-horizontal" method="post"
+				action="${formAction}">
 				<fieldset>
 					<legend>${legend}</legend>
 
