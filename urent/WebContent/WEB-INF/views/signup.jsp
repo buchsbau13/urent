@@ -10,11 +10,9 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
 <jsp:include page="includes/bootstrapMeta.jsp" />
-<title>New Rentable</title>
+<title>Sign up</title>
 <jsp:include page="includes/bootstrapCss.jsp" />
-</head>
 <body>
 
 	<nav class="navbar navbar-inverse">
@@ -42,43 +40,38 @@
 				<fieldset>
 					<legend>${legend}</legend>
 
-					<! ----------------  category ---------------- -->
+					<! ---------------  username ---------------- -->
 					<div class="form-group">
-						<label for="inputCategory" class="col-md-2 control-label">Category</label>
+						<label for="inputUsername" class="col-md-2 control-label">Username</label>
 						<div class="col-md-10">
-
-
-							<form:select path="categoryId">
-								<form:option value="0" label="--- Select ---" />
-								<form:options items="${categories}" itemValue="id"
-									itemLabel="name" />
-							</form:select>
+							<input class="form-control" id="inputUsername" type="text"
+								name="username" value="<c:out value="${user.username}"/>">
 						</div>
 					</div>
-					<! ----------------  title ---------------- -->
+					<! ----------------  email  ---------------- -->
 					<div class="form-group">
-						<label for="inputTitel" class="col-md-2 control-label">Title</label>
+						<label for="inputEmail" class="col-md-2 control-label">E-Mail</label>
 						<div class="col-md-10">
-							<input class="form-control" id="inputTitle" type="text"
-								name="title" value="<c:out value="${rentable.title}"/>">
-						</div>
-					</div>
-					<! ----------------  description  ---------------- -->
-					<div class="form-group">
-						<label for="inputDescription" class="col-md-2 control-label">Description</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputDescription" type="text"
-								name="description"
-								value="<c:out value="${rentable.description}"/>">
+							<input class="form-control" id="inputEmail" type="text"
+								name="email" value="<c:out value="${user.email}"/>">
 						</div>
 					</div>
 
-					<! ----------------  price  ---------------- -->
+					<! ----------------  password  ---------------- -->
 					<div class="form-group">
-						<label for="inputPrice" class="col-md-2 control-label">Price</label>
+						<label for="inputPassword" class="col-md-2 control-label">Password</label>
 						<div class="col-md-10">
-							<input class="form-control" id="inputPrice" type="text"
-								name="price" value="<c:out value="${rentable.price}"/>">
+							<input class="form-control" id="inputPassword" type="text"
+								name="password" value="<c:out value="${user.password}"/>">
+						</div>
+					</div>
+
+					<! ----------------  password  ---------------- -->
+					<div class="form-group">
+						<label for="inputPassword" class="col-md-2 control-label">Password again</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputPassword" type="text"
+								name="password_again" value="<c:out value="${user.password_again}"/>">
 						</div>
 					</div>
 
@@ -99,7 +92,7 @@
 		</div>
 	</div>
 
-	</div>
+
 	<!--  End of container -->
 
 </body>

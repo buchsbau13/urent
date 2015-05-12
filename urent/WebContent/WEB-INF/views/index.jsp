@@ -25,7 +25,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="./login" class="nav-item"><span
 						class="glyphicon glyphicon-log-in"></span> Log In</a></li>
-				<li><a href="Sign Up" class="nav-item"><span
+				<li><a href="./signup" class="nav-item"><span
 						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 				<li><a href="./newRentable" class="nav-item"><span
 						class="glyphicon glyphicon-plus"></span> New Rentable</a></li>

@@ -44,10 +44,10 @@ public class IndexController {
 	@Transactional
 	public String init(Model model) {
 
-		Category hobby = categoryDao.getCategory("Hobby");
-		if (hobby == null)
-			hobby = new Category("Hobby");
-		categoryDao.persist(hobby);
+		Category entertainment = categoryDao.getCategory("Entertainment");
+		if (entertainment == null)
+			entertainment = new Category("Entertainment");
+		categoryDao.persist(entertainment);
 
 		Category sport = categoryDao.getCategory("Sport");
 		if (sport == null)
@@ -58,7 +58,27 @@ public class IndexController {
 		if (music == null)
 			music = new Category("Music");
 		categoryDao.persist(music);
+		
+		Category kitchen = categoryDao.getCategory("Kitchen");
+		if (kitchen == null)
+			kitchen = new Category("Kitchen");
+		categoryDao.persist(kitchen);
 
+		Category garden = categoryDao.getCategory("Garden");
+		if (garden == null)
+			garden = new Category("Garden");
+		categoryDao.persist(garden);
+		
+		Category tools = categoryDao.getCategory("Tools");
+		if (tools == null)
+			tools = new Category("Tools");
+		categoryDao.persist(tools);
+		
+		Category hobby = categoryDao.getCategory("Hobby");
+		if (hobby == null)
+			hobby = new Category("Hobby");
+		categoryDao.persist(hobby);
+		
 		return "forward:/list";
 
 	}
