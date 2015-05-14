@@ -48,14 +48,6 @@
 								name="username" value="<c:out value="${user.username}"/>">
 						</div>
 					</div>
-					<! ----------------  email  ---------------- -->
-					<div class="form-group">
-						<label for="inputEmail" class="col-md-2 control-label">E-Mail</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputEmail" type="text"
-								name="email" value="<c:out value="${user.email}"/>">
-						</div>
-					</div>
 
 					<! ----------------  password  ---------------- -->
 					<div class="form-group">
@@ -68,10 +60,12 @@
 
 					<! ----------------  password  ---------------- -->
 					<div class="form-group">
-						<label for="inputPassword" class="col-md-2 control-label">Password again</label>
+						<label for="inputPassword" class="col-md-2 control-label">Password
+							again</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputPassword" type="text"
-								name="password_again" value="<c:out value="${user.password_again}"/>">
+								name="password_again"
+								value="<c:out value="${user.password_again}"/>">
 						</div>
 					</div>
 

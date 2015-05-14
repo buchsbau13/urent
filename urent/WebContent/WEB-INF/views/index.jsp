@@ -50,10 +50,10 @@
 					<blockquote align="center">
 						<p align="center">Urent is a great way to convert your
 							belongings in some Money</p>
-						<footer>By Julia Buchsbaum</footer>
+						<footer>By Christoph Fuchsjäger</footer>
 					</blockquote>
 					<pre>
-				"Money is not everything. Money is the only thing" - by Julia Buchsbaum</pre>
+				"Money is not everything. Money is the only thing" - by Christoph Fuchsjäger</pre>
 
 
 				</div>

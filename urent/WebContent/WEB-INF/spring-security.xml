@@ -6,9 +6,9 @@
 
 	<http>
 		<csrf />
-		<intercept-url pattern="/*" access="permitAll" />
+		<intercept-url pattern="/**" access="permitAll" />
 		<form-login login-page="/login" />
-		<logout logout-url="/logout" />
+		<logout logout-success-url="/login" logout-url="/logout" />
 	</http>
 
 	<authentication-manager>
