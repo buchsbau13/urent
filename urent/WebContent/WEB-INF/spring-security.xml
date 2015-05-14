@@ -6,7 +6,8 @@
 
 	<http>
 		<csrf />
-		<intercept-url pattern="/**" access="permitAll" />
+		<intercept-url pattern="/newRentable"
+			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<form-login login-page="/login" />
 		<logout logout-success-url="/login" logout-url="/logout" />
 	</http>

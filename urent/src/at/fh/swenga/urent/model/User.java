@@ -19,7 +19,9 @@ public class User implements java.io.Serializable {
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
-
+	private Set<Rentable> rentables;
+	
+	
 	public User() {
 	}
 
@@ -42,6 +44,8 @@ public class User implements java.io.Serializable {
 	public String getUsername() {
 		return username;
 	}
+	
+	
 
 	public void setUsername(String username) {
 		this.username = username;
@@ -73,4 +77,15 @@ public class User implements java.io.Serializable {
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
 	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	public Set<Rentable> getRentables() {
+		return rentables;
+	}
+
+	public void setRentables(Set<Rentable> rentables) {
+		this.rentables = rentables;
+	}
+	
+	
 }

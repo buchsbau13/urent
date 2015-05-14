@@ -1,5 +1,6 @@
 package at.fh.swenga.urent.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import at.fh.swenga.urent.dao.CategoryDao;
 import at.fh.swenga.urent.dao.RentableDao;
+import at.fh.swenga.urent.dao.UserDao;
 import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.RentableForm;
+import at.fh.swenga.urent.model.User;
 
 @Controller
 public class IndexController {
@@ -29,6 +32,9 @@ public class IndexController {
 
 	@Autowired
 	CategoryDao categoryDao;
+	
+	@Autowired
+	UserDao userDao; 
 
 	@RequestMapping(value = { "/", "list" })
 	public String index(Model model) {
@@ -95,7 +101,7 @@ public class IndexController {
 	@RequestMapping(value = "/newRentable", method = RequestMethod.POST)
 	public String newRentable(
 			@Valid @ModelAttribute RentableForm newRentableForm,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Principal principal, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
@@ -105,11 +111,15 @@ public class IndexController {
 			model.addAttribute("errorMessage", errorMessage);
 			return "forward:/list";
 		}
+		
+		String name = principal.getName();
+		User currentUser = userDao.getUser(name); 
 
 		Rentable rentable = new Rentable();
 		rentable.setTitle(newRentableForm.getTitle());
 		Category category = categoryDao.getCategoryId(newRentableForm
 				.getCategoryId());
+		rentable.setUser(currentUser);
 		rentable.setCategory(category);
 		rentable.setDescription(newRentableForm.getDescription());
 		rentable.setPrice(newRentableForm.getPrice());

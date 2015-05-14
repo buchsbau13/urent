@@ -24,7 +24,8 @@ public class Rentable implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	// private String owner;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	private User user;
 
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Category category;
@@ -49,9 +50,10 @@ public class Rentable implements Serializable {
 	public Rentable() {
 	}
 
-	public Rentable(Category category, String title, String description,
+	public Rentable(User user, Category category, String title, String description,
 			double price) {
 		super();
+		this.user = user; 
 		this.category = category;
 		this.title = title;
 		this.description = description;
@@ -64,6 +66,14 @@ public class Rentable implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Category getCategory() {

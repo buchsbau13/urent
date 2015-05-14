@@ -22,6 +22,8 @@
 						placeholder="Password" required name="password">
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 						in</button>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
 				</form>
 			</div>
 		</div>
