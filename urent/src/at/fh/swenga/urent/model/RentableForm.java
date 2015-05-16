@@ -29,17 +29,20 @@ public class RentableForm implements Serializable{
 	
 	@Column(nullable = false)
 	private double price;
+	
+	private byte[] image; 
 
 	public RentableForm() {
 	}
 
 	public RentableForm(int categoryId, String title, String description,
-			double price) {
+			double price, byte[] image) {
 		super();
 		this.categoryId = categoryId;
 		this.title = title;
 		this.description = description;
 		this.price = price;
+		this.image = image; 
 	}
 
 	public long getVersion() {
@@ -88,6 +91,14 @@ public class RentableForm implements Serializable{
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 	
 	

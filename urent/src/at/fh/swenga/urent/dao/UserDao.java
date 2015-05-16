@@ -15,9 +15,14 @@ public class UserDao {
 
 	@PersistenceContext
 	protected EntityManager entityManager;
-	
+
 	public User getUser(String name) throws DataAccessException {
 		return entityManager.find(User.class, name);
+	}
+
+	public void persist(User user) {
+		entityManager.persist(user);
+
 	}
 
 }

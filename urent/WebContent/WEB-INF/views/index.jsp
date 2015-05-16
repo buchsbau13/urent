@@ -22,7 +22,7 @@
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">uRent</a>
+			<a class="navbar-brand" href="./">uRent</a>
 		</div>
 		<div>
 			<ul class="nav navbar-nav navbar-right">
@@ -34,6 +34,10 @@
 						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 						<a href="./newRentable" class="nav-item"><span
 							class="glyphicon glyphicon-plus"></span> New Rentable</a>
+					</sec:authorize></li>
+				<li><sec:authorize
+						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+						<a href="./dashboard" class="nav-item"> Dashboard</a>
 					</sec:authorize></li>
 			</ul>
 		</div>
@@ -90,6 +94,7 @@
 							<th>Title</th>
 							<th>Description</th>
 							<th>Price</th>
+							<th>Image</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -101,6 +106,7 @@
 								<td class="col-md-1">${rentable.title}</td>
 								<td class="col-md-1">${rentable.description}</td>
 								<td class="col-md-1">${rentable.price}</td>
+								<td class="col-md-1"><img src="getImage/<c:out value="${rentable.id}"/>.do" height="75px" width="75px"/></td>
 								<td class="col-md-1"><a href="delete?id=${rentable.id}">Delete</a></td>
 							</tr>
 						</c:forEach>

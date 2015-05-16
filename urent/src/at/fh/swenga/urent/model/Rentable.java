@@ -2,14 +2,16 @@ package at.fh.swenga.urent.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 @Entity
@@ -36,7 +38,10 @@ public class Rentable implements Serializable {
 	@Column(nullable = false)
 	private String description;
 
-	// Bild
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(length = 100000)
+	private byte[] image;
 
 	/*
 	 * @OneToOne private Rating rating;
@@ -50,14 +55,15 @@ public class Rentable implements Serializable {
 	public Rentable() {
 	}
 
-	public Rentable(User user, Category category, String title, String description,
-			double price) {
+	public Rentable(User user, Category category, String title,
+			String description, double price, byte[] image) {
 		super();
-		this.user = user; 
+		this.user = user;
 		this.category = category;
 		this.title = title;
 		this.description = description;
 		this.price = price;
+		this.image = image;
 	}
 
 	public int getId() {
@@ -112,6 +118,14 @@ public class Rentable implements Serializable {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] bs) {
+		this.image = bs;
 	}
 
 }

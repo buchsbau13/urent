@@ -35,13 +35,12 @@
 
 
 
-	<!-- Doesn't work 
-	<mvc:annotation-driven /> <bean class="org.springframework.data.web.config.SpringDataWebConfiguration" /> 
-	-->
+	<!-- Doesn't work <mvc:annotation-driven /> <bean class="org.springframework.data.web.config.SpringDataWebConfiguration" 
+		/> -->
 
 
-	<!-- This is a replacement -> Copy and Paste for the project, it is a workaround --> 
-	
+	<!-- This is a replacement -> Copy and Paste for the project, it is a workaround -->
+
 	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
@@ -49,7 +48,15 @@
 		class="org.springframework.data.repository.support.DomainClassConverter">
 		<constructor-arg ref="conversionService" />
 	</bean>
-	
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="10000000">
+		</property>
+	</bean>
+
 	<mvc:annotation-driven conversion-service="conversionService">
 		<mvc:argument-resolvers>
 			<ref bean="sortResolver" />
@@ -78,9 +85,6 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
-
-
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

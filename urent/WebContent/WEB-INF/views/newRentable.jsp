@@ -20,7 +20,7 @@
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">uRent</a>
+			<a class="navbar-brand" href="./">uRent</a>
 		</div>
 		<div>
 			<ul class="nav navbar-nav navbar-right">
@@ -38,7 +38,8 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<form:form class="form-horizontal" method="post"
-				action="${formAction}">
+				action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
+				enctype="multipart/form-data">
 				<fieldset>
 					<legend>${legend}</legend>
 
@@ -82,6 +83,16 @@
 						</div>
 					</div>
 
+					<! ----------------  image  ---------------- -->
+					<div class="form-group">
+						<label for="inputImage" class="col-md-2 control-label">Image</label>
+						<div class="col-md-10">
+							<input type="file" name="file">
+							<c:out value="${rentable.image}" />
+						</div>
+					</div>
+
+
 					<! ----------------  buttons ---------------- -->
 					<div class="form-group">
 						<div class="col-md-10 col-md-offset-2">
@@ -91,10 +102,7 @@
 							</a>
 						</div>
 					</div>
-
 				</fieldset>
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
 			</form:form>
 		</div>
 	</div>

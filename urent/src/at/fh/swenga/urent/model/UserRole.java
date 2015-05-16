@@ -20,6 +20,15 @@ public class UserRole implements java.io.Serializable {
 	private User user;
 	private String role;
 
+	public UserRole() {
+	}
+
+	public UserRole(User user, String role) {
+		super();
+		this.user = user;
+		this.role = role;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_role_id", unique = true, nullable = false)

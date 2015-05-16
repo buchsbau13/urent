@@ -65,5 +65,15 @@ public class RentableDao {
 		List<Rentable> typedResultList = typedQuery.getResultList();
 		return typedResultList;
 	}
+	
+	public List<Rentable> userRentables(String user) {
+		TypedQuery<Rentable> typedQuery = entityManager
+				.createQuery(
+						"select r from Rentable r where r.user.name like :search",
+						Rentable.class);
+		typedQuery.setParameter("search", user);
+		List<Rentable> typedResultList = typedQuery.getResultList();
+		return typedResultList;
+	}
 
 }

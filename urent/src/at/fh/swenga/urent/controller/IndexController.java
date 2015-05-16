@@ -1,8 +1,11 @@
 package at.fh.swenga.urent.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -12,17 +15,21 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import at.fh.swenga.urent.dao.CategoryDao;
 import at.fh.swenga.urent.dao.RentableDao;
 import at.fh.swenga.urent.dao.UserDao;
+import at.fh.swenga.urent.dao.UserRoleDao;
 import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.RentableForm;
 import at.fh.swenga.urent.model.User;
+import at.fh.swenga.urent.model.UserRole;
 
 @Controller
 public class IndexController {
@@ -32,9 +39,12 @@ public class IndexController {
 
 	@Autowired
 	CategoryDao categoryDao;
-	
+
 	@Autowired
-	UserDao userDao; 
+	UserDao userDao;
+
+	@Autowired
+	UserRoleDao userRoleDao;
 
 	@RequestMapping(value = { "/", "list" })
 	public String index(Model model) {
@@ -43,7 +53,18 @@ public class IndexController {
 		model.addAttribute("rentables", rentables);
 
 		return "index";
+	}
 
+	@RequestMapping(value = "/getImage/{id}")
+	public void showImage(HttpServletResponse response,
+			@PathVariable("id") int rentableId) throws IOException {
+
+		Rentable rentable = rentableDao.getRentable(rentableId);
+		response.setContentType("image/jpeg");
+		OutputStream out = response.getOutputStream(); 
+		out.write(rentable.getImage());
+		out.flush(); 
+		
 	}
 
 	@RequestMapping("/init")
@@ -64,7 +85,7 @@ public class IndexController {
 		if (music == null)
 			music = new Category("Music");
 		categoryDao.persist(music);
-		
+
 		Category kitchen = categoryDao.getCategory("Kitchen");
 		if (kitchen == null)
 			kitchen = new Category("Kitchen");
@@ -74,17 +95,56 @@ public class IndexController {
 		if (garden == null)
 			garden = new Category("Garden");
 		categoryDao.persist(garden);
-		
+
 		Category tools = categoryDao.getCategory("Tools");
 		if (tools == null)
 			tools = new Category("Tools");
 		categoryDao.persist(tools);
-		
+
 		Category hobby = categoryDao.getCategory("Hobby");
 		if (hobby == null)
 			hobby = new Category("Hobby");
 		categoryDao.persist(hobby);
-		
+
+		User admin = userDao.getUser("admin");
+		if (admin == null)
+			admin = new User(
+					"admin",
+					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
+					true);
+		userDao.persist(admin);
+
+		UserRole roleAdmin1 = new UserRole(admin, "ROLE_ADMIN");
+		userRoleDao.persist(roleAdmin1);
+
+		UserRole roleUser1 = new UserRole(admin, "ROLE_USER");
+		userRoleDao.persist(roleUser1);
+
+		User user = userDao.getUser("user");
+		if (user == null)
+			user = new User(
+					"user",
+					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
+					true);
+		userDao.persist(user);
+
+		UserRole roleUser2 = new UserRole(user, "ROLE_USER");
+		userRoleDao.persist(roleUser2);
+
+		User julia = userDao.getUser("julia");
+		if (julia == null)
+			julia = new User(
+					"julia",
+					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
+					true);
+		userDao.persist(julia);
+
+		UserRole roleAdmin2 = new UserRole(julia, "ROLE_ADMIN");
+		userRoleDao.persist(roleAdmin2);
+
+		UserRole roleUser3 = new UserRole(julia, "ROLE_USER");
+		userRoleDao.persist(roleUser3);
+
 		return "forward:/list";
 
 	}
@@ -101,7 +161,9 @@ public class IndexController {
 	@RequestMapping(value = "/newRentable", method = RequestMethod.POST)
 	public String newRentable(
 			@Valid @ModelAttribute RentableForm newRentableForm,
-			BindingResult bindingResult, Principal principal, Model model) {
+			BindingResult bindingResult, Principal principal,
+			@RequestParam("file") MultipartFile file, Model model)
+			throws IOException {
 
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
@@ -111,19 +173,27 @@ public class IndexController {
 			model.addAttribute("errorMessage", errorMessage);
 			return "forward:/list";
 		}
-		
-		String name = principal.getName();
-		User currentUser = userDao.getUser(name); 
 
-		Rentable rentable = new Rentable();
-		rentable.setTitle(newRentableForm.getTitle());
-		Category category = categoryDao.getCategoryId(newRentableForm
-				.getCategoryId());
-		rentable.setUser(currentUser);
-		rentable.setCategory(category);
-		rentable.setDescription(newRentableForm.getDescription());
-		rentable.setPrice(newRentableForm.getPrice());
-		rentableDao.persist(rentable);
+		String name = principal.getName();
+		User currentUser = userDao.getUser(name);
+
+		if (!file.isEmpty()) {
+			byte[] image = file.getBytes();
+
+			Rentable rentable = new Rentable();
+			rentable.setTitle(newRentableForm.getTitle());
+			Category category = categoryDao.getCategoryId(newRentableForm
+					.getCategoryId());
+			rentable.setUser(currentUser);
+			rentable.setImage(image);
+			rentable.setCategory(category);
+			rentable.setDescription(newRentableForm.getDescription());
+			rentable.setPrice(newRentableForm.getPrice());
+
+			rentableDao.persist(rentable);
+
+			return "forward:/list";
+		}
 
 		return "forward:/list";
 	}
