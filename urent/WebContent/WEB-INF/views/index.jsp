@@ -131,48 +131,38 @@
 
 		<div class="row">
 			<div class="col-lg-4 col-sm-6 col-xs-12">
+				<a href="./categoryEntertainment"> <img
+					src="http://placehold.it/800x600" class="thumbnail img-responsive">
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6 col-xs-12">
+				<a href="./categoryGarden"> <img
+					src="http://placehold.it/800x600" class="thumbnail img-responsive">
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6 col-xs-12">
+				<a href="./categoryHobby"> <img
+					src="http://placehold.it/800x600" class="thumbnail img-responsive">
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6 col-xs-12">
+				<a href="./categoryKitchen"> <img
+					src="http://placehold.it/800x600" class="thumbnail img-responsive">
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6 col-xs-12">
+				<a href="./categoryMusic"> <img
+					src="http://placehold.it/800x600" class="thumbnail img-responsive">
+				</a>
+			</div>
+			<div class="col-lg-4 col-sm-6 col-xs-12">
 				<a href="./categorySport"> <img
 					src="http://placehold.it/800x600" class="thumbnail img-responsive">
 				</a>
 			</div>
 			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="#"> <img src="http://placehold.it/800x600"
-					class="thumbnail img-responsive">
+				<a href="./categoryTools"> <img
+					src="http://placehold.it/800x600" class="thumbnail img-responsive">
 				</a>
 			</div>
 		</div>

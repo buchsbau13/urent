@@ -1,10 +1,14 @@
 package at.fh.swenga.urent.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -77,35 +81,35 @@ public class IndexController {
 			entertainment = new Category("Entertainment");
 		categoryDao.persist(entertainment);
 
-		Category sport = categoryDao.getCategory("Sport");
-		if (sport == null)
-			sport = new Category("Sport");
-		categoryDao.persist(sport);
+		Category garden = categoryDao.getCategory("Garden");
+		if (garden == null)
+			garden = new Category("Garden");
+		categoryDao.persist(garden);
 
-		Category music = categoryDao.getCategory("Music");
-		if (music == null)
-			music = new Category("Music");
-		categoryDao.persist(music);
+		Category hobby = categoryDao.getCategory("Hobby");
+		if (hobby == null)
+			hobby = new Category("Hobby");
+		categoryDao.persist(hobby);
 
 		Category kitchen = categoryDao.getCategory("Kitchen");
 		if (kitchen == null)
 			kitchen = new Category("Kitchen");
 		categoryDao.persist(kitchen);
 
-		Category garden = categoryDao.getCategory("Garden");
-		if (garden == null)
-			garden = new Category("Garden");
-		categoryDao.persist(garden);
+		Category music = categoryDao.getCategory("Music");
+		if (music == null)
+			music = new Category("Music");
+		categoryDao.persist(music);
+
+		Category sport = categoryDao.getCategory("Sport");
+		if (sport == null)
+			sport = new Category("Sport");
+		categoryDao.persist(sport);
 
 		Category tools = categoryDao.getCategory("Tools");
 		if (tools == null)
 			tools = new Category("Tools");
 		categoryDao.persist(tools);
-
-		Category hobby = categoryDao.getCategory("Hobby");
-		if (hobby == null)
-			hobby = new Category("Hobby");
-		categoryDao.persist(hobby);
 
 		User admin = userDao.getUser("admin");
 		if (admin == null)
@@ -179,7 +183,12 @@ public class IndexController {
 		User currentUser = userDao.getUser(name);
 
 		if (!file.isEmpty()) {
+
 			byte[] image = file.getBytes();
+			InputStream in = new ByteArrayInputStream(image);
+			BufferedImage originalImage = ImageIO.read(in);
+			
+			
 
 			Rentable rentable = new Rentable();
 			rentable.setTitle(newRentableForm.getTitle());
@@ -204,6 +213,56 @@ public class IndexController {
 		return "forward:/list";
 	}
 
+	@RequestMapping("/categoryEntertainment")
+	public String showCategoryEntertainment(Model model) {
+
+		List<Rentable> rentables = rentableDao.searchRentables("Entertainment");
+		model.addAttribute("rentables", rentables);
+
+		return "categoryEntertainment";
+
+	}
+
+	@RequestMapping("/categoryGarden")
+	public String showCategoryGarden(Model model) {
+
+		List<Rentable> rentables = rentableDao.searchRentables("Garden");
+		model.addAttribute("rentables", rentables);
+
+		return "categoryGarden";
+
+	}
+
+	@RequestMapping("/categoryHobby")
+	public String showCategoryHobby(Model model) {
+
+		List<Rentable> rentables = rentableDao.searchRentables("Hobby");
+		model.addAttribute("rentables", rentables);
+
+		return "categoryHobby";
+
+	}
+
+	@RequestMapping("/categoryKitchen")
+	public String showCategoryKitchen(Model model) {
+
+		List<Rentable> rentables = rentableDao.searchRentables("Kitchen");
+		model.addAttribute("rentables", rentables);
+
+		return "categoryKitchen";
+
+	}
+
+	@RequestMapping("/categoryMusic")
+	public String showCategoryMusic(Model model) {
+
+		List<Rentable> rentables = rentableDao.searchRentables("Music");
+		model.addAttribute("rentables", rentables);
+
+		return "categoryMusic";
+
+	}
+
 	@RequestMapping("/categorySport")
 	public String showCategorySport(Model model) {
 
@@ -211,6 +270,16 @@ public class IndexController {
 		model.addAttribute("rentables", rentables);
 
 		return "categorySport";
+
+	}
+
+	@RequestMapping("/categoryTools")
+	public String showCategoryTools(Model model) {
+
+		List<Rentable> rentables = rentableDao.searchRentables("Tools");
+		model.addAttribute("rentables", rentables);
+
+		return "categoryTools";
 
 	}
 
