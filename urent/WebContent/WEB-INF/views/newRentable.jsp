@@ -83,6 +83,49 @@
 						</div>
 					</div>
 
+					<! ----------------  location.street  ---------------- -->
+					<div class="form-group">
+						<label for="inputLocationStreet" class="col-md-2 control-label">Location
+							Street</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputLocationStreet" type="text"
+								name="street"
+								value="<c:out value="${rentable.location.street}"/>">
+						</div>
+					</div>
+
+					<! ----------------  location.city ---------------- -->
+					<div class="form-group">
+						<label for="inputLocationCity" class="col-md-2 control-label">Location
+							City</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputLocationCity" type="text"
+								name="city" value="<c:out value="${rentable.location.city}"/>">
+						</div>
+					</div>
+
+					<! ----------------  location.country ---------------- -->
+					<div class="form-group">
+						<label for="inputLocationCountry" class="col-md-2 control-label">Location
+							Country</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputLocationCountry" type="text"
+								name="country"
+								value="<c:out value="${rentable.location.country}"/>">
+						</div>
+					</div>
+
+					<! ----------------  location.zip ---------------- -->
+					<div class="form-group">
+						<label for="inputLocationZip" class="col-md-2 control-label">Location
+							ZIP</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputLocationZip" type="text"
+								name="zip"
+								value="<c:out value="${rentable.location.zip}"/>">
+						</div>
+					</div>
+
 					<! ----------------  image  ---------------- -->
 					<div class="form-group">
 						<label for="inputImage" class="col-md-2 control-label">Image</label>

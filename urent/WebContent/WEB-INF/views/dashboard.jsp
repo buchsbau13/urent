@@ -10,7 +10,7 @@
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <jsp:include page="includes/bootstrapCss.jsp" />
 <jsp:include page="includes/bootstrapJs.jsp" />
-<title>Sport</title>
+<title>Dashboard</title>
 </head>
 <body>
 
@@ -37,7 +37,7 @@
 
 	<!--  list all persons ----------------------------------------------------------- -->
 	<center>
-		<h1>Category Sport</h1>
+		<h1>My Rentables</h1>
 		<div class="row">
 
 			<div class="table-index">

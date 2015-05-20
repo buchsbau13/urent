@@ -25,6 +25,7 @@ import at.fh.swenga.urent.dao.CategoryDao;
 import at.fh.swenga.urent.dao.RentableDao;
 import at.fh.swenga.urent.dao.UserDao;
 import at.fh.swenga.urent.dao.UserRoleDao;
+import at.fh.swenga.urent.model.Address;
 import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.RentableForm;
@@ -61,10 +62,10 @@ public class IndexController {
 
 		Rentable rentable = rentableDao.getRentable(rentableId);
 		response.setContentType("image/jpeg");
-		OutputStream out = response.getOutputStream(); 
+		OutputStream out = response.getOutputStream();
 		out.write(rentable.getImage());
-		out.flush(); 
-		
+		out.flush();
+
 	}
 
 	@RequestMapping("/init")
@@ -190,6 +191,11 @@ public class IndexController {
 			rentable.setDescription(newRentableForm.getDescription());
 			rentable.setPrice(newRentableForm.getPrice());
 
+			Address location = new Address(newRentableForm.getStreet(),
+					newRentableForm.getCity(), newRentableForm.getCountry(),
+					newRentableForm.getZip());
+			rentable.setLocation(location);
+
 			rentableDao.persist(rentable);
 
 			return "forward:/list";
@@ -205,6 +211,18 @@ public class IndexController {
 		model.addAttribute("rentables", rentables);
 
 		return "categorySport";
+
+	}
+
+	@RequestMapping("/dashboard")
+	public String showDashboard(Principal principal, Model model) {
+
+		String name = principal.getName();
+
+		List<Rentable> rentables = rentableDao.userRentables(name);
+		model.addAttribute("rentables", rentables);
+
+		return "dashboard";
 
 	}
 

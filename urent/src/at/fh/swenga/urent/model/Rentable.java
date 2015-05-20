@@ -51,12 +51,15 @@ public class Rentable implements Serializable {
 	private double price;
 
 	// Verfügbarkeit
+	
+	@Column(nullable = false)
+	private Address location; 
 
 	public Rentable() {
 	}
 
 	public Rentable(User user, Category category, String title,
-			String description, double price, byte[] image) {
+			String description, double price, byte[] image, Address location) {
 		super();
 		this.user = user;
 		this.category = category;
@@ -64,6 +67,7 @@ public class Rentable implements Serializable {
 		this.description = description;
 		this.price = price;
 		this.image = image;
+		this.location = location; 
 	}
 
 	public int getId() {
@@ -127,5 +131,15 @@ public class Rentable implements Serializable {
 	public void setImage(byte[] bs) {
 		this.image = bs;
 	}
+
+	public Address getLocation() {
+		return location;
+	}
+
+	public void setLocation(Address location) {
+		this.location = location;
+	}
+	
+	
 
 }

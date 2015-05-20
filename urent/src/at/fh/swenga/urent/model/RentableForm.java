@@ -31,18 +31,27 @@ public class RentableForm implements Serializable{
 	private double price;
 	
 	private byte[] image; 
+	
+	private String street; 
+	private String city; 
+	private String country; 
+	private String zip; 
 
 	public RentableForm() {
 	}
 
 	public RentableForm(int categoryId, String title, String description,
-			double price, byte[] image) {
+			double price, byte[] image, String street, String city, String country, String zip) {
 		super();
 		this.categoryId = categoryId;
 		this.title = title;
 		this.description = description;
 		this.price = price;
 		this.image = image; 
+		this.street = street; 
+		this.city = city; 
+		this.country = country; 
+		this.zip = zip; 
 	}
 
 	public long getVersion() {
@@ -100,6 +109,39 @@ public class RentableForm implements Serializable{
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	
 	
 	
 	
