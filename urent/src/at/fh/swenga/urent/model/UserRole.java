@@ -12,7 +12,6 @@ import javax.persistence.UniqueConstraint;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name = "user_roles")
 public class UserRole implements java.io.Serializable {
 	private static final long serialVersionUID = 8098173157518993615L;
 	

@@ -12,7 +12,7 @@
 <html>
 <head>
 <jsp:include page="includes/bootstrapMeta.jsp" />
-<title>New Rentable</title>
+<title>Edit Rentable</title>
 <jsp:include page="includes/bootstrapCss.jsp" />
 </head>
 <body>
@@ -43,19 +43,14 @@
 				<fieldset>
 					<legend>${legend}</legend>
 
-					<! ----------------  category ---------------- -->
+					<! ----------------  id ---------------- -->
 					<div class="form-group">
-						<label for="inputCategory" class="col-md-2 control-label">Category</label>
 						<div class="col-md-10">
-
-
-							<form:select path="categoryId">
-								<form:option value="0" label="--- Select ---" />
-								<form:options items="${categories}" itemValue="id"
-									itemLabel="name" />
-							</form:select>
+							<input type="hidden" class="form-control" id="inputID"
+								type="text" name="id" value="<c:out value="${rentable.id}"/>">
 						</div>
 					</div>
+
 					<! ----------------  title ---------------- -->
 					<div class="form-group">
 						<label for="inputTitel" class="col-md-2 control-label">Title</label>
@@ -124,16 +119,6 @@
 								name="zip" value="<c:out value="${rentable.location.zip}"/>">
 						</div>
 					</div>
-
-					<! ----------------  image  ---------------- -->
-					<div class="form-group">
-						<label for="inputImage" class="col-md-2 control-label">Image</label>
-						<div class="col-md-10">
-							<input type="file" name="file">
-							<c:out value="${rentable.image}" />
-						</div>
-					</div>
-
 
 					<! ----------------  buttons ---------------- -->
 					<div class="form-group">

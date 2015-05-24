@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
 public class User implements java.io.Serializable {
 	private static final long serialVersionUID = 8198173157518983615L;
 	

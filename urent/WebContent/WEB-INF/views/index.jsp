@@ -79,6 +79,25 @@
 
 		<!--  list all persons ----------------------------------------------------------- -->
 		<h1>Rentables</h1>
+
+		<!--  Error message ----------------------------------------------------------- -->
+		<c:if test="${not empty errorMessage}">
+			<div class="alert alert-danger" role="alert">${errorMessage}</div>
+		</c:if>
+		<!--  Error message ----------------------------------------------------------- -->
+
+		<!--  Warning message ----------------------------------------------------------- -->
+		<c:if test="${not empty warningMessage}">
+			<div class="alert alert-warning" role="warning">${warningMessage}</div>
+		</c:if>
+		<!--  Warning message ----------------------------------------------------------- -->
+
+		<!--   message ----------------------------------------------------------- -->
+		<c:if test="${not empty message}">
+			<div class="alert alert-success" role="warning">${message}</div>
+		</c:if>
+		<!--   message ----------------------------------------------------------- -->
+
 		<div class="row">
 
 			<div class="table-index">

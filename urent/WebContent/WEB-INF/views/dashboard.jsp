@@ -68,8 +68,18 @@
 								<td class="col-md-1">${rentable.price}</td>
 								<td class="col-md-1">${rentable.location.street}
 									${rentable.location.zip} ${rentable.location.city}</td>
-								<td class="col-md-1"><img src="getImage/<c:out value="${rentable.id}"/>.do" height="75px" width="75px"/></td>
-								<td class="col-md-1"><a href="delete?id=${rentable.id}">Delete</a></td>
+								<td class="col-md-1"><img
+									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
+									width="75px" /></td>
+								<td><a href="editRentable?id=${rentable.id}">
+										<button type="button" class="btn btn-xs btn-success">
+											<span class="glyphicon glyphicon-pencil"></span> Edit
+										</button>
+								</a> <a href="deleteRentable?id=${rentable.id}">
+										<button type="button" class="btn btn-xs btn-danger">
+											<span class="glyphicon glyphicon-trash"></span> Delete
+										</button>
+								</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

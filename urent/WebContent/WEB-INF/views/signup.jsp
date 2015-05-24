@@ -37,8 +37,7 @@
 
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<c:url value="/signup" var="signupURL" />
-			<form class="form-horizontal" action="${signupURL}" method="post">
+			<form class="form-horizontal" action="${formAction}" method="post">
 				<fieldset>
 					<legend>${legend}</legend>
 
@@ -54,7 +53,7 @@
 					<div class="form-group">
 						<label for="inputPassword" class="col-md-2 control-label">Password</label>
 						<div class="col-md-10">
-							<input class="form-control" id="inputPassword" type="text"
+							<input class="form-control" id="inputPassword" type="password"
 								name="password" value="<c:out value="${user.password}"/>">
 						</div>
 					</div>

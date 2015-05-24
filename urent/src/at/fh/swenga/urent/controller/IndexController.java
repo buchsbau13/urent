@@ -1,14 +1,10 @@
 package at.fh.swenga.urent.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -179,16 +175,13 @@ public class IndexController {
 			return "forward:/list";
 		}
 
+		String errorMessage = "";
+
 		String name = principal.getName();
 		User currentUser = userDao.getUser(name);
 
-		if (!file.isEmpty()) {
-
+		try {
 			byte[] image = file.getBytes();
-			InputStream in = new ByteArrayInputStream(image);
-			BufferedImage originalImage = ImageIO.read(in);
-			
-			
 
 			Rentable rentable = new Rentable();
 			rentable.setTitle(newRentableForm.getTitle());
@@ -207,7 +200,11 @@ public class IndexController {
 
 			rentableDao.persist(rentable);
 
-			return "forward:/list";
+			model.addAttribute("message", "Rentable" + rentable.getTitle()
+					+ " successfully added!");
+
+		} catch (Exception e) {
+			errorMessage += "Invalid Data<br>";
 		}
 
 		return "forward:/list";
