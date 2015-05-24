@@ -1,6 +1,8 @@
 package at.fh.swenga.urent.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 @Entity
@@ -32,6 +35,9 @@ public class Rentable implements Serializable {
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Category category;
 
+	@OneToMany(mappedBy = "rentable", fetch = FetchType.EAGER)
+	private Set<Rating> ratings;
+
 	@Column(nullable = false, length = 50)
 	private String title;
 
@@ -43,17 +49,13 @@ public class Rentable implements Serializable {
 	@Column(length = 100000)
 	private byte[] image;
 
-	/*
-	 * @OneToOne private Rating rating;
-	 */
-
 	@Column(nullable = false)
 	private double price;
 
 	// Verfügbarkeit
-	
+
 	@Column(nullable = false)
-	private Address location; 
+	private Address location;
 
 	public Rentable() {
 	}
@@ -67,7 +69,7 @@ public class Rentable implements Serializable {
 		this.description = description;
 		this.price = price;
 		this.image = image;
-		this.location = location; 
+		this.location = location;
 	}
 
 	public int getId() {
@@ -110,12 +112,6 @@ public class Rentable implements Serializable {
 		this.description = description;
 	}
 
-	/*
-	 * public Rating getRating() { return rating; }
-	 * 
-	 * public void setRating(Rating rating) { this.rating = rating; }
-	 */
-
 	public double getPrice() {
 		return price;
 	}
@@ -139,7 +135,19 @@ public class Rentable implements Serializable {
 	public void setLocation(Address location) {
 		this.location = location;
 	}
-	
-	
 
+	public Set<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(Set<Rating> ratings) {
+		this.ratings = ratings;
+	}
+
+	public void addRating(Rating rating) {
+		if (ratings == null) {
+			ratings = new HashSet<Rating>();
+		}
+		ratings.add(rating);
+	}
 }

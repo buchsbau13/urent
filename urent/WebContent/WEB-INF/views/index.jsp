@@ -103,9 +103,6 @@
 			<div class="table-index">
 				<table class="table table-hover">
 
-
-
-
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -115,6 +112,7 @@
 							<th>Price</th>
 							<th>Location</th>
 							<th>Image</th>
+							<th>Ratings</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -131,11 +129,20 @@
 								<td class="col-md-1"><img
 									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
 									width="75px" /></td>
-								<td class="col-md-1"><a href="delete?id=${rentable.id}">Delete</a></td>
+								<td class="col-md-1"><a href="ratings?id=${rentable.id}">Ratings</a></td>
+								<td class="col-md-1"><a
+									href="deleteRentable?id=${rentable.id}">
+										<button type="button" class="btn btn-xs btn-danger">
+											<span class="glyphicon glyphicon-trash"></span> Delete
+										</button>
+								</a> <a href="rateRentable?id=${rentable.id}">
+										<button type="button" class="btn btn-xs btn-success">
+											<span class="glyphicon glyphicon-pencil"></span> Rate
+										</button>
+								</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
-				</table>
 				</table>
 
 			</div>

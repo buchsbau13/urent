@@ -12,7 +12,7 @@
 <html>
 <head>
 <jsp:include page="includes/bootstrapMeta.jsp" />
-<title>Edit Rentable</title>
+<title>Rate Rentable</title>
 <jsp:include page="includes/bootstrapCss.jsp" />
 </head>
 <body>
@@ -49,72 +49,28 @@
 						</div>
 					</div>
 
+					<! ----------------  user ---------------- -->
+					<div class="form-group">
+						<div class="col-md-10">
+							<input type="hidden" class="form-control" id="inputUser"
+								type="text" name="user" value="<c:out value="${rentable.user}"/>">
+						</div>
+					</div>
+
 					<! ----------------  title ---------------- -->
 					<div class="form-group">
 						<label for="inputTitel" class="col-md-2 control-label">Title</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputTitle" type="text"
-								name="title" value="<c:out value="${rentable.title}"/>">
+								name="title" value="<c:out value="${rating.title}"/>">
 						</div>
 					</div>
-					<! ----------------  description  ---------------- -->
+					<! ----------------  text  ---------------- -->
 					<div class="form-group">
-						<label for="inputDescription" class="col-md-2 control-label">Description</label>
+						<label for="inputText" class="col-md-2 control-label">Text</label>
 						<div class="col-md-10">
-							<input class="form-control" id="inputDescription" type="text"
-								name="description"
-								value="<c:out value="${rentable.description}"/>">
-						</div>
-					</div>
-
-					<! ----------------  price  ---------------- -->
-					<div class="form-group">
-						<label for="inputPrice" class="col-md-2 control-label">Price</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputPrice" type="text"
-								name="price" value="<c:out value="${rentable.price}"/>">
-						</div>
-					</div>
-
-					<! ----------------  location.street  ---------------- -->
-					<div class="form-group">
-						<label for="inputLocationStreet" class="col-md-2 control-label">Location
-							Street</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputLocationStreet" type="text"
-								name="street"
-								value="<c:out value="${rentable.location.street}"/>">
-						</div>
-					</div>
-
-					<! ----------------  location.city ---------------- -->
-					<div class="form-group">
-						<label for="inputLocationCity" class="col-md-2 control-label">Location
-							City</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputLocationCity" type="text"
-								name="city" value="<c:out value="${rentable.location.city}"/>">
-						</div>
-					</div>
-
-					<! ----------------  location.country ---------------- -->
-					<div class="form-group">
-						<label for="inputLocationCountry" class="col-md-2 control-label">Location
-							Country</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputLocationCountry" type="text"
-								name="country"
-								value="<c:out value="${rentable.location.country}"/>">
-						</div>
-					</div>
-
-					<! ----------------  location.zip ---------------- -->
-					<div class="form-group">
-						<label for="inputLocationZip" class="col-md-2 control-label">Location
-							ZIP</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputLocationZip" type="text"
-								name="zip" value="<c:out value="${rentable.location.zip}"/>">
+							<input class="form-control" id="inputText" type="text"
+								name="text" value="<c:out value="${rating.text}"/>">
 						</div>
 					</div>
 

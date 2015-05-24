@@ -3,6 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -71,15 +73,21 @@
 								<td class="col-md-1"><img
 									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
 									width="75px" /></td>
-								<td><a href="editRentable?id=${rentable.id}">
-										<button type="button" class="btn btn-xs btn-success">
-											<span class="glyphicon glyphicon-pencil"></span> Edit
-										</button>
-								</a> <a href="deleteRentable?id=${rentable.id}">
-										<button type="button" class="btn btn-xs btn-danger">
-											<span class="glyphicon glyphicon-trash"></span> Delete
-										</button>
-								</a></td>
+								<td class="col-md-1"><sec:authorize
+										access="hasRole('ROLE_USER')">
+										<a href="editRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-success">
+												<span class="glyphicon glyphicon-pencil"></span> Edit
+											</button>
+										</a>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_USER')">
+										<a href="deleteRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-danger">
+												<span class="glyphicon glyphicon-trash"></span> Delete
+											</button>
+										</a>
+									</sec:authorize></td>
 							</tr>
 						</c:forEach>
 					</tbody>

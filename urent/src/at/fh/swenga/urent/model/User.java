@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 public class User implements java.io.Serializable {
@@ -19,6 +18,7 @@ public class User implements java.io.Serializable {
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 	private Set<Rentable> rentables;
+	private Set<Rating> ratings; 
 	
 	
 	public User() {
@@ -43,7 +43,6 @@ public class User implements java.io.Serializable {
 	public String getUsername() {
 		return username;
 	}
-	
 	
 
 	public void setUsername(String username) {
@@ -85,6 +84,25 @@ public class User implements java.io.Serializable {
 	public void setRentables(Set<Rentable> rentables) {
 		this.rentables = rentables;
 	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+	public Set<Rating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(Set<Rating> ratings) {
+		this.ratings = ratings;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		User other = (User) obj;
+		if (username == other.username)
+			return true;
+		return false; 
+	}
+	
+	
 	
 	
 }

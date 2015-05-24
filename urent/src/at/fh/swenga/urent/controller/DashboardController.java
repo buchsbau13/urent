@@ -1,7 +1,5 @@
 package at.fh.swenga.urent.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
