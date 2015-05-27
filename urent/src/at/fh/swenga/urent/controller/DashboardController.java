@@ -55,5 +55,13 @@ public class DashboardController {
 
 		return "forward:/list";
 	}
+	
+	@RequestMapping(value="/showRentable", method = RequestMethod.GET)
+	public String showRentable (Model model, @RequestParam int id) {
+		
+		model.addAttribute("rentable", rentableDao.getRentable(id));
+		
+		return "showRentable";
+	}
 
 }

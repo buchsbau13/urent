@@ -73,7 +73,17 @@
 								<td class="col-md-1"><img
 									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
 									width="75px" /></td>
-								<td class="col-md-1"><sec:authorize
+								<td class="col-md-1">
+									<sec:authorize
+										access="hasRole('ROLE_USER')">
+										<a href="showRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-success">
+												<span class="glyphicon glyphicon-pencil"></span> Show
+											</button>
+										</a>
+									</sec:authorize>
+								
+									<sec:authorize
 										access="hasRole('ROLE_USER')">
 										<a href="editRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-success">
