@@ -106,6 +106,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </div>
 
 <h1 align="center">${rentable.title}</h1>
+<h1>test</h1>
 
 <div id="map_container"></div>
 
