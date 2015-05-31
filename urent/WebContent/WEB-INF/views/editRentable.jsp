@@ -4,6 +4,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -17,7 +19,7 @@
 </head>
 <body>
 
-		<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="./">uRent</a>
@@ -33,8 +35,8 @@
 						<form action="${logoutUrl }" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input
-								type="submit" value="Log Out" /></label>
+								class="glyphicon glyphicon-log-out"></span><input type="submit"
+								value="Log Out" /></label>
 						</form>
 					</sec:authorize></li>
 				<li><a href="./signup" class="nav-item"><span
@@ -55,7 +57,9 @@
 
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<form class="form-horizontal" method="post" action="${formAction}">
+			<form class="form-horizontal" method="post"
+				action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
+				enctype="multipart/form-data">
 				<fieldset>
 					<legend>${legend}</legend>
 
@@ -66,7 +70,6 @@
 								type="text" name="id" value="<c:out value="${rentable.id}"/>">
 						</div>
 					</div>
-
 					<! ----------------  title ---------------- -->
 					<div class="form-group">
 						<label for="inputTitel" class="col-md-2 control-label">Title</label>
@@ -134,6 +137,15 @@
 							<input class="form-control" id="inputLocationZip" type="text"
 								name="zip" value="<c:out value="${rentable.location.zip}"/>">
 						</div>
+					</div>
+
+					<! ----------------  image  ---------------- -->
+					<div class="form-group">
+						<label for="inputImage" class="col-md-2 control-label">Image</label>
+						<div class="col-md-10">
+							<input type="file" name="file">
+						</div>
+
 					</div>
 
 					<! ----------------  buttons ---------------- -->

@@ -19,7 +19,7 @@
 </head>
 <body>
 
-		<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="./">uRent</a>
@@ -35,8 +35,8 @@
 						<form action="${logoutUrl }" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input
-								type="submit" value="Log Out" /></label>
+								class="glyphicon glyphicon-log-out"></span><input type="submit"
+								value="Log Out" /></label>
 						</form>
 					</sec:authorize></li>
 				<li><a href="./signup" class="nav-item"><span
@@ -81,7 +81,7 @@
 						<label for="inputTitel" class="col-md-2 control-label">Title</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputTitle" type="text"
-								name="title" value="<c:out value="${rentable.title}"/>">
+								name="title">
 						</div>
 					</div>
 					<! ----------------  description  ---------------- -->
@@ -89,8 +89,7 @@
 						<label for="inputDescription" class="col-md-2 control-label">Description</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputDescription" type="text"
-								name="description"
-								value="<c:out value="${rentable.description}"/>">
+								name="description">
 						</div>
 					</div>
 
@@ -99,7 +98,7 @@
 						<label for="inputPrice" class="col-md-2 control-label">Price</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputPrice" type="text"
-								name="price" value="<c:out value="${rentable.price}"/>">
+								name="price">
 						</div>
 					</div>
 
@@ -109,8 +108,7 @@
 							Street</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputLocationStreet" type="text"
-								name="street"
-								value="<c:out value="${rentable.location.street}"/>">
+								name="street">
 						</div>
 					</div>
 
@@ -120,7 +118,7 @@
 							City</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputLocationCity" type="text"
-								name="city" value="<c:out value="${rentable.location.city}"/>">
+								name="city">
 						</div>
 					</div>
 
@@ -130,8 +128,7 @@
 							Country</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputLocationCountry" type="text"
-								name="country"
-								value="<c:out value="${rentable.location.country}"/>">
+								name="country">
 						</div>
 					</div>
 
@@ -141,7 +138,7 @@
 							ZIP</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputLocationZip" type="text"
-								name="zip" value="<c:out value="${rentable.location.zip}"/>">
+								name="zip">
 						</div>
 					</div>
 
@@ -149,8 +146,7 @@
 					<div class="form-group">
 						<label for="inputImage" class="col-md-2 control-label">Image</label>
 						<div class="col-md-10">
-							<input type="file" name="file">
-							<c:out value="${rentable.image}" />
+							<input type="file" name="file"> 
 						</div>
 					</div>
 

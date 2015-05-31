@@ -200,7 +200,7 @@ public class IndexController {
 
 			rentableDao.persist(rentable);
 
-			model.addAttribute("message", "Rentable" + rentable.getTitle()
+			model.addAttribute("message", "Rentable " + rentable.getTitle()
 					+ " successfully added!");
 
 		} catch (Exception e) {
