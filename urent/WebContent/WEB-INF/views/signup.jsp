@@ -49,6 +49,38 @@
 								name="username" value="<c:out value="${user.username}"/>">
 						</div>
 					</div>
+					<! ----------------  email ---------------- -->
+					<div class="form-group">
+						<label for="inputEmail" class="col-md-2 control-label">E-Mail</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputEmail" type="text"
+								name="email" value="<c:out value="${user.email}"/>">
+						</div>
+					</div>
+					<! ---------------  firstname ---------------- -->
+					<div class="form-group">
+						<label for="inputFirstname" class="col-md-2 control-label">Firstname</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputFirstname" type="text"
+								name="firstname" value="<c:out value="${user.firstname}"/>">
+						</div>
+					</div>
+					<! ---------------  lastname ---------------- -->
+					<div class="form-group">
+						<label for="inputLastname" class="col-md-2 control-label">Lastname</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputLastname" type="text"
+								name="lastname" value="<c:out value="${user.lastname}"/>">
+						</div>
+					</div>
+					<! --------------  telephone ---------------- -->
+					<div class="form-group">
+						<label for="inputTelephone" class="col-md-2 control-label">Telephone</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputTelephone" type="text"
+								name="telephone" value="<c:out value="${user.telephone}"/>">
+						</div>
+					</div>
 					<! ----------------  password  ---------------- -->
 					<div class="form-group">
 						<label for="inputPassword" class="col-md-2 control-label">Password</label>

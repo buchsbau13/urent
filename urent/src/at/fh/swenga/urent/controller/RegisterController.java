@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,28 +38,51 @@ public class RegisterController {
 	public String signUp(@Valid @ModelAttribute User user,
 			BindingResult bindingResult, Model model) {
 		
-		String errorMessage = ""; 
-
-		try {
-			User newUser = new User();
-			newUser.setUsername(user.getUsername());
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			newUser.setPassword(encoder.encode(user.getPassword()));
-			newUser.setEnabled(true);
-			userDao.persist(newUser);
-
-			UserRole standardUser = new UserRole();
-			standardUser.setUser(newUser);
-			standardUser.setRole("ROLE_USER");
-			userRoleDao.persist(standardUser);
-
-			model.addAttribute("message", "User " + newUser.getUsername() + " successfully added!"); 
-			
-		} catch (Exception e) {
-			errorMessage += "Invalid data"; 
+		if (bindingResult.hasErrors()) {
+			String errorMessage = "";
+			for (FieldError fieldError : bindingResult.getFieldErrors()) {
+				errorMessage += fieldError.getField() + " is invalid<br>";
+			}
+			model.addAttribute("errorMessage", errorMessage);
+			return "signup";
 		}
 
-		return "forward:/list";
+		String errorMessage = "";
+
+		try {
+			User existingUser = userDao.getUser(user.getUsername());
+			if (existingUser == null) {
+
+				User newUser = new User();
+				newUser.setUsername(user.getUsername());
+				newUser.setFirstname(user.getFirstname());
+				newUser.setLastname(user.getLastname());
+				newUser.setEmail(user.getEmail());
+				newUser.setTelephone(user.getTelephone());
+				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+				newUser.setPassword(encoder.encode(user.getPassword()));
+				newUser.setEnabled(true);
+				userDao.persist(newUser);
+
+				UserRole standardUser = new UserRole();
+				standardUser.setUser(newUser);
+				standardUser.setRole("ROLE_USER");
+				userRoleDao.persist(standardUser);
+
+				model.addAttribute("message", "User " + newUser.getUsername()
+						+ " successfully added!");
+				return "forward:/list";
+			} else {
+				model.addAttribute("errorMessage",
+						"There is already a User with this Username");
+				return "signup";
+			}
+
+		} catch (Exception e) {
+			errorMessage += "Invalid data";
+			return "signup";
+		}
+
 	}
 
 }

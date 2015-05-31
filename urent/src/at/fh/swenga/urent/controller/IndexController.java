@@ -112,7 +112,7 @@ public class IndexController {
 			admin = new User(
 					"admin",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
-					true);
+					"Admin", "Admin", "admin@urent.com", 123, true);
 		userDao.persist(admin);
 
 		UserRole roleAdmin1 = new UserRole(admin, "ROLE_ADMIN");
@@ -126,7 +126,7 @@ public class IndexController {
 			user = new User(
 					"user",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
-					true);
+					"User", "User", "user@urent.com", 123, true);
 		userDao.persist(user);
 
 		UserRole roleUser2 = new UserRole(user, "ROLE_USER");
@@ -137,7 +137,7 @@ public class IndexController {
 			julia = new User(
 					"julia",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
-					true);
+					"Julia", "Buchsbaum", "julia@urent.com", 123, true);
 		userDao.persist(julia);
 
 		UserRole roleAdmin2 = new UserRole(julia, "ROLE_ADMIN");
