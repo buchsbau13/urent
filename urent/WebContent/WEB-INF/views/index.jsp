@@ -26,8 +26,19 @@
 		</div>
 		<div>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="./login" class="nav-item"><span
-						class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+				<li><sec:authorize access="isAnonymous()">
+						<a href="./login" class="nav-item"><span
+							class="glyphicon glyphicon-log-in"></span> Log In</a>
+					</sec:authorize></li>
+				<li><sec:authorize access="isAuthenticated()">
+						<c:url value="logout" var="logoutUrl" />
+						<form action="${logoutUrl }" method="post">
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" /> <label class="nav-item"><span
+							class="glyphicon glyphicon-log-out"></span><input
+								type="submit" value="Log Out" /></label>
+						</form>
+					</sec:authorize></li>
 				<li><a href="./signup" class="nav-item"><span
 						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 				<li><sec:authorize

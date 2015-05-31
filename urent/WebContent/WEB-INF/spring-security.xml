@@ -9,7 +9,7 @@
 		<intercept-url pattern="/newRentable"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<form-login login-page="/login" />
-		<logout logout-success-url="/login" logout-url="/logout" />
+		<logout logout-success-url="/" logout-url="/logout" />
 	</http>
 
 	<authentication-manager>
