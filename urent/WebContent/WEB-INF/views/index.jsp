@@ -13,11 +13,11 @@
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <jsp:include page="includes/bootstrapCss.jsp" />
 <jsp:include page="includes/bootstrapJs.jsp" />
+
+
 <title>u.rent</title>
 </head>
 <body>
-	<!-- 	<div class="masthead"> -->
-	<!-- 		<div class="container"> -->
 
 	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
@@ -35,8 +35,8 @@
 						<form action="${logoutUrl }" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input
-								type="submit" value="Log Out" /></label>
+								class="glyphicon glyphicon-log-out"></span><input type="submit"
+								value="Log Out" /></label>
 						</form>
 					</sec:authorize></li>
 				<li><a href="./signup" class="nav-item"><span
@@ -55,154 +55,154 @@
 	</div>
 	</nav>
 
-	<div class="jumbotron">
-		<div class="container">
-			<div class="page-header">
 
-				<div class="row">
+	<!-- Banner -->
 
+	<section id="banner">
+	<div class="inner">
+		<header>
+		<h2>uRent</h2>
+		</header>
+		<p>
+			This is <strong>uRent</strong>, a free <br /> Marketplace for all
+			your Stuff <br />
+		</p>
+	</div>
+	</section>
 
-					<h1 align="center">
-						<abbr title="you Rent">uRent</abbr><small> A place for <mark>
-							all</mark> your stuff
-						</small>
-
-					</h1>
-					<blockquote align="center">
-						<p align="center">Urent is a great way to convert your
-							belongings in some Money</p>
-						<footer>By Christoph Fuchsjäger</footer>
-					</blockquote>
-					<pre>
-				"Money is not everything. Money is the only thing" - by Christoph Fuchsjäger</pre>
+	<!-- Table Rentables -->
 
 
-				</div>
+	<!-- Main -->
+	<article id="main"> <header class="special container">
+	<span class="icon fa-bar-chart-o"></span>
+	<h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+		diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+		erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+		et ea rebum.</h2>
+	<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+		ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+		sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+		dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+		et justo duo dolores et ea rebum.</p>
+	</header> <!-- Three --> <section class="wrapper style3 container special">
 
+	<header class="major">
+	<h2>Things to Rent</h2>
+	</header>
 
+	<div class="row">
+		<div class="6u 12u(narrower)">
 
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic01.jpg" alt="" /></a> <header>
+			<h3>Kitchen</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
 
-			</div>
+		</div>
+		<div class="6u 12u(narrower)">
+
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic02.jpg" alt="" /></a> <header>
+			<h3>Sports</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
 
 		</div>
 	</div>
-	<center>
+	<div class="row">
+		<div class="6u 12u(narrower)">
 
-		<!--  list all persons ----------------------------------------------------------- -->
-		<h1>Rentables</h1>
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic03.jpg" alt="" /></a> <header>
+			<h3>Household</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
 
-		<!--  Error message ----------------------------------------------------------- -->
-		<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger" role="alert">${errorMessage}</div>
-		</c:if>
-		<!--  Error message ----------------------------------------------------------- -->
-
-		<!--  Warning message ----------------------------------------------------------- -->
-		<c:if test="${not empty warningMessage}">
-			<div class="alert alert-warning" role="warning">${warningMessage}</div>
-		</c:if>
-		<!--  Warning message ----------------------------------------------------------- -->
-
-		<!--   message ----------------------------------------------------------- -->
-		<c:if test="${not empty message}">
-			<div class="alert alert-success" role="warning">${message}</div>
-		</c:if>
-		<!--   message ----------------------------------------------------------- -->
-
-		<div class="row">
-
-			<div class="table-index">
-				<table class="table table-hover">
-
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Category</th>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Price</th>
-							<th>Location</th>
-							<th>Image</th>
-							<th>Ratings</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${rentables}" var="rentable">
-							<tr>
-								<td class="col-md-1">${rentable.id}</td>
-								<td class="col-md-1">${rentable.category.name}</td>
-								<td class="col-md-1">${rentable.title}</td>
-								<td class="col-md-1">${rentable.description}</td>
-								<td class="col-md-1">${rentable.price}</td>
-								<td class="col-md-1">${rentable.location.street}
-									${rentable.location.zip} ${rentable.location.city}</td>
-								<td class="col-md-1"><img
-									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
-									width="75px" /></td>
-								<td class="col-md-1"><a href="ratings?id=${rentable.id}">Ratings</a></td>
-								<td class="col-md-1"><a
-									href="deleteRentable?id=${rentable.id}">
-										<button type="button" class="btn btn-xs btn-danger">
-											<span class="glyphicon glyphicon-trash"></span> Delete
-										</button>
-								</a> <a href="rateRentable?id=${rentable.id}">
-										<button type="button" class="btn btn-xs btn-success">
-											<span class="glyphicon glyphicon-pencil"></span> Rate
-										</button>
-								</a></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-
-			</div>
 		</div>
+		<div class="6u 12u(narrower)">
 
-	</center>
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic04.jpg" alt="" /></a> <header>
+			<h3>Electronics</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
 
-	<div class="container">
-		<center>
-			<h2>Things to rent</h2>
-		</center>
-
-		<div class="row">
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categoryEntertainment"> <img
-					src="http://placehold.it/800x600" class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categoryGarden"> <img
-					src="http://placehold.it/800x600" class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categoryHobby"> <img
-					src="http://placehold.it/800x600" class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categoryKitchen"> <img
-					src="http://placehold.it/800x600" class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categoryMusic"> <img
-					src="http://placehold.it/800x600" class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categorySport"> <img
-					src="http://placehold.it/800x600" class="thumbnail img-responsive">
-				</a>
-			</div>
-			<div class="col-lg-4 col-sm-6 col-xs-12">
-				<a href="./categoryTools"> <img
-					src="http://placehold.it/800x600" class="thumbnail img-responsive">
-				</a>
-			</div>
 		</div>
 	</div>
+
+	<footer class="major">
+	<ul class="buttons">
+		<li><a href="#" class="button">See More</a></li>
+	</ul>
+	</footer> </section> </article>
+
+
+	<!-- CTA -->
+	<section id="cta"> <header>
+	<h2>
+		Ready to do <strong>explore uRent</strong>?
+	</h2>
+	<p>Proin a ullamcorper elit, et sagittis turpis integer ut
+		fermentum.</p>
+	</header> <footer>
+	<ul class="buttons">
+		<li><a href="#" class="button special">Browse</a></li>
+	</ul>
+	</footer> </section>
+
+
+	<!-- Footer -->
+	<footer id="footer">
+
+	<ul class="icons">
+		<li><a href="#" class="icon circle fa-twitter"><span
+				class="label">Twitter</span></a></li>
+		<li><a href="#" class="icon circle fa-facebook"><span
+				class="label">Facebook</span></a></li>
+		<li><a href="#" class="icon circle fa-google-plus"><span
+				class="label">Google+</span></a></li>
+		<li><a href="#" class="icon circle fa-github"><span
+				class="label">Github</span></a></li>
+		<li><a href="#" class="icon circle fa-dribbble"><span
+				class="label">Dribbble</span></a></li>
+	</ul>
+
+	<ul class="copyright">
+		<li>&copy; uRent Development</li>
+	</ul>
+
+	</footer>
+
+	</div>
+
+
+
+	<!-- Scripts -->
+	<script src="resources/js/jquery.min.js"></script>
+	<script src="resources/js/jquery.dropotron.min.js"></script>
+	<script src="resources/js/jquery.scrolly.min.js"></script>
+	<script src="resources/js/jquery.scrollgress.min.js"></script>
+	<script src="resources/js/skel.min.js"></script>
+	<script src="resources/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="resources/js/main.js"></script>
 </body>
 </html>
