@@ -25,7 +25,9 @@
 
 		<!-- Header -->
 
-		<header id="header" class="alt"> <nav id="nav">
+		<header id="header" class="alt"> 
+		
+		<nav id="nav">
 		<ul>
 			<li class="current"><a href="./">Welcome</a></li>
 			<li><sec:authorize access="isAnonymous()">
