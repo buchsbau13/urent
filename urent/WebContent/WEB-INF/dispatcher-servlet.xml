@@ -92,7 +92,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
-	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources location="/resources/" mapping="/resources/**" />
 	
 	
 	

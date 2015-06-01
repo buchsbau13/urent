@@ -13,183 +13,232 @@
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <jsp:include page="includes/bootstrapCss.jsp" />
 <jsp:include page="includes/bootstrapJs.jsp" />
+<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
 
 
 <title>u.rent</title>
 </head>
 <body>
+<body class="index">
+	<div id="page-wrapper">
 
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./">uRent</a>
+
+		<!-- Header -->
+
+		<header id="header" class="alt"> <nav id="nav">
+		<ul>
+			<li class="current"><a href="./">Welcome</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./login" class="nav-item">Log In</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAuthenticated()">
+					<c:url value="logout" var="logoutUrl" />
+					<form action="${logoutUrl }" method="post">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" /> <label class="nav-item"><span
+							class="glyphicon glyphicon-log-out"></span><input type="submit"
+							value="Log Out" /></label>
+					</form>
+				</sec:authorize></li>
+			<li><a href="./signup" class="button special">Sign Up</a></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./dashboard" class="nav-item">Dashboard</a>
+				</sec:authorize></li>
+		</ul>
+		</nav> </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- 		<nav class="navbar navbar-inverse"> -->
+		<!-- 		<div class="container-fluid"> -->
+		<!-- 			<div class="navbar-header"> -->
+		<!-- 				<a class="navbar-brand" href="./">uRent</a> -->
+		<!-- 			</div> -->
+		<!-- 			<div> -->
+		<!-- 				<ul class="nav navbar-nav navbar-right"> -->
+		<%-- 					<li><sec:authorize access="isAnonymous()"> --%>
+		<!-- 							<a href="./login" class="nav-item"><span -->
+		<!-- 								class="glyphicon glyphicon-log-in"></span> Log In</a> -->
+		<%-- 						</sec:authorize></li> --%>
+		<%-- 					<li><sec:authorize access="isAuthenticated()"> --%>
+		<%-- 							<c:url value="logout" var="logoutUrl" /> --%>
+		<%-- 							<form action="${logoutUrl }" method="post"> --%>
+		<%-- 								<input type="hidden" name="${_csrf.parameterName}" --%>
+		<%-- 									value="${_csrf.token}" /> <label class="nav-item"><span --%>
+		<!-- 									class="glyphicon glyphicon-log-out"></span><input type="submit" -->
+		<!-- 									value="Log Out" /></label> -->
+		<!-- 							</form> -->
+		<%-- 						</sec:authorize></li> --%>
+		<!-- 					<li><a href="./signup" class="nav-item"><span -->
+		<!-- 							class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
+		<%-- 					<li><sec:authorize --%>
+		<%-- 							access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> --%>
+		<!-- 							<a href="./newRentable" class="nav-item"><span -->
+		<!-- 								class="glyphicon glyphicon-plus"></span> New Rentable</a> -->
+		<%-- 						</sec:authorize></li> --%>
+		<%-- 					<li><sec:authorize --%>
+		<%-- 							access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> --%>
+		<!-- 							<a href="./dashboard" class="nav-item"> Dashboard</a> -->
+		<%-- 						</sec:authorize></li> --%>
+		<!-- 				</ul> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+		<!-- 		</nav> -->
+
+
+		<!-- Banner -->
+
+		<section id="banner">
+		<div class="inner">
+			<header>
+			<h2>uRent</h2>
+			</header>
+			<p>
+				This is <strong>uRent</strong>, a free <br /> Marketplace for all
+				your Stuff <br />
+			</p>
 		</div>
-		<div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><sec:authorize access="isAnonymous()">
-						<a href="./login" class="nav-item"><span
-							class="glyphicon glyphicon-log-in"></span> Log In</a>
-					</sec:authorize></li>
-				<li><sec:authorize access="isAuthenticated()">
-						<c:url value="logout" var="logoutUrl" />
-						<form action="${logoutUrl }" method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <label class="nav-item"><span
-								class="glyphicon glyphicon-log-out"></span><input type="submit"
-								value="Log Out" /></label>
-						</form>
-					</sec:authorize></li>
-				<li><a href="./signup" class="nav-item"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./newRentable" class="nav-item"><span
-							class="glyphicon glyphicon-plus"></span> New Rentable</a>
-					</sec:authorize></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./dashboard" class="nav-item"> Dashboard</a>
-					</sec:authorize></li>
-			</ul>
-		</div>
-	</div>
-	</nav>
+		</section>
+
+		<!-- Table Rentables -->
 
 
-	<!-- Banner -->
+		<!-- Main -->
+		<article id="main"> <header class="special container">
+		<span class="icon fa-bar-chart-o"></span>
+		<h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+			diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+			erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+			et ea rebum.</h2>
+		<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+			ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+			sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+			dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+			et justo duo dolores et ea rebum.</p>
+		</header> <!-- Three --> <section class="wrapper style3 container special">
 
-	<section id="banner">
-	<div class="inner">
-		<header>
-		<h2>uRent</h2>
+		<header class="major">
+		<h2>Things to Rent</h2>
 		</header>
-		<p>
-			This is <strong>uRent</strong>, a free <br /> Marketplace for all
-			your Stuff <br />
-		</p>
-	</div>
-	</section>
 
-	<!-- Table Rentables -->
+		<div class="row">
+			<div class="6u 12u(narrower)">
 
+				<section> <a href="#" class="image featured"><img
+					src="resources/pictures/pic01.jpg" alt="" /></a> <header>
+				<h3>Kitchen</h3>
+				</header>
+				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+					dolore.</p>
+				</section>
 
-	<!-- Main -->
-	<article id="main"> <header class="special container">
-	<span class="icon fa-bar-chart-o"></span>
-	<h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-		diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-		erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-		et ea rebum.</h2>
-	<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-		ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-		sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-		dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-		et justo duo dolores et ea rebum.</p>
-	</header> <!-- Three --> <section class="wrapper style3 container special">
+			</div>
+			<div class="6u 12u(narrower)">
 
-	<header class="major">
-	<h2>Things to Rent</h2>
-	</header>
+				<section> <a href="#" class="image featured"><img
+					src="resources/pictures/pic02.jpg" alt="" /></a> <header>
+				<h3>Sports</h3>
+				</header>
+				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+					dolore.</p>
+				</section>
 
-	<div class="row">
-		<div class="6u 12u(narrower)">
-
-			<section> <a href="#" class="image featured"><img
-				src="resources/pictures/pic01.jpg" alt="" /></a> <header>
-			<h3>Kitchen</h3>
-			</header>
-			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-				dolore.</p>
-			</section>
-
+			</div>
 		</div>
-		<div class="6u 12u(narrower)">
+		<div class="row">
+			<div class="6u 12u(narrower)">
 
-			<section> <a href="#" class="image featured"><img
-				src="resources/pictures/pic02.jpg" alt="" /></a> <header>
-			<h3>Sports</h3>
-			</header>
-			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-				dolore.</p>
-			</section>
+				<section> <a href="#" class="image featured"><img
+					src="resources/pictures/pic03.jpg" alt="" /></a> <header>
+				<h3>Household</h3>
+				</header>
+				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+					dolore.</p>
+				</section>
 
+			</div>
+			<div class="6u 12u(narrower)">
+
+				<section> <a href="#" class="image featured"><img
+					src="resources/pictures/pic04.jpg" alt="" /></a> <header>
+				<h3>Electronics</h3>
+				</header>
+				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+					dolore.</p>
+				</section>
+
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="6u 12u(narrower)">
 
-			<section> <a href="#" class="image featured"><img
-				src="resources/pictures/pic03.jpg" alt="" /></a> <header>
-			<h3>Household</h3>
-			</header>
-			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-				dolore.</p>
-			</section>
-
-		</div>
-		<div class="6u 12u(narrower)">
-
-			<section> <a href="#" class="image featured"><img
-				src="resources/pictures/pic04.jpg" alt="" /></a> <header>
-			<h3>Electronics</h3>
-			</header>
-			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-				dolore.</p>
-			</section>
-
-		</div>
-	</div>
-
-	<footer class="major">
-	<ul class="buttons">
-		<li><a href="#" class="button">See More</a></li>
-	</ul>
-	</footer> </section> </article>
+		<footer class="major">
+		<ul class="buttons">
+			<li><a href="#" class="button">See More</a></li>
+		</ul>
+		</footer> </section> </article>
 
 
-	<!-- CTA -->
-	<section id="cta"> <header>
-	<h2>
-		Ready to do <strong>explore uRent</strong>?
-	</h2>
-	<p>Proin a ullamcorper elit, et sagittis turpis integer ut
-		fermentum.</p>
-	</header> <footer>
-	<ul class="buttons">
-		<li><a href="#" class="button special">Browse</a></li>
-	</ul>
-	</footer> </section>
+		<!-- CTA -->
+		<section id="cta"> <header>
+		<h2>
+			Ready to do <strong>explore uRent</strong>?
+		</h2>
+		<p>Proin a ullamcorper elit, et sagittis turpis integer ut
+			fermentum.</p>
+		</header> <footer>
+		<ul class="buttons">
+			<li><a href="#" class="button special">Browse</a></li>
+		</ul>
+		</footer> </section>
 
 
-	<!-- Footer -->
-	<footer id="footer">
+		<!-- Footer -->
+		<footer id="footer">
 
-	<ul class="icons">
-		<li><a href="#" class="icon circle fa-twitter"><span
-				class="label">Twitter</span></a></li>
-		<li><a href="#" class="icon circle fa-facebook"><span
-				class="label">Facebook</span></a></li>
-		<li><a href="#" class="icon circle fa-google-plus"><span
-				class="label">Google+</span></a></li>
-		<li><a href="#" class="icon circle fa-github"><span
-				class="label">Github</span></a></li>
-		<li><a href="#" class="icon circle fa-dribbble"><span
-				class="label">Dribbble</span></a></li>
-	</ul>
+		<ul class="icons">
+			<li><a href="#" class="icon circle fa-twitter"><span
+					class="label">Twitter</span></a></li>
+			<li><a href="#" class="icon circle fa-facebook"><span
+					class="label">Facebook</span></a></li>
+			<li><a href="#" class="icon circle fa-google-plus"><span
+					class="label">Google+</span></a></li>
+			<li><a href="#" class="icon circle fa-github"><span
+					class="label">Github</span></a></li>
+			<li><a href="#" class="icon circle fa-dribbble"><span
+					class="label">Dribbble</span></a></li>
+		</ul>
 
-	<ul class="copyright">
-		<li>&copy; uRent Development</li>
-	</ul>
+		<ul class="copyright">
+			<li>&copy; uRent Development</li>
+		</ul>
 
-	</footer>
+		</footer>
 
 	</div>
 
@@ -202,7 +251,6 @@
 	<script src="resources/js/jquery.scrollgress.min.js"></script>
 	<script src="resources/js/skel.min.js"></script>
 	<script src="resources/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="resources/js/main.js"></script>
 </body>
 </html>
