@@ -13,10 +13,11 @@
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <jsp:include page="includes/bootstrapCss.jsp" />
 <jsp:include page="includes/bootstrapJs.jsp" />
-<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 
 
-<title>u.rent</title>
+<title>uRent</title>
 </head>
 <body>
 <body class="index">
@@ -25,9 +26,10 @@
 
 		<!-- Header -->
 
-		<header id="header" class="alt"> 
-		
+		<header id="header" class="alt">
+		<h1>uRent</h1>
 		<nav id="nav">
+
 		<ul>
 			<li class="current"><a href="./">Welcome</a></li>
 			<li><sec:authorize access="isAnonymous()">
@@ -110,14 +112,11 @@
 		<!-- Banner -->
 
 		<section id="banner">
-		<div class="inner">
-			<header>
-			<h2>uRent</h2>
-			</header>
-			<p>
-				This is <strong>uRent</strong>, a free <br /> Marketplace for all
-				your Stuff <br />
-			</p>
+		
+			
+			<img src="pictures/urent_banner.jpg" alt="">
+			
+			
 		</div>
 		</section>
 
@@ -125,6 +124,7 @@
 
 
 		<!-- Main -->
+		
 		<article id="main"> <header class="special container">
 		<span class="icon fa-bar-chart-o"></span>
 		<h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
@@ -136,7 +136,43 @@
 			sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
 			dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
 			et justo duo dolores et ea rebum.</p>
-		</header> <!-- Three --> <section class="wrapper style3 container special">
+		</header> <section class="wrapper style1 container special">
+		<div class="row">
+			<div class="4u 12u(narrower)">
+
+				<section> <span class="icon featured fa-check"></span> <header>
+				<h3>All the Things you need</h3>
+				</header>
+				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
+					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
+					elit, et sagittis turpis. Integer ut fermentum.</p>
+				</section>
+
+			</div>
+			<div class="4u 12u(narrower)">
+
+				<section> <span class="icon featured fa-lock"></span> <header>
+				<h3>Secure</h3>
+				</header>
+				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
+					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
+					elit, et sagittis turpis. Integer ut fermentum.</p>
+				</section>
+
+			</div>
+			<div class="4u 12u(narrower)">
+
+				<section> <span class="icon featured fa-laptop"></span> <header>
+				<h3>Very niice</h3>
+				</header>
+				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
+					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
+					elit, et sagittis turpis. Integer ut fermentum.</p>
+				</section>
+
+			</div>
+		</div>
+		</section> <!-- Three --> <section class="wrapper style3 container special">
 
 		<header class="major">
 		<h2>Things to Rent</h2>
@@ -147,7 +183,7 @@
 
 				<section> <a href="#" class="image featured"><img
 					src="resources/pictures/pic01.jpg" alt="" /></a> <header>
-				<h3>Kitchen</h3>
+				<h3>Tools</h3>
 				</header>
 				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
 					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
@@ -160,7 +196,7 @@
 
 				<section> <a href="#" class="image featured"><img
 					src="resources/pictures/pic02.jpg" alt="" /></a> <header>
-				<h3>Sports</h3>
+				<h3>Sport</h3>
 				</header>
 				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
 					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
@@ -175,7 +211,7 @@
 
 				<section> <a href="#" class="image featured"><img
 					src="resources/pictures/pic03.jpg" alt="" /></a> <header>
-				<h3>Household</h3>
+				<h3>Music</h3>
 				</header>
 				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
 					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
@@ -188,7 +224,7 @@
 
 				<section> <a href="#" class="image featured"><img
 					src="resources/pictures/pic04.jpg" alt="" /></a> <header>
-				<h3>Electronics</h3>
+				<h3>Garden</h3>
 				</header>
 				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
 					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
@@ -255,4 +291,6 @@
 	<script src="resources/js/util.js"></script>
 	<script src="resources/js/main.js"></script>
 </body>
+
+
 </html>
