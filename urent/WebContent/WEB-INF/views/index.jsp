@@ -28,7 +28,9 @@
 
 		<header id="header" class="alt">
 		<h1>uRent</h1>
-		<nav id="nav">
+		<nav id="nav"> <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="username" />
+		</sec:authorize>
 
 		<ul>
 			<li class="current"><a href="./">Welcome</a></li>
@@ -36,247 +38,184 @@
 					<a href="./login" class="nav-item">Log In</a>
 				</sec:authorize></li>
 			<li><sec:authorize access="isAuthenticated()">
-					<c:url value="logout" var="logoutUrl" />
-					<form action="${logoutUrl }" method="post">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input type="submit"
-							value="Log Out" /></label>
-					</form>
+					<a href="./logout" class="nav-item">Log Out</a>
 				</sec:authorize></li>
-			<li><a href="./signup" class="button special">Sign Up</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./signup" class="button special">Sign Up</a>
+				</sec:authorize></li>
 			<li><sec:authorize
 					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
 				</sec:authorize></li>
 			<li><sec:authorize
 					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-					<a href="./dashboard" class="nav-item">Dashboard</a>
+					<a href="./dashboard" class="button special">${username}</a>
 				</sec:authorize></li>
 		</ul>
 		</nav> </header>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		<!-- 		<nav class="navbar navbar-inverse"> -->
-		<!-- 		<div class="container-fluid"> -->
-		<!-- 			<div class="navbar-header"> -->
-		<!-- 				<a class="navbar-brand" href="./">uRent</a> -->
-		<!-- 			</div> -->
-		<!-- 			<div> -->
-		<!-- 				<ul class="nav navbar-nav navbar-right"> -->
-		<%-- 					<li><sec:authorize access="isAnonymous()"> --%>
-		<!-- 							<a href="./login" class="nav-item"><span -->
-		<!-- 								class="glyphicon glyphicon-log-in"></span> Log In</a> -->
-		<%-- 						</sec:authorize></li> --%>
-		<%-- 					<li><sec:authorize access="isAuthenticated()"> --%>
-		<%-- 							<c:url value="logout" var="logoutUrl" /> --%>
-		<%-- 							<form action="${logoutUrl }" method="post"> --%>
-		<%-- 								<input type="hidden" name="${_csrf.parameterName}" --%>
-		<%-- 									value="${_csrf.token}" /> <label class="nav-item"><span --%>
-		<!-- 									class="glyphicon glyphicon-log-out"></span><input type="submit" -->
-		<!-- 									value="Log Out" /></label> -->
-		<!-- 							</form> -->
-		<%-- 						</sec:authorize></li> --%>
-		<!-- 					<li><a href="./signup" class="nav-item"><span -->
-		<!-- 							class="glyphicon glyphicon-user"></span> Sign Up</a></li> -->
-		<%-- 					<li><sec:authorize --%>
-		<%-- 							access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> --%>
-		<!-- 							<a href="./newRentable" class="nav-item"><span -->
-		<!-- 								class="glyphicon glyphicon-plus"></span> New Rentable</a> -->
-		<%-- 						</sec:authorize></li> --%>
-		<%-- 					<li><sec:authorize --%>
-		<%-- 							access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> --%>
-		<!-- 							<a href="./dashboard" class="nav-item"> Dashboard</a> -->
-		<%-- 						</sec:authorize></li> --%>
-		<!-- 				</ul> -->
-		<!-- 			</div> -->
-		<!-- 		</div> -->
-		<!-- 		</nav> -->
-
-
 		<!-- Banner -->
 
-		<section id="banner">
-		
-			
-			<img src="pictures/urent_banner.jpg" alt="">
-			
-			
+		<section id="banner"> <img src="pictures/urent_banner.jpg"
+			alt="">
+	</div>
+	</section>
+
+
+	<!-- Main -->
+
+	<article id="main"> <header class="special container">
+	<span class="icon fa-bar-chart-o"></span>
+	<h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+		diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+		erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+		et ea rebum.</h2>
+	<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+		ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+		sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+		dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+		et justo duo dolores et ea rebum.</p>
+	</header> <section class="wrapper style1 container special">
+	<div class="row">
+		<div class="4u 12u(narrower)">
+
+			<section> <span class="icon featured fa-check"></span> <header>
+			<h3>All the Things you need</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
+				eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit,
+				et sagittis turpis. Integer ut fermentum.</p>
+			</section>
+
 		</div>
-		</section>
+		<div class="4u 12u(narrower)">
 
-		<!-- Table Rentables -->
+			<section> <span class="icon featured fa-lock"></span> <header>
+			<h3>Secure</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
+				eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit,
+				et sagittis turpis. Integer ut fermentum.</p>
+			</section>
 
-
-		<!-- Main -->
-		
-		<article id="main"> <header class="special container">
-		<span class="icon fa-bar-chart-o"></span>
-		<h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-			diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-			erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-			et ea rebum.</h2>
-		<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-			ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-			sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-			dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-			et justo duo dolores et ea rebum.</p>
-		</header> <section class="wrapper style1 container special">
-		<div class="row">
-			<div class="4u 12u(narrower)">
-
-				<section> <span class="icon featured fa-check"></span> <header>
-				<h3>All the Things you need</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
-					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
-					elit, et sagittis turpis. Integer ut fermentum.</p>
-				</section>
-
-			</div>
-			<div class="4u 12u(narrower)">
-
-				<section> <span class="icon featured fa-lock"></span> <header>
-				<h3>Secure</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
-					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
-					elit, et sagittis turpis. Integer ut fermentum.</p>
-				</section>
-
-			</div>
-			<div class="4u 12u(narrower)">
-
-				<section> <span class="icon featured fa-laptop"></span> <header>
-				<h3>Very niice</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
-					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
-					elit, et sagittis turpis. Integer ut fermentum.</p>
-				</section>
-
-			</div>
 		</div>
-		</section> <!-- Three --> <section class="wrapper style3 container special">
+		<div class="4u 12u(narrower)">
 
-		<header class="major">
-		<h2>Things to Rent</h2>
-		</header>
+			<section> <span class="icon featured fa-laptop"></span> <header>
+			<h3>Very niice</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
+				eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper elit,
+				et sagittis turpis. Integer ut fermentum.</p>
+			</section>
 
-		<div class="row">
-			<div class="6u 12u(narrower)">
-
-				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic01.jpg" alt="" /></a> <header>
-				<h3>Tools</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
-				</section>
-
-			</div>
-			<div class="6u 12u(narrower)">
-
-				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic02.jpg" alt="" /></a> <header>
-				<h3>Sport</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
-				</section>
-
-			</div>
 		</div>
-		<div class="row">
-			<div class="6u 12u(narrower)">
+	</div>
+	</section> <!-- Three --> <section class="wrapper style3 container special">
 
-				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic03.jpg" alt="" /></a> <header>
-				<h3>Music</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
-				</section>
+	<header class="major">
+	<h2>Things to Rent</h2>
+	</header>
 
-			</div>
-			<div class="6u 12u(narrower)">
+	<div class="row">
+		<div class="6u 12u(narrower)">
 
-				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic04.jpg" alt="" /></a> <header>
-				<h3>Garden</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
-				</section>
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic01.jpg" alt="" /></a> <header>
+			<h3>Tools</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
 
-			</div>
 		</div>
+		<div class="6u 12u(narrower)">
 
-		<footer class="major">
-		<ul class="buttons">
-			<li><a href="#" class="button">See More</a></li>
-		</ul>
-		</footer> </section> </article>
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic02.jpg" alt="" /></a> <header>
+			<h3>Sport</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="6u 12u(narrower)">
+
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic03.jpg" alt="" /></a> <header>
+			<h3>Music</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
+
+		</div>
+		<div class="6u 12u(narrower)">
+
+			<section> <a href="#" class="image featured"><img
+				src="resources/pictures/pic04.jpg" alt="" /></a> <header>
+			<h3>Garden</h3>
+			</header>
+			<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
+				nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
+				volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
+				dolore.</p>
+			</section>
+
+		</div>
+	</div>
+
+	<footer class="major">
+	<ul class="buttons">
+		<li><a href="#" class="button">See More</a></li>
+	</ul>
+	</footer> </section> </article>
 
 
-		<!-- CTA -->
-		<section id="cta"> <header>
-		<h2>
-			Ready to do <strong>explore uRent</strong>?
-		</h2>
-		<p>Proin a ullamcorper elit, et sagittis turpis integer ut
-			fermentum.</p>
-		</header> <footer>
-		<ul class="buttons">
-			<li><a href="#" class="button special">Browse</a></li>
-		</ul>
-		</footer> </section>
+	<!-- CTA -->
+	<section id="cta"> <header>
+	<h2>
+		Ready to do <strong>explore uRent</strong>?
+	</h2>
+	<p>Proin a ullamcorper elit, et sagittis turpis integer ut
+		fermentum.</p>
+	</header> <footer>
+	<ul class="buttons">
+		<li><a href="#" class="button special">Browse</a></li>
+	</ul>
+	</footer> </section>
 
 
-		<!-- Footer -->
-		<footer id="footer">
+	<!-- Footer -->
+	<footer id="footer">
 
-		<ul class="icons">
-			<li><a href="#" class="icon circle fa-twitter"><span
-					class="label">Twitter</span></a></li>
-			<li><a href="#" class="icon circle fa-facebook"><span
-					class="label">Facebook</span></a></li>
-			<li><a href="#" class="icon circle fa-google-plus"><span
-					class="label">Google+</span></a></li>
-			<li><a href="#" class="icon circle fa-github"><span
-					class="label">Github</span></a></li>
-			<li><a href="#" class="icon circle fa-dribbble"><span
-					class="label">Dribbble</span></a></li>
-		</ul>
+	<ul class="icons">
+		<li><a href="#" class="icon circle fa-twitter"><span
+				class="label">Twitter</span></a></li>
+		<li><a href="#" class="icon circle fa-facebook"><span
+				class="label">Facebook</span></a></li>
+		<li><a href="#" class="icon circle fa-google-plus"><span
+				class="label">Google+</span></a></li>
+		<li><a href="#" class="icon circle fa-github"><span
+				class="label">Github</span></a></li>
+		<li><a href="#" class="icon circle fa-dribbble"><span
+				class="label">Dribbble</span></a></li>
+	</ul>
 
-		<ul class="copyright">
-			<li>&copy; uRent Development</li>
-		</ul>
+	<ul class="copyright">
+		<li>&copy; uRent Development</li>
+	</ul>
 
-		</footer>
+	</footer>
 
 	</div>
 

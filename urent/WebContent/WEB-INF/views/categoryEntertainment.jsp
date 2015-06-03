@@ -19,7 +19,7 @@
 	<!-- 	<div class="masthead"> -->
 	<!-- 		<div class="container"> -->
 
-		<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="./">uRent</a>
@@ -35,8 +35,8 @@
 						<form action="${logoutUrl }" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input
-								type="submit" value="Log Out" /></label>
+								class="glyphicon glyphicon-log-out"></span><input type="submit"
+								value="Log Out" /></label>
 						</form>
 					</sec:authorize></li>
 				<li><a href="./signup" class="nav-item"><span
@@ -75,6 +75,7 @@
 							<th>Price</th>
 							<th>Location</th>
 							<th>Image</th>
+							<th>Ratings</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -91,6 +92,7 @@
 								<td class="col-md-1"><img
 									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
 									width="75px" /></td>
+								<td class="col-md-1"><a href="ratings?id=${rentable.id}">Ratings</a></td>
 								<td class="col-md-1"><sec:authorize
 										access="hasRole('ROLE_ADMIN')">
 										<a href="deleteRentable?id=${rentable.id}">

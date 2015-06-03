@@ -172,7 +172,7 @@ public class IndexController {
 				errorMessage += fieldError.getField() + " is invalid<br>";
 			}
 			model.addAttribute("errorMessage", errorMessage);
-			return "forward:/list";
+			return "newRentable";
 		}
 
 		String errorMessage = "";
@@ -205,6 +205,7 @@ public class IndexController {
 
 		} catch (Exception e) {
 			errorMessage += "Invalid Data<br>";
+			return "newRentable"; 
 		}
 
 		return "forward:/list";

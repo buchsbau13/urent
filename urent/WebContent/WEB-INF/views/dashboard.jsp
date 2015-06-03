@@ -19,7 +19,7 @@
 	<!-- 	<div class="masthead"> -->
 	<!-- 		<div class="container"> -->
 
-		<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="./">uRent</a>
@@ -31,13 +31,7 @@
 							class="glyphicon glyphicon-log-in"></span> Log In</a>
 					</sec:authorize></li>
 				<li><sec:authorize access="isAuthenticated()">
-						<c:url value="logout" var="logoutUrl" />
-						<form action="${logoutUrl }" method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input
-								type="submit" value="Log Out" /></label>
-						</form>
+						<a href="./logout" class="nav-item">Log Out</a>
 					</sec:authorize></li>
 				<li><a href="./signup" class="nav-item"><span
 						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -93,25 +87,20 @@
 								<td class="col-md-1"><img
 									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
 									width="75px" /></td>
-								<td class="col-md-1">
-									<sec:authorize
+								<td class="col-md-1"><sec:authorize
 										access="hasRole('ROLE_USER')">
 										<a href="showRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-success">
 												<span class="glyphicon glyphicon-pencil"></span> Show
 											</button>
 										</a>
-									</sec:authorize>
-								
-									<sec:authorize
-										access="hasRole('ROLE_USER')">
+									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
 										<a href="editRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-success">
 												<span class="glyphicon glyphicon-pencil"></span> Edit
 											</button>
 										</a>
-									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_USER')">
+									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
 										<a href="deleteRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-danger">
 												<span class="glyphicon glyphicon-trash"></span> Delete

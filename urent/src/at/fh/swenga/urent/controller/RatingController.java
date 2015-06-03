@@ -56,7 +56,7 @@ public class RatingController {
 		if (name.equals(ownerRentable)) {
 			model.addAttribute("errorMessage",
 					"You are not allowed to rate your own products");
-			return "forward:/list";
+			return "rateRentable";
 		} else {
 			Rating newRating = new Rating();
 			newRating.setDate(new Date());

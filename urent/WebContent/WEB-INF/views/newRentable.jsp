@@ -55,6 +55,26 @@
 	</div>
 	</nav>
 
+	<center>
+		<!--  Error message ----------------------------------------------------------- -->
+		<c:if test="${not empty errorMessage}">
+			<div class="alert alert-danger" role="alert">${errorMessage}</div>
+		</c:if>
+		<!--  Error message ----------------------------------------------------------- -->
+
+		<!--  Warning message ----------------------------------------------------------- -->
+		<c:if test="${not empty warningMessage}">
+			<div class="alert alert-warning" role="warning">${warningMessage}</div>
+		</c:if>
+		<!--  Warning message ----------------------------------------------------------- -->
+
+		<!--   message ----------------------------------------------------------- -->
+		<c:if test="${not empty message}">
+			<div class="alert alert-success" role="warning">${message}</div>
+		</c:if>
+		<!--   message ----------------------------------------------------------- -->
+	</center>
+
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<form:form class="form-horizontal" method="post"
@@ -146,7 +166,7 @@
 					<div class="form-group">
 						<label for="inputImage" class="col-md-2 control-label">Image</label>
 						<div class="col-md-10">
-							<input type="file" name="file"> 
+							<input type="file" name="file">
 						</div>
 					</div>
 
