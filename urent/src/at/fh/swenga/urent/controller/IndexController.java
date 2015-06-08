@@ -1,10 +1,15 @@
 package at.fh.swenga.urent.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -181,14 +186,21 @@ public class IndexController {
 		User currentUser = userDao.getUser(name);
 
 		try {
-			byte[] image = file.getBytes();
+			//byte[] image = file.getBytes();
+			BufferedImage croppedImage = cropImageSquare(file.getBytes());
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(croppedImage, "jpg", baos );
+			baos.flush();
+			byte[] imageInByte = baos.toByteArray();
+			baos.close();
 
 			Rentable rentable = new Rentable();
 			rentable.setTitle(newRentableForm.getTitle());
 			Category category = categoryDao.getCategoryId(newRentableForm
 					.getCategoryId());
 			rentable.setUser(currentUser);
-			rentable.setImage(image);
+			rentable.setImage(imageInByte);
 			rentable.setCategory(category);
 			rentable.setDescription(newRentableForm.getDescription());
 			rentable.setPrice(newRentableForm.getPrice());
@@ -205,10 +217,10 @@ public class IndexController {
 
 		} catch (Exception e) {
 			errorMessage += "Invalid Data<br>";
-			return "newRentable"; 
+			return "newRentable";
 		}
 
-		return "forward:/list";
+		return "forward:dashboard";
 	}
 
 	@RequestMapping("/categoryEntertainment")
@@ -306,6 +318,32 @@ public class IndexController {
 
 		return "showError";
 
+	}
+
+	private BufferedImage cropImageSquare(byte[] image) throws IOException {
+		InputStream in = new ByteArrayInputStream(image);
+		BufferedImage originalImage = ImageIO.read(in);
+
+		int height = originalImage.getHeight();
+		int width = originalImage.getWidth();
+
+		if (height == width) {
+			return originalImage;
+		}
+
+		int squareSize = (height > width ? width : height);
+
+		int xc = width / 2;
+		int yc = height / 2;
+
+		BufferedImage croppedImage = originalImage.getSubimage(xc
+				- (squareSize / 2), 
+				yc - (squareSize / 2), 
+				squareSize, 
+				squareSize 
+				);
+
+		return croppedImage;
 	}
 
 }
