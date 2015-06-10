@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -171,6 +172,8 @@ public class IndexController {
 			@RequestParam("file") MultipartFile file, Model model)
 			throws IOException {
 
+		final DefaultResourceLoader loader = new DefaultResourceLoader();
+
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -186,21 +189,11 @@ public class IndexController {
 		User currentUser = userDao.getUser(name);
 
 		try {
-			//byte[] image = file.getBytes();
-			BufferedImage croppedImage = cropImageSquare(file.getBytes());
-
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ImageIO.write(croppedImage, "jpg", baos );
-			baos.flush();
-			byte[] imageInByte = baos.toByteArray();
-			baos.close();
-
 			Rentable rentable = new Rentable();
 			rentable.setTitle(newRentableForm.getTitle());
 			Category category = categoryDao.getCategoryId(newRentableForm
 					.getCategoryId());
 			rentable.setUser(currentUser);
-			rentable.setImage(imageInByte);
 			rentable.setCategory(category);
 			rentable.setDescription(newRentableForm.getDescription());
 			rentable.setPrice(newRentableForm.getPrice());
@@ -209,6 +202,20 @@ public class IndexController {
 					newRentableForm.getCity(), newRentableForm.getCountry(),
 					newRentableForm.getZip());
 			rentable.setLocation(location);
+
+			if (file.isEmpty()) {
+				byte[] image = file.getBytes();
+				rentable.setImage(image);
+
+			} else {
+				BufferedImage croppedImage = cropImageSquare(file.getBytes());
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(croppedImage, "jpg", baos);
+				baos.flush();
+				byte[] imageInByte = baos.toByteArray();
+				baos.close();
+				rentable.setImage(imageInByte);
+			}
 
 			rentableDao.persist(rentable);
 
@@ -337,11 +344,8 @@ public class IndexController {
 		int yc = height / 2;
 
 		BufferedImage croppedImage = originalImage.getSubimage(xc
-				- (squareSize / 2), 
-				yc - (squareSize / 2), 
-				squareSize, 
-				squareSize 
-				);
+				- (squareSize / 2), yc - (squareSize / 2), squareSize,
+				squareSize);
 
 		return croppedImage;
 	}
