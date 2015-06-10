@@ -2038,7 +2038,7 @@ top
 #banner {
 		background-attachment: scroll, scroll, scroll, fixed;
 		background-color: #645862;
-		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("images/overlay.png"), url("../../images/banner.jpg");
+		background-image: url("resources/pictures/light-bl.svg"), url("resources/pictures/light-br.svg"), url("resources/pictures/overlay.png"), url("resources/pictures/pic11.jpg");
 		background-position: bottom left, bottom right, top left, top center;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
 		background-size: 25em, 25em, auto, cover;
@@ -2569,13 +2569,20 @@ body.index #main {
 	}
 }
 
-input{
-   text-align:center;
-}
+   .formalign {
+        width: 500px;
+        clear: both;
+    }
+    .formalign input {
+        width: 100%;
+        clear: both;
+    }
 
-label {
-    margin-bottom: 20px;
-}
+
+
+
+
+
 
 /* old */
 .container {
