@@ -3,10 +3,12 @@ package at.fh.swenga.urent.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.Email;
@@ -25,6 +27,12 @@ public class User implements java.io.Serializable {
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 	private Set<Rentable> rentables;
 	private Set<Rating> ratings;
+	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(length = 100000)
+	private byte[] image;
+
 
 	public User() {
 	}
@@ -147,4 +155,13 @@ public class User implements java.io.Serializable {
 			return true;
 		return false;
 	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	
 }

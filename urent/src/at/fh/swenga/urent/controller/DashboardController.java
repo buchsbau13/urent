@@ -17,19 +17,29 @@ import org.springframework.web.multipart.MultipartFile;
 
 import at.fh.swenga.urent.dao.CategoryDao;
 import at.fh.swenga.urent.dao.RentableDao;
+import at.fh.swenga.urent.dao.UserDao;
+import at.fh.swenga.urent.dao.UserRoleDao;
 import at.fh.swenga.urent.model.Address;
 import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.RentableForm;
+import at.fh.swenga.urent.model.User;
+import at.fh.swenga.urent.model.UserRole;
 
 @Controller
 public class DashboardController {
 
 	@Autowired
 	RentableDao rentableDao;
+
+	@Autowired
+	CategoryDao categoryDao;
+
+	@Autowired
+	UserDao userDao;
 	
 	@Autowired 
-	CategoryDao categoryDao; 
+	UserRoleDao userRoleDao; 
 
 	@RequestMapping(value = "/editRentable", method = RequestMethod.GET)
 	public String showEditRentableForm(Model model, @RequestParam int id) {
@@ -37,14 +47,16 @@ public class DashboardController {
 		List<Category> categories = categoryDao.getCategories();
 		model.addAttribute("rentable", rentableDao.getRentable(id));
 		model.addAttribute("command", new RentableForm());
-		model.addAttribute("categories", categories); 
+		model.addAttribute("categories", categories);
 
 		return "editRentable";
 	}
 
 	@RequestMapping(value = "/editRentable", method = RequestMethod.POST)
-	public String newRentable(@Valid @ModelAttribute RentableForm rentable,
-			BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model) throws IOException {
+	public String editRentable(@Valid @ModelAttribute RentableForm rentable,
+			BindingResult bindingResult,
+			@RequestParam("file") MultipartFile file, Model model)
+			throws IOException {
 
 		Rentable changedRentable = rentableDao.getRentable(rentable.getId());
 
@@ -62,19 +74,50 @@ public class DashboardController {
 					rentable.getZip());
 			changedRentable.setLocation(location);
 			rentableDao.merge(changedRentable);
-			
-			model.addAttribute("message", "Changed Rentable " + changedRentable.getId());
+
+			model.addAttribute("message",
+					"Changed Rentable " + changedRentable.getId());
 		}
 
 		return "forward:/list";
 	}
-	
-	@RequestMapping(value="/showRentable", method = RequestMethod.GET)
-	public String showRentable (Model model, @RequestParam int id) {
-		
+
+	@RequestMapping(value = "/showRentable", method = RequestMethod.GET)
+	public String showRentable(Model model, @RequestParam int id) {
+
 		model.addAttribute("rentable", rentableDao.getRentable(id));
-		
+
 		return "showRentable";
+	}
+
+	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
+	public String showEditUser(Model model, @RequestParam String username) {
+
+		model.addAttribute("user", userDao.getUser(username));
+
+		return "editUser";
+	}
+
+	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
+	public String editUser(@Valid @ModelAttribute User user,
+			BindingResult bindingResult, Model model) throws IOException {
+
+		User changedUser = userDao.getUser(user.getUsername());
+
+		if (changedUser == null) {
+			model.addAttribute("errorMessage", "User does not exist!<br>");
+		} else {
+			changedUser.setEmail(user.getEmail());
+			changedUser.setFirstname(user.getFirstname());
+			changedUser.setLastname(user.getLastname());
+			changedUser.setTelephone(user.getTelephone());
+			userDao.merge(changedUser); 
+			
+			model.addAttribute("message",
+					"Changed User " + changedUser.getUsername());
+		}
+
+		return "forward:/dashboard";
 	}
 
 }

@@ -307,6 +307,7 @@ public class IndexController {
 
 		List<Rentable> rentables = rentableDao.userRentables(name);
 		model.addAttribute("rentables", rentables);
+		model.addAttribute("user", userDao.getUser(name));
 
 		return "dashboard";
 

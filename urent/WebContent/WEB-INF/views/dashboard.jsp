@@ -51,6 +51,19 @@
 	</ul>
 	</div>
 
+	<h2 align="center">${user.username}</h2>
+
+	<h2 align="center">${user.email}</h2>
+	<h2 align="center">${user.telephone}</h2>
+
+	<center><sec:authorize access="hasRole('ROLE_USER')">
+		<a href="editUser?username=${user.username}">
+			<button type="button" class="btn btn-xs btn-success">
+				<span class="glyphicon glyphicon-pencil"></span> Edit User
+			</button>
+		</a>
+	</sec:authorize></center>
+
 	<!--  list all persons ----------------------------------------------------------- -->
 	<center>
 		<h1>My Rentables</h1>
@@ -116,6 +129,5 @@
 		</div>
 
 	</center>
-
 </body>
 </html>

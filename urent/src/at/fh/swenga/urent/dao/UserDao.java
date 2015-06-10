@@ -25,4 +25,9 @@ public class UserDao {
 
 	}
 
+	public void merge(User user) {
+		entityManager.merge(user);
+
+	}
+
 }
