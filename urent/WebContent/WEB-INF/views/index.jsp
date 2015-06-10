@@ -76,10 +76,7 @@
 				This is <strong>uRent</strong>, a <br /> place to share your Stuff
 				with the World <br />
 				<footer>
-				<ul class="buttons vertical">
-					<li><a href="#main" class="button fit scrolly">Tell Me
-							More</a></li>
-				</ul>
+				
 				</footer>
 		</div>
 		</section>
