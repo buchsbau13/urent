@@ -70,7 +70,7 @@
 		<!-- One --> 
 		<section class="wrapper style4 special container 25%">
 		<div class="content">
-			
+			<center>
 				<div class="row 50%">
 					<c:url value="/login" var="loginUrl" />
 					<form action="${loginUrl}" method="post">
@@ -89,6 +89,7 @@
 					</form>
 				</div>
 			</div>
+			</center>
 		</div>
 		</section> 
 		

@@ -22,6 +22,7 @@
 <script src="resources/js/util.js"></script>
 <script src="resources/js/main.js"></script>
 <jsp:include page="includes/bootstrapMeta.jsp" />
+
 <link rel="stylesheet" type="text/css"
 	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <jsp:include page="includes/bootstrapMeta.jsp" />
@@ -65,142 +66,172 @@
 
 		<article id="main"> <header class=special container>
 		<span class="icon fa-plus-square-o"></span>
-		<h2>Sign up</h2>
+		<h2>New Rentable</h2>
 		</header> <!-- One --> <section class="wrapper style4 special container 50%">
-		<div class="content">
 
 
-			<center>
-				<!--  Error message ----------------------------------------------------------- -->
-				<c:if test="${not empty errorMessage}">
-					<div class="alert alert-danger" role="alert">${errorMessage}</div>
-				</c:if>
-				<!--  Error message ----------------------------------------------------------- -->
 
-				<!--  Warning message ----------------------------------------------------------- -->
-				<c:if test="${not empty warningMessage}">
-					<div class="alert alert-warning" role="warning">${warningMessage}</div>
-				</c:if>
-				<!--  Warning message ----------------------------------------------------------- -->
+		<center>
+			<!--  Error message ------------------------------------------------------------->
+			<c:if test="${not empty errorMessage}">
+				<div class="alert alert-danger" role="alert">${errorMessage}</div>
+			</c:if>
+			<!--  Error message ------------------------------------------------------------->
 
-				<!--   message ----------------------------------------------------------- -->
-				<c:if test="${not empty message}">
-					<div class="alert alert-success" role="warning">${message}</div>
-				</c:if>
-				<!--   message ----------------------------------------------------------- -->
-			</center>
+			<!--  Warning message ------------------------------------------------------------->
+			<c:if test="${not empty warningMessage}">
+				<div class="alert alert-warning" role="warning">${warningMessage}</div>
+			</c:if>
+			<!--  Warning message ------------------------------------------------------------->
 
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<form:form class="form-horizontal" method="post"
-						action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
-						enctype="multipart/form-data">
-						<fieldset>
-							<legend>${legend}</legend>
-
-							<! ----------------  category ---------------- -->
-							<div class="form-group">
-								<label for="inputCategory" class="col-md-2 control-label">Category</label>
-								<div class="col-md-10">
+			<!--   message ------------------------------------------------------------->
+			<c:if test="${not empty message}">
+				<div class="alert alert-success" role="warning">${message}</div>
+			</c:if>
+			<!--   message ------------------------------------------------------------->
+		</center>
+		<form:form class="form" method="post"
+			action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
+			enctype="multipart/form-data" role="form" >
+			
+			
+			<legend>${legend}</legend>
+			<! ----------------  category ---------------- -->
+			<div class="form-group">
+				<label for="inputCategory" class="control-label col-sm-2 ">Category</label>
+				
 
 
-									<form:select path="categoryId">
-										<form:option value="0" label="--- Select ---" />
-										<form:options items="${categories}" itemValue="id"
-											itemLabel="name" />
-									</form:select>
-								</div>
-							</div>
-							<! ----------------  title ---------------- -->
-							<div class="form-group">
-								<label for="inputTitel" class="col-md-2 control-label">Title</label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputTitle" type="text"
-										name="title">
-								</div>
-							</div>
-							<! ----------------  description  ---------------- -->
-							<div class="form-group">
-								<label for="inputDescription" class="col-md-2 control-label">Description</label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputDescription" type="text"
-										name="description">
-								</div>
-							</div>
-
-							<! ----------------  price  ---------------- -->
-							<div class="form-group">
-								<label for="inputPrice" class="col-md-2 control-label">Price</label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputPrice" type="text"
-										name="price">
-								</div>
-							</div>
-
-							<! ----------------  location.street  ---------------- -->
-							<div class="form-group">
-								<label for="inputLocationStreet" class="col-md-2 control-label">Location
-									Street</label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputLocationStreet"
-										type="text" name="street">
-								</div>
-							</div>
-
-							<! ----------------  location.city ---------------- -->
-							<div class="form-group">
-								<label for="inputLocationCity" class="col-md-2 control-label">Location
-									City</label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputLocationCity" type="text"
-										name="city">
-								</div>
-							</div>
-
-							<! ----------------  location.country ---------------- -->
-							<div class="form-group">
-								<label for="inputLocationCountry" class="col-md-2 control-label">Location
-									Country</label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputLocationCountry"
-										type="text" name="country">
-								</div>
-							</div>
-
-							<! ----------------  location.zip ---------------- -->
-							<div class="form-group">
-								<label for="inputLocationZip" class="col-md-2 control-label">Location
-									ZIP</label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputLocationZip" type="text"
-										name="zip">
-								</div>
-							</div>
-
-							<! ----------------  image  ---------------- -->
-							<div class="form-group">
-								<label for="inputImage" class="col-md-2 control-label">Image</label>
-								<div class="col-md-10">
-									<input type="file" name="file">
-								</div>
-							</div>
-
-
-							<! ----------------  buttons ---------------- -->
-							<div class="form-group">
-								<div class="col-md-10 col-md-offset-2">
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<a href="list">
-										<button type="button" class="btn btn-default">Cancel</button>
-									</a>
-								</div>
-							</div>
-						</fieldset>
-					</form:form>
-				</div>
+					<form:select path="categoryId">
+						<form:option value="0" label="--- Select ---" />
+						<form:options items="${categories}" itemValue="id"
+							itemLabel="name" />
+					</form:select>
+				
 			</div>
+			
+			
+	
+			
+			
+			
+			<! ----------------  title ------------------>
+			<div class="form-group">
+				<label for="inputTitel" >Title</label>
+				
+					<input class="form-control" id="inputTitle" type="text"
+						name="title">
+				</div>
+			
+			
+		<! ----------------  description  ------------------>
+			<div class="form-group">
+				<label for="inputDescription" >Description
+				</label>
+				
+					<input class="form-control" id="inputDescription" type="text"
+						name="description" rows="4S">
+				</div>
+				
+				<! ----------------  price  ---------------- -->
+			<div class="form-group">
+				<label for="inputPrice">Price</label>
+				
+					<input class="form-control" id="inputPrice" type="text"
+						name="price">
+				</div>
+			
 
-		</div>
-		<!--  End of container -->
+			<! ----------------  location.street  ---------------- -->
+			<div class="form-group">
+				<label for="inputLocationStreet" >Location
+					Street</label>
+				
+					<input class="form-control" id="inputLocationStreet" type="text"
+						name="street">
+				</div>
+			
+
+			<! ----------------  location.city ---------------- -->
+			<div class="form-group">
+				<label for="inputLocationCity" >Location
+					City</label>
+				
+					<input class="form-control" id="inputLocationCity" type="text"
+						name="city">
+				</div>
+			
+
+			<! ----------------  location.country ---------------- -->
+			<div class="form-group">
+				<label for="inputLocationCountry" >Location
+					Country</label>
+				
+					<input class="form-control" id="inputLocationCountry" type="text"
+						name="country">
+				</div>
+			
+
+			<! ----------------  location.zip ---------------- -->
+			<div class="form-group">
+				<label for="inputLocationZip" >Location
+					ZIP</label>
+				
+					<input class="form-control" id="inputLocationZip" type="text"
+						name="zip">
+				</div>
+			
+				
+			<! ----------------  image  ---------------- -->
+			<div class="form-group">
+				<label for="inputImage" >Image</label>
+				<center>
+					<input type="file" name="file"></center>
+				</div>
+			
+		<! ----------------  buttons ---------------- -->
+			<div class="form-group">
+				
+					<button type="submit" class="btn btn-default btn-lg">Submit</button>
+					<a href="list">
+						<button type="button" class="btn btn-default btn-lg">Cancel</button>
+					</a>
+				</div>
+			
+			
+				
+				
+				
+				
+				
+				
+			</div>
+			</form:form>
+	</div>
+
+
+	</article>
+	</section>
+	<!-- Footer -->
+	<footer id="footer">
+
+	<ul class="icons">
+		<li><a href="#" class="icon circle fa-twitter"><span
+				class="label">Twitter</span></a></li>
+		<li><a href="#" class="icon circle fa-facebook"><span
+				class="label">Facebook</span></a></li>
+		<li><a href="#" class="icon circle fa-google-plus"><span
+				class="label">Google+</span></a></li>
+		<li><a href="#" class="icon circle fa-github"><span
+				class="label">Github</span></a></li>
+		<li><a href="#" class="icon circle fa-dribbble"><span
+				class="label">Dribbble</span></a></li>
+	</ul>
+
+	<ul class="copyright">
+		<li>&copy; uRent Development</li>
+	</ul>
+	</footer>
+	<!--  End of container -->
 </body>
 </html>
