@@ -73,6 +73,7 @@ public class RegisterController {
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 				newUser.setPassword(encoder.encode(user.getPassword()));
 				newUser.setEnabled(true);
+				
 				userDao.persist(newUser);
 
 				UserRole standardUser = new UserRole();

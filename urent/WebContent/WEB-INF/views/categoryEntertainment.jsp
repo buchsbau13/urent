@@ -106,6 +106,13 @@
 												<span class="glyphicon glyphicon-pencil"></span> Rate
 											</button>
 										</a>
+									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
+										<a href="addToWishlist?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-success">
+												<span class="glyphicon glyphicon-pencil"></span> Add to
+												Wishlist
+											</button>
+										</a>
 									</sec:authorize></td>
 							</tr>
 						</c:forEach>

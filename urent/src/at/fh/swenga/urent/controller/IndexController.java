@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -216,6 +217,9 @@ public class IndexController {
 				baos.close();
 				rentable.setImage(imageInByte);
 			}
+			
+			List<User> wishlistUsers = new ArrayList<User>(); 
+			rentable.setWishlistUsers(wishlistUsers);
 
 			rentableDao.persist(rentable);
 
@@ -306,7 +310,9 @@ public class IndexController {
 		String name = principal.getName();
 
 		List<Rentable> rentables = rentableDao.userRentables(name);
+		List<Rentable> wishlistRentables = userDao.getUser(name).getWishlistRentables(); 
 		model.addAttribute("rentables", rentables);
+		model.addAttribute("wishlistRentables", wishlistRentables); 
 		model.addAttribute("user", userDao.getUser(name));
 
 		return "dashboard";

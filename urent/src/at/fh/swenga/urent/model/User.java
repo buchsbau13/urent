@@ -1,6 +1,7 @@
 package at.fh.swenga.urent.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.Email;
@@ -27,12 +29,12 @@ public class User implements java.io.Serializable {
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 	private Set<Rentable> rentables;
 	private Set<Rating> ratings;
-	
+	private List<Rentable> wishlistRentables; 
+
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(length = 100000)
 	private byte[] image;
-
 
 	public User() {
 	}
@@ -163,5 +165,15 @@ public class User implements java.io.Serializable {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "wishlistUsers")
+	public List<Rentable> getWishlistRentables() {
+		return wishlistRentables;
+	}
+
+	public void setWishlistRentables(List<Rentable> wishlistRentables) {
+		this.wishlistRentables = wishlistRentables;
+	}
+	
 	
 }

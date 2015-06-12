@@ -2,6 +2,7 @@ package at.fh.swenga.urent.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Basic;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
@@ -52,16 +54,18 @@ public class Rentable implements Serializable {
 	@Column(nullable = false)
 	private double price;
 
-	// Verfügbarkeit
-
 	@Column(nullable = false)
 	private Address location;
+
+	@ManyToMany(cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+	private List<User> wishlistUsers;
 
 	public Rentable() {
 	}
 
 	public Rentable(User user, Category category, String title,
-			String description, double price, byte[] image, Address location) {
+			String description, double price, byte[] image, Address location,
+			List<User> wishlistUsers) {
 		super();
 		this.user = user;
 		this.category = category;
@@ -70,6 +74,7 @@ public class Rentable implements Serializable {
 		this.price = price;
 		this.image = image;
 		this.location = location;
+		this.wishlistUsers = wishlistUsers;
 	}
 
 	public int getId() {
@@ -150,4 +155,13 @@ public class Rentable implements Serializable {
 		}
 		ratings.add(rating);
 	}
+
+	public List<User> getWishlistUsers() {
+		return wishlistUsers;
+	}
+
+	public void setWishlistUsers(List<User> wishlistUsers) {
+		this.wishlistUsers = wishlistUsers;
+	}
+
 }
