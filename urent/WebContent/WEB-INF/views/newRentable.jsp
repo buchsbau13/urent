@@ -126,11 +126,12 @@
 			
 		<! ----------------  description  ------------------>
 			<div class="form-group">
-				<label for="inputDescription" >Description
+				<label for="inputDescription" class="control-label">Description
 				</label>
 				
-					<input class="form-control" id="inputDescription" type="text"
-						name="description" rows="4S">
+					
+						
+						<textarea class="form-control" rows="5" cols="35" id="inputDescription" type="text" name="description"></textarea>
 				</div>
 				
 				<! ----------------  price  ---------------- -->

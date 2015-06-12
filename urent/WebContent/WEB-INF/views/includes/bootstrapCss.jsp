@@ -1724,8 +1724,9 @@ input[type="button"].fit, input[type="submit"].fit, input[type="reset"].fit,
 input[type="button"].small, input[type="submit"].small, input[type="reset"].small,
 	.button.small {
 	font-size: 0.7em;
-	min-width: 14em;
-	padding: 0.5em 0;
+	min-width: 10em;
+	max-height: 3em;
+	padding-bottom: 0em;
 }
 
 /* Wrapper */
@@ -2582,7 +2583,12 @@ input{
    text-align:center;
 }
 
+.space{
+margin-bottom: 10px;
+}
 
+
+/* search */
 
 
 

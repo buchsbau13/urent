@@ -75,10 +75,19 @@
 			<p>
 				This is <strong>uRent</strong>, a <br /> place to share your Stuff
 				with the World <br />
-				<footer>
-				
-				</footer>
-		</div>
+				<footer> </footer>
+				<fieldset>
+			<div class="form-group">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="space">
+						<input type="text" class="form-control"
+							placeholder="What are you lookig for?">
+					</div>
+					<button type="submit" class="button fit">Search</button>
+
+				</div>
+			</div>
+			</fieldset>
 		</section>
 
 
