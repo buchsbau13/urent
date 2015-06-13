@@ -8,114 +8,143 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/jquery.dropotron.min.js"></script>
+<script src="resources/js/jquery.scrolly.min.js"></script>
+<script src="resources/js/jquery.scrollgress.min.js"></script>
+<script src="resources/js/skel.min.js"></script>
+<script src="resources/js/util.js"></script>
+<script src="resources/js/main.js"></script>
 <meta name="viewport" content="width_device-width, initial-scale=1">
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <jsp:include page="includes/bootstrapCss.jsp" />
 <jsp:include page="includes/bootstrapJs.jsp" />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <title>Sport</title>
 </head>
-<body>
+<body onload="loadMap()">
+	<div id="page-wrapper">
+		<!-- Header -->
 
-	<!-- 	<div class="masthead"> -->
-	<!-- 		<div class="container"> -->
+		<header id="header">
+		<h1>uRent</h1>
+		<nav id="nav"> <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="username" />
+		</sec:authorize>
 
-		<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./">uRent</a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><sec:authorize access="isAnonymous()">
-						<a href="./login" class="nav-item"><span
-							class="glyphicon glyphicon-log-in"></span> Log In</a>
-					</sec:authorize></li>
-				<li><sec:authorize access="isAuthenticated()">
-						<c:url value="logout" var="logoutUrl" />
-						<form action="${logoutUrl }" method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input
-								type="submit" value="Log Out" /></label>
-						</form>
-					</sec:authorize></li>
-				<li><a href="./signup" class="nav-item"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./newRentable" class="nav-item"><span
-							class="glyphicon glyphicon-plus"></span> New Rentable</a>
-					</sec:authorize></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./dashboard" class="nav-item"> Dashboard</a>
-					</sec:authorize></li>
-			</ul>
-		</div>
-	</div>
-	</nav>
-	</ul>
-	</div>
-
-	<!--  list all persons ----------------------------------------------------------- -->
-	<center>
-		<h1>Category Sport</h1>
-		<div class="row">
-
-			<div class="table-index">
-				<table class="table table-hover">
+		<ul>
+			<li class="current"><a href="./categorySport">Sport</a></li>
+			<li class="current"><a href="./">Welcome</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./login" class="nav-item">Log In</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAuthenticated()">
+					<a href="./logout" class="nav-item">Log Out</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./signup" class="button special">Sign Up</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./dashboard" class="button special">${username}</a>
+				</sec:authorize></li>
+		</ul>
+		</nav> </header>
 
 
 
+		<!--  list rentablesSport-->
+		
+			<h1>Category Sport</h1>
+			<div class="row">
+			<br>
+			
+				<div class="sidebar">
+				<div class="right">
+				 <header class=special >
+					<span class="icon fa-futbol-o "></span>
+					</div>
+				</header> 
+					
+					<h2>Your place for sporty Stuff</h2>
+					
+					<p>Snowboard, Soccerball or Tennisracket. This is the place to find it!</p>
+					
+					
+                    
 
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Category</th>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Price</th>
-							<th>Location</th>
-							<th>Image</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${rentables}" var="rentable">
+
+				
+					<table data-toggle="table" data-classes="table table-hover "
+						data-striped="false" data-sort-name="stargazers_count"
+						data-sort-order="desc"  data-search="true"   data-show-toggle="true"  >
+
+						<thead>
 							<tr>
-								<td class="col-md-1">${rentable.id}</td>
-								<td class="col-md-1">${rentable.category.name}</td>
-								<td class="col-md-1">${rentable.title}</td>
-								<td class="col-md-1">${rentable.description}</td>
-								<td class="col-md-1">${rentable.price}</td>
-								<td class="col-md-1">${rentable.location.street}
-									${rentable.location.zip} ${rentable.location.city}</td>
-								<td class="col-md-1"><img
-									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
-									width="75px" /></td>
-								<td class="col-md-1"><sec:authorize
-										access="hasRole('ROLE_ADMIN')">
-										<a href="deleteRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-danger">
-												<span class="glyphicon glyphicon-trash"></span> Delete
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="rateRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Rate
-											</button>
-										</a>
-									</sec:authorize></td>
+								<th data-field="title" data-sortable="true" class="col-md-1">Title</th>
+								<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
+								<th data-field="category" data-sortable="true" class="col-md-1">Category</th>
+								<th data-field="description" data-sortable="true" class="col-md-3.5">Description</th>
+								<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
+								<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
+								<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
+								<th class="col-md-1">Action</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach items="${rentables}" var="rentable">
+								<tr>
+									<td>${rentable.title}</td>
+									<td>${rentable.user.username}</td>
+									
+									<td>${rentable.category.name}</td>
 
+									<td>${rentable.description}</td>
+									<td>${rentable.location.street}<br>
+									${rentable.location.zip} ${rentable.location.city}</td>
+									<td>${rentable.price} Euro</td>
+
+									<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
+										height="75px" width="75px" /></td>
+									<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+											<a href="deleteRentable?id=${rentable.id}">
+												<button type="button" class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash"></span> Delete
+												</button>
+											</a>
+										</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
+											<a href="rateRentable?id=${rentable.id}">
+												<button type="button" class="btn btn-xs btn-success">
+													<span class="glyphicon glyphicon-pencil"></span> Rate
+												</button>
+											</a>
+										</sec:authorize></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+						
+						
+					</table>
+
+				</div>
+				
+				
+  
+   
+  
+  </div>
+				
+				
+				
 			</div>
-		</div>
 
-	</center>
 
+
+	
 </body>
 </html>
