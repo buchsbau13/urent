@@ -1290,10 +1290,13 @@ a {
 		background-color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out,
 		background-color 0.2s ease-in-out;
-	color: #3fb1a3;
+	color: #ffffff;
 	text-decoration: none;
-	border-bottom: dotted 1px;
+	
 }
+
+
+
 
 a:hover {
 	border-bottom-color: transparent;
@@ -2586,6 +2589,10 @@ input{
 .space{
 margin-bottom: 10px;
 }
+
+
+
+
 
 
 /* search */

@@ -83,7 +83,7 @@
 						<input type="text" class="form-control"
 							placeholder="What are you lookig for?">
 					</div>
-					<button type="submit" class="button fit">Search</button>
+					<button type="submit" class="button fit"><a href="./login" style="text-decoration:none;">Search</a></button>
 
 				</div>
 			</div>
@@ -108,34 +108,20 @@
 		<div class="row">
 			<div class="4u 12u(narrower)">
 
-				<section> <span class="icon featured fa-check"></span> <header>
-				<h3>All the Things you need</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
-					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
-					elit, et sagittis turpis. Integer ut fermentum.</p>
+				<section> <span class="icon featured fa-check"></span> 
+				
 				</section>
 
 			</div>
 			<div class="4u 12u(narrower)">
 
-				<section> <span class="icon featured fa-lock"></span> <header>
-				<h3>Secure</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
-					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
-					elit, et sagittis turpis. Integer ut fermentum.</p>
+				<section> <span class="icon featured fa-lock"></span> 
 				</section>
 
 			</div>
 			<div class="4u 12u(narrower)">
 
-				<section> <span class="icon featured fa-laptop"></span> <header>
-				<h3>Very niice</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat ultrices. Aliquam eu elit
-					eget arcu commodo suscipit dolor nec nibh. Proin a ullamcorper
-					elit, et sagittis turpis. Integer ut fermentum.</p>
+				<section> <span class="icon featured fa-laptop"></span>
 				</section>
 
 			</div>
@@ -150,26 +136,14 @@
 			<div class="6u 12u(narrower)">
 
 				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic01.jpg" alt="" /></a> <header>
-				<h3>Tools</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
+					src="resources/pictures/pic01.jpg" alt="" /></a> 
 				</section>
 
 			</div>
 			<div class="6u 12u(narrower)">
 
 				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic02.jpg" alt="" /></a> <header>
-				<h3>Sport</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
+					src="resources/pictures/pic02.jpg" alt="" /></a> 
 				</section>
 
 			</div>
@@ -178,26 +152,14 @@
 			<div class="6u 12u(narrower)">
 
 				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic03.jpg" alt="" /></a> <header>
-				<h3>Music</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
+					src="resources/pictures/pic03.jpg" alt="" /></a> 
 				</section>
 
 			</div>
 			<div class="6u 12u(narrower)">
 
 				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic04.jpg" alt="" /></a> <header>
-				<h3>Garden</h3>
-				</header>
-				<p>Sed tristique purus vitae volutpat commodo suscipit amet sed
-					nibh. Proin a ullamcorper sed blandit. Sed tristique purus vitae
-					volutpat commodo suscipit ullamcorper sed blandit lorem ipsum
-					dolore.</p>
+					src="resources/pictures/pic04.jpg" alt="" /></a>
 				</section>
 
 			</div>
