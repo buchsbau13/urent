@@ -22,6 +22,19 @@
 <link rel="stylesheet" type="text/css"
 	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <title>Sport</title>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+	function initialize() {
+		var mapCanvas = document.getElementById('map-canvas');
+		var mapOptions = {
+			center : new google.maps.LatLng(47.069817, 15.40903),
+			zoom : 10,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		}
+		var map = new google.maps.Map(mapCanvas, mapOptions)
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
+</script>
 </head>
 <body onload="loadMap()">
 	<div id="page-wrapper">
@@ -58,93 +71,96 @@
 
 
 
+
 		<!--  list rentablesSport-->
-		
-			<h1>Category Sport</h1>
-			<div class="row">
-			<br>
-			
-				<div class="sidebar">
+
+
+
+		<div class="row">
+			<div class="sidebar">
 				<div class="right">
-				 <header class=special >
-					<span class="icon fa-futbol-o "></span>
-					</div>
-				</header> 
-					
-					<h2>Your place for sporty Stuff</h2>
-					
-					<p>Snowboard, Soccerball or Tennisracket. This is the place to find it!</p>
-					
-					
-                    
-
-
-				
-					<table data-toggle="table" data-classes="table table-hover "
-						data-striped="false" data-sort-name="stargazers_count"
-						data-sort-order="desc"  data-search="true"   data-show-toggle="true"  >
-
-						<thead>
-							<tr>
-								<th data-field="title" data-sortable="true" class="col-md-1">Title</th>
-								<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
-								<th data-field="category" data-sortable="true" class="col-md-1">Category</th>
-								<th data-field="description" data-sortable="true" class="col-md-3.5">Description</th>
-								<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
-								<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
-								<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
-								<th class="col-md-1">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${rentables}" var="rentable">
-								<tr>
-									<td>${rentable.title}</td>
-									<td>${rentable.user.username}</td>
-									
-									<td>${rentable.category.name}</td>
-
-									<td>${rentable.description}</td>
-									<td>${rentable.location.street}<br>
-									${rentable.location.zip} ${rentable.location.city}</td>
-									<td>${rentable.price} Euro</td>
-
-									<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
-										height="75px" width="75px" /></td>
-									<td><sec:authorize access="hasRole('ROLE_ADMIN')">
-											<a href="deleteRentable?id=${rentable.id}">
-												<button type="button" class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash"></span> Delete
-												</button>
-											</a>
-										</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-											<a href="rateRentable?id=${rentable.id}">
-												<button type="button" class="btn btn-xs btn-success">
-													<span class="glyphicon glyphicon-pencil"></span> Rate
-												</button>
-											</a>
-										</sec:authorize></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						
-						
-					</table>
-
+					<header class=special> <span class="icon fa-futbol-o "></span>
 				</div>
-				
-				
-  
-   
-  
-  </div>
-				
-				
-				
+				</header>
+
+				<h2>Your place for sporty Stuff</h2>
+
+				<p>Snowboard, Soccerball or Tennisracket. This is the place to
+					find it!</p>
+
+
+
+
+
+
+				<table data-toggle="table" data-classes="table table-hover "
+					data-striped="false" data-sort-name="stargazers_count"
+					data-sort-order="desc" data-search="true" data-show-toggle="true">
+
+					<thead>
+						<tr>
+							<th data-field="title" data-sortable="true" class="col-md-0.5">Title</th>
+							<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
+							<th data-field="category" data-sortable="true" class="col-md-0.5">Category</th>
+							<th data-field="description" data-sortable="true"
+								class="col-md-3.5">Description</th>
+							<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
+							<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
+							<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
+							<th class="col-md-2">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${rentables}" var="rentable">
+							<tr>
+								<td>${rentable.title}</td>
+								<td>${rentable.user.username}</td>
+
+								<td>${rentable.category.name}</td>
+
+								<td>${rentable.description}</td>
+								<td>${rentable.location.street}<br>
+									${rentable.location.zip} ${rentable.location.city}
+								</td>
+								<td>${rentable.price}Euro</td>
+
+								<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
+									height="75px" width="75px" /></td>
+								<td><sec:authorize access="hasRole('ROLE_ADMIN')">
+										<a href="deleteRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-danger">
+												<span class="glyphicon glyphicon-trash"></span> Delete
+											</button>
+										</a>
+									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
+										<a href="rateRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-success">
+												<span class="glyphicon glyphicon-pencil"></span> Rate
+											</button>
+										</a>
+									</sec:authorize></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+
+
+				</table>
+
 			</div>
 
 
 
-	
+
+
+		</div>
+
+
+
+	</div>
+
+
+	<div id="map-canvas"></div>
+
+
 </body>
 </html>

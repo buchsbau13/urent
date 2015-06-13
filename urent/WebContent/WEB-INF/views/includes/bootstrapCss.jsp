@@ -2649,31 +2649,14 @@ position: relative;
 
 /* map */
 
-.map {
-display: block;
-width: 40%;
+
+
+#map-canvas {
+	width: 40%;
+	height: 720px;
+	float: right;
+	top:95px;
 }
-
-
-
-.map {
-position: fixed;
-right: 0;
-left: auto;
-bottom: 0;
-width: 100%;
-}
-
-
-.map {
-position: absolute;
-top: 47px;
-bottom: 0;
-left: 0;
-right: 0;
-}
-
-
 
 
 
