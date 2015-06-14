@@ -50,19 +50,49 @@
 	</nav>
 	</ul>
 	</div>
+	<center>
+		<!--  Error message ----------------------------------------------------------- -->
+		<c:if test="${not empty errorMessage}">
+			<div class="alert alert-danger" role="alert">${errorMessage}</div>
+		</c:if>
+		<!--  Error message ----------------------------------------------------------- -->
+
+		<!--  Warning message ----------------------------------------------------------- -->
+		<c:if test="${not empty warningMessage}">
+			<div class="alert alert-warning" role="warning">${warningMessage}</div>
+		</c:if>
+		<!--  Warning message ----------------------------------------------------------- -->
+
+		<!--   message ----------------------------------------------------------- -->
+		<c:if test="${not empty message}">
+			<div class="alert alert-success" role="warning">${message}</div>
+		</c:if>
+		<!--   message ----------------------------------------------------------- -->
+	</center>
 
 	<h2 align="center">${user.username}</h2>
 
 	<h2 align="center">${user.email}</h2>
 	<h2 align="center">${user.telephone}</h2>
 
-	<center><sec:authorize access="hasRole('ROLE_USER')">
-		<a href="editUser?username=${user.username}">
-			<button type="button" class="btn btn-xs btn-success">
-				<span class="glyphicon glyphicon-pencil"></span> Edit User
-			</button>
-		</a>
-	</sec:authorize></center>
+	<center>
+		<img src="getUserImage/<c:out value="${user.username}" />.do"
+			height="75px" width="75px" />
+		<h2>${user.description}</h2>
+
+	</center>
+	<br>
+
+
+	<center>
+		<sec:authorize access="hasRole('ROLE_USER')">
+			<a href="editUser?username=${user.username}">
+				<button type="button" class="btn btn-xs btn-success">
+					<span class="glyphicon glyphicon-pencil"></span> Edit User
+				</button>
+			</a>
+		</sec:authorize>
+	</center>
 
 	<!--  list all persons ----------------------------------------------------------- -->
 	<center>

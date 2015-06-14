@@ -14,7 +14,7 @@
 <html>
 <head>
 <jsp:include page="includes/bootstrapMeta.jsp" />
-<title>Edit Rentable</title>
+<title>Edit User</title>
 <jsp:include page="includes/bootstrapCss.jsp" />
 </head>
 <body>
@@ -67,7 +67,8 @@
 					<div class="form-group">
 						<div class="col-md-10">
 							<input type="hidden" class="form-control" id="inputUsername"
-								type="text" name="username" value="<c:out value="${user.username}"/>">
+								type="text" name="username"
+								value="<c:out value="${user.username}"/>">
 						</div>
 					</div>
 					<! ----------------  email ---------------- -->
@@ -101,8 +102,16 @@
 						<label for="inputTelephone" class="col-md-2 control-label">Telephone</label>
 						<div class="col-md-10">
 							<input class="form-control" id="inputTelephone" type="text"
-								name="telephone"
-								value="<c:out value="${user.telephone}"/>">
+								name="telephone" value="<c:out value="${user.telephone}"/>">
+						</div>
+					</div>
+
+					<! ---------------  description  ---------------- -->
+					<div class="form-group">
+						<label for="inputDescription" class="col-md-2 control-label">Description</label>
+						<div class="col-md-10">
+							<input class="form-control" id="inputDescription" type="text"
+								name="description" value="<c:out value="${user.description}"/>">
 						</div>
 					</div>
 

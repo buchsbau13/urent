@@ -1,8 +1,15 @@
 package at.fh.swenga.urent.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +32,6 @@ import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.RentableForm;
 import at.fh.swenga.urent.model.User;
-import at.fh.swenga.urent.model.UserRole;
 
 @Controller
 public class DashboardController {
@@ -37,9 +44,9 @@ public class DashboardController {
 
 	@Autowired
 	UserDao userDao;
-	
-	@Autowired 
-	UserRoleDao userRoleDao; 
+
+	@Autowired
+	UserRoleDao userRoleDao;
 
 	@RequestMapping(value = "/editRentable", method = RequestMethod.GET)
 	public String showEditRentableForm(Model model, @RequestParam int id) {
@@ -63,11 +70,23 @@ public class DashboardController {
 		if (changedRentable == null) {
 			model.addAttribute("errorMessage", "Rentable does not exist!<br>");
 		} else {
-			byte[] image = file.getBytes();
 			changedRentable.setTitle(rentable.getTitle());
 			changedRentable.setDescription(rentable.getDescription());
 			changedRentable.setPrice(rentable.getPrice());
-			changedRentable.setImage(image);
+
+			if (file.isEmpty()) {
+				byte[] image = file.getBytes();
+				changedRentable.setImage(image);
+
+			} else {
+				BufferedImage croppedImage = cropImageSquare(file.getBytes());
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(croppedImage, "jpg", baos);
+				baos.flush();
+				byte[] imageInByte = baos.toByteArray();
+				baos.close();
+				changedRentable.setImage(imageInByte);
+			}
 
 			Address location = new Address(rentable.getStreet(),
 					rentable.getCity(), rentable.getCountry(),
@@ -79,7 +98,7 @@ public class DashboardController {
 					"Changed Rentable " + changedRentable.getId());
 		}
 
-		return "forward:/list";
+		return "forward:/dashboard";
 	}
 
 	@RequestMapping(value = "/showRentable", method = RequestMethod.GET)
@@ -100,7 +119,9 @@ public class DashboardController {
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
 	public String editUser(@Valid @ModelAttribute User user,
-			BindingResult bindingResult, Model model) throws IOException {
+			BindingResult bindingResult,
+			@RequestParam("file") MultipartFile file, Model model)
+			throws IOException {
 
 		User changedUser = userDao.getUser(user.getUsername());
 
@@ -111,13 +132,64 @@ public class DashboardController {
 			changedUser.setFirstname(user.getFirstname());
 			changedUser.setLastname(user.getLastname());
 			changedUser.setTelephone(user.getTelephone());
-			userDao.merge(changedUser); 
-			
+			changedUser.setDescription(user.getDescription());
+
+			if (file.isEmpty()) {
+				byte[] image = file.getBytes();
+				changedUser.setImage(image);
+
+			} else {
+				BufferedImage croppedImage = cropImageSquare(file.getBytes());
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(croppedImage, "jpg", baos);
+				baos.flush();
+				byte[] imageInByte = baos.toByteArray();
+				baos.close();
+				changedUser.setImage(imageInByte);
+			}
+
+			userDao.merge(changedUser);
+
 			model.addAttribute("message",
 					"Changed User " + changedUser.getUsername());
 		}
 
 		return "forward:/dashboard";
+	}
+	
+	@RequestMapping(value = "/getUserImage/{username}")
+	public void showUserImage(HttpServletResponse response,
+			@PathVariable("username") String username) throws IOException {
+
+		User currentUser = userDao.getUser(username); 
+		response.setContentType("image/jpeg");
+		OutputStream out = response.getOutputStream();
+		out.write(currentUser.getImage());
+		out.flush();
+
+	}
+
+	private BufferedImage cropImageSquare(byte[] image) throws IOException {
+		InputStream in = new ByteArrayInputStream(image);
+		BufferedImage originalImage = ImageIO.read(in);
+
+		int height = originalImage.getHeight();
+		int width = originalImage.getWidth();
+
+		if (height == width) {
+			return originalImage;
+		}
+
+		int squareSize = (height > width ? width : height);
+
+		int xc = width / 2;
+		int yc = height / 2;
+
+		BufferedImage croppedImage = originalImage.getSubimage(xc
+				- (squareSize / 2), yc - (squareSize / 2), squareSize,
+				squareSize);
+
+		return croppedImage;
 	}
 
 }

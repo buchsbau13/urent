@@ -29,11 +29,8 @@ public class User implements java.io.Serializable {
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 	private Set<Rentable> rentables;
 	private Set<Rating> ratings;
-	private List<Rentable> wishlistRentables; 
-
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@Column(length = 100000)
+	private List<Rentable> wishlistRentables;
+	private String description;
 	private byte[] image;
 
 	public User() {
@@ -158,6 +155,9 @@ public class User implements java.io.Serializable {
 		return false;
 	}
 
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(length = 100000)
 	public byte[] getImage() {
 		return image;
 	}
@@ -174,6 +174,14 @@ public class User implements java.io.Serializable {
 	public void setWishlistRentables(List<Rentable> wishlistRentables) {
 		this.wishlistRentables = wishlistRentables;
 	}
-	
-	
+
+	@Column(length = 150)
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }
