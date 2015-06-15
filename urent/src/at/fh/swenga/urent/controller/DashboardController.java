@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -46,6 +48,9 @@ public class DashboardController {
 	UserDao userDao;
 
 	@Autowired
+	ServletContext servletContext;
+
+	@Autowired
 	UserRoleDao userRoleDao;
 
 	@RequestMapping(value = "/editRentable", method = RequestMethod.GET)
@@ -61,7 +66,7 @@ public class DashboardController {
 
 	@RequestMapping(value = "/editRentable", method = RequestMethod.POST)
 	public String editRentable(@Valid @ModelAttribute RentableForm rentable,
-			BindingResult bindingResult,
+			BindingResult bindingResult, HttpServletRequest request,
 			@RequestParam("file") MultipartFile file, Model model)
 			throws IOException {
 
@@ -75,8 +80,8 @@ public class DashboardController {
 			changedRentable.setPrice(rentable.getPrice());
 
 			if (file.isEmpty()) {
-				byte[] image = file.getBytes();
-				changedRentable.setImage(image);
+				Rentable oldRentable = rentableDao.getRentable(rentable.getId()); 
+				changedRentable.setImage(oldRentable.getImage());
 
 			} else {
 				BufferedImage croppedImage = cropImageSquare(file.getBytes());
@@ -95,7 +100,7 @@ public class DashboardController {
 			rentableDao.merge(changedRentable);
 
 			model.addAttribute("message",
-					"Changed Rentable " + changedRentable.getId());
+					"Changed Rentable " + changedRentable.getTitle());
 		}
 
 		return "forward:/dashboard";
@@ -118,7 +123,7 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
-	public String editUser(@Valid @ModelAttribute User user,
+	public String editUser(@Valid @ModelAttribute User user, 
 			BindingResult bindingResult,
 			@RequestParam("file") MultipartFile file, Model model)
 			throws IOException {
@@ -135,8 +140,8 @@ public class DashboardController {
 			changedUser.setDescription(user.getDescription());
 
 			if (file.isEmpty()) {
-				byte[] image = file.getBytes();
-				changedUser.setImage(image);
+				User oldUser = userDao.getUser(user.getUsername()); 
+				changedUser.setImage(oldUser.getImage());
 
 			} else {
 				BufferedImage croppedImage = cropImageSquare(file.getBytes());
@@ -156,12 +161,12 @@ public class DashboardController {
 
 		return "forward:/dashboard";
 	}
-	
+
 	@RequestMapping(value = "/getUserImage/{username}")
 	public void showUserImage(HttpServletResponse response,
 			@PathVariable("username") String username) throws IOException {
 
-		User currentUser = userDao.getUser(username); 
+		User currentUser = userDao.getUser(username);
 		response.setContentType("image/jpeg");
 		OutputStream out = response.getOutputStream();
 		out.write(currentUser.getImage());

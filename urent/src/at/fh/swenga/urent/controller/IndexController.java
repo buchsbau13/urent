@@ -16,7 +16,6 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -152,92 +151,44 @@ public class IndexController {
 
 		UserRole roleUser3 = new UserRole(julia, "ROLE_USER");
 		userRoleDao.persist(roleUser3);
-		
-Address graz = new Address("Mandellstraﬂe 3","Graz","Austria","8010");
-		
-		
+
+		Address graz = new Address("Mandellstraﬂe 3", "Graz", "Austria", "8010");
+
 		Rentable soccerball = rentableDao.getRentable(0);
-		if(soccerball == null)
-			soccerball = new Rentable(
-					julia,
-					sport,
-					"Soccerball",
-					"A very good Ball",
-					29.99,
-					null,
-					graz,
-					null);
+		if (soccerball == null)
+			soccerball = new Rentable(julia, sport, "Soccerball",
+					"A very good Ball", 29.99, null, graz, null);
 		rentableDao.persist(soccerball);
-		
-		
+
 		Rentable basketball = rentableDao.getRentable(1);
-		if(basketball == null)
-			basketball = new Rentable(
-					julia,
-					sport,
-					"basketball",
-					"A very good Ball",
-					19.99,
-					null,
-					graz,
-					null);
+		if (basketball == null)
+			basketball = new Rentable(julia, sport, "basketball",
+					"A very good Ball", 19.99, null, graz, null);
 		rentableDao.persist(basketball);
-		
-		
+
 		Rentable tennisracket = rentableDao.getRentable(2);
-		if(tennisracket == null)
-			tennisracket = new Rentable(
-					julia,
-					sport,
-					"tennisracket",
-					"A very good Ball",
-					39.99,
-					null,
-					graz,
-					null);
+		if (tennisracket == null)
+			tennisracket = new Rentable(julia, sport, "tennisracket",
+					"A very good Ball", 39.99, null, graz, null);
 		rentableDao.persist(tennisracket);
-		
+
 		Rentable soccerjersey = rentableDao.getRentable(3);
-		if(soccerjersey == null)
-			soccerjersey = new Rentable(
-					julia,
-					sport,
-					"soccerjersey",
-					"A very good Ball",
-					29.99,
-					null,
-					graz,
-					null);
+		if (soccerjersey == null)
+			soccerjersey = new Rentable(julia, sport, "soccerjersey",
+					"A very good Ball", 29.99, null, graz, null);
 		rentableDao.persist(soccerjersey);
-		
-		
+
 		Rentable basketballjersey = rentableDao.getRentable(4);
-		if(basketballjersey == null)
-			basketballjersey = new Rentable(
-					julia,
-					sport,
-					"basketballjersey",
-					"A very good Ball",
-					25.99,
-					null,
-					graz,
-					null);
+		if (basketballjersey == null)
+			basketballjersey = new Rentable(julia, sport, "basketballjersey",
+					"A very good Ball", 25.99, null, graz, null);
 		rentableDao.persist(basketballjersey);
-		
-		
+
 		Rentable tennisball = rentableDao.getRentable(5);
-		if(tennisball == null)
-			tennisball = new Rentable(
-					julia,
-					sport,
-					"tennisball",
-					"A very good Ball",
-					25.99,
-					null,
-					graz,
-					null);
+		if (tennisball == null)
+			tennisball = new Rentable(julia, sport, "tennisball",
+					"A very good Ball", 25.99, null, graz, null);
 		rentableDao.persist(tennisball);
-		
 
 		return "forward:/list";
 
@@ -259,8 +210,6 @@ Address graz = new Address("Mandellstraﬂe 3","Graz","Austria","8010");
 			@RequestParam("file") MultipartFile file, Model model)
 			throws IOException {
 
-		final DefaultResourceLoader loader = new DefaultResourceLoader();
-
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -269,8 +218,6 @@ Address graz = new Address("Mandellstraﬂe 3","Graz","Austria","8010");
 			model.addAttribute("errorMessage", errorMessage);
 			return "newRentable";
 		}
-
-		String errorMessage = "";
 
 		String name = principal.getName();
 		User currentUser = userDao.getUser(name);
@@ -303,8 +250,8 @@ Address graz = new Address("Mandellstraﬂe 3","Graz","Austria","8010");
 				baos.close();
 				rentable.setImage(imageInByte);
 			}
-			
-			List<User> wishlistUsers = new ArrayList<User>(); 
+
+			List<User> wishlistUsers = new ArrayList<User>();
 			rentable.setWishlistUsers(wishlistUsers);
 
 			rentableDao.persist(rentable);
@@ -313,7 +260,7 @@ Address graz = new Address("Mandellstraﬂe 3","Graz","Austria","8010");
 					+ " successfully added!");
 
 		} catch (Exception e) {
-			errorMessage += "Invalid Data<br>";
+			model.addAttribute("errorMessage", "Invalid Data!");
 			return "newRentable";
 		}
 
@@ -396,9 +343,10 @@ Address graz = new Address("Mandellstraﬂe 3","Graz","Austria","8010");
 		String name = principal.getName();
 
 		List<Rentable> rentables = rentableDao.userRentables(name);
-		List<Rentable> wishlistRentables = userDao.getUser(name).getWishlistRentables(); 
+		List<Rentable> wishlistRentables = userDao.getUser(name)
+				.getWishlistRentables();
 		model.addAttribute("rentables", rentables);
-		model.addAttribute("wishlistRentables", wishlistRentables); 
+		model.addAttribute("wishlistRentables", wishlistRentables);
 		model.addAttribute("user", userDao.getUser(name));
 
 		return "dashboard";

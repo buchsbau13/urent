@@ -92,122 +92,95 @@
 		</center>
 		<form:form class="form" method="post"
 			action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
-			enctype="multipart/form-data" role="form" >
-			
-			
+			enctype="multipart/form-data" role="form">
+
+
 			<legend>${legend}</legend>
 			<! ----------------  category ---------------- -->
 			<div class="form-group">
 				<label for="inputCategory" class="control-label col-sm-2 ">Category</label>
-				
 
 
-					<form:select path="categoryId">
-						<form:option value="0" label="--- Select ---" />
-						<form:options items="${categories}" itemValue="id"
-							itemLabel="name" />
-					</form:select>
-				
+
+				<form:select path="categoryId">
+					<form:option value="0" label="--- Select ---" />
+					<form:options items="${categories}" itemValue="id" itemLabel="name" />
+				</form:select>
+
 			</div>
-			
-			
-	
-			
-			
-			
+
 			<! ----------------  title ------------------>
 			<div class="form-group">
-				<label for="inputTitel" >Title</label>
-				
-					<input class="form-control" id="inputTitle" type="text"
-						name="title">
-				</div>
-			
-			
-		<! ----------------  description  ------------------>
+				<label for="inputTitel">Title</label> <input class="form-control"
+					id="inputTitle" type="text" name="title">
+			</div>
+
+
+			<! ----------------  description  ------------------>
 			<div class="form-group">
 				<label for="inputDescription" class="control-label">Description
 				</label>
-				
-					
-						
-						<textarea class="form-control" rows="5" cols="35" id="inputDescription" type="text" name="description"></textarea>
-				</div>
-				
-				<! ----------------  price  ---------------- -->
+
+
+
+				<textarea class="form-control" rows="5" cols="35"
+					id="inputDescription" type="text" name="description"></textarea>
+			</div>
+
+			<! ----------------  price  ---------------- -->
 			<div class="form-group">
-				<label for="inputPrice">Price</label>
-				
-					<input class="form-control" id="inputPrice" type="text"
-						name="price">
-				</div>
-			
+				<label for="inputPrice">Price</label> <input class="form-control"
+					id="inputPrice" type="text" name="price">
+			</div>
+
 
 			<! ----------------  location.street  ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationStreet" >Location
-					Street</label>
-				
-					<input class="form-control" id="inputLocationStreet" type="text"
-						name="street">
-				</div>
-			
+				<label for="inputLocationStreet">Location Street</label> <input
+					class="form-control" id="inputLocationStreet" type="text"
+					name="street">
+			</div>
+
 
 			<! ----------------  location.city ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationCity" >Location
-					City</label>
-				
-					<input class="form-control" id="inputLocationCity" type="text"
-						name="city">
-				</div>
-			
+				<label for="inputLocationCity">Location City</label> <input
+					class="form-control" id="inputLocationCity" type="text" name="city">
+			</div>
+
 
 			<! ----------------  location.country ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationCountry" >Location
-					Country</label>
-				
-					<input class="form-control" id="inputLocationCountry" type="text"
-						name="country">
-				</div>
-			
+				<label for="inputLocationCountry">Location Country</label> <input
+					class="form-control" id="inputLocationCountry" type="text"
+					name="country">
+			</div>
+
 
 			<! ----------------  location.zip ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationZip" >Location
-					ZIP</label>
-				
-					<input class="form-control" id="inputLocationZip" type="text"
-						name="zip">
-				</div>
-			
-				
+				<label for="inputLocationZip">Location ZIP</label> <input
+					class="form-control" id="inputLocationZip" type="text" name="zip">
+			</div>
+
+
 			<! ----------------  image  ---------------- -->
 			<div class="form-group">
-				<label for="inputImage" >Image</label>
+				<label for="inputImage">Image</label>
 				<center>
-					<input type="file" name="file"></center>
-				</div>
-			
-		<! ----------------  buttons ---------------- -->
-			<div class="form-group">
-				
-					<button type="submit" class="btn btn-default btn-lg">Submit</button>
-					<a href="list">
-						<button type="button" class="btn btn-default btn-lg">Cancel</button>
-					</a>
-				</div>
-			
-			
-				
-				
-				
-				
-				
-				
+					<input type="file" name="file">
+				</center>
 			</div>
-			</form:form>
+
+			<! ----------------  buttons ---------------- -->
+			<div class="form-group">
+
+				<button type="submit" class="btn btn-default btn-lg">Submit</button>
+				<a href="list">
+					<button type="button" class="btn btn-default btn-lg">Cancel</button>
+				</a>
+			</div>
+		</form:form>
 	</div>
 
 

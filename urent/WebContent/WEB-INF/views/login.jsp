@@ -65,58 +65,55 @@
 		<article id="main"> <header class=special container>
 		<span class="icon fa-user"></span>
 		<h2>Log in</h2>
-		</header> 
-		
-		<!-- One --> 
-		<section class="wrapper style4 special container 25%">
+		</header> <!-- One --> <section class="wrapper style4 special container 25%">
 		<div class="content">
 			<center>
 				<div class="row 50%">
 					<c:url value="/login" var="loginUrl" />
 					<form action="${loginUrl}" method="post">
-						<label for="inputUsername" class="sr-only">Username</label> 
-						<label>
-						<input type="text" id="username" class="form-control" placeholder="User"
-							required autofocus name="username"> </label>
-							<label
-							for="inputPassword" class="sr-only">Password</label><label> <input
-							type="password" id="password" class="form-control"
-							placeholder="Password" required name="password"></label>
+						<label for="inputUsername" class="sr-only">Username</label> <label>
+							<input type="text" id="username" class="form-control"
+							placeholder="User" required autofocus name="username">
+						</label> <label for="inputPassword" class="sr-only">Password</label><label>
+							<input type="password" id="password" class="form-control"
+							placeholder="Password" required name="password">
+						</label>
 						<button class="btn btn-lg btn-sucess btn-block" type="submit">Log
 							in</button>
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
+
 					</form>
 				</div>
-			</div>
-			</center>
 		</div>
-		</section> 
-		
-		
-		
-		<!--  End of container --> 
-		<!-- Footer --> 
-		<footer id="footer">
+		</center>
+	</div>
+	</section>
 
 
-		<ul class="icons">
-			<li><a href="#" class="icon circle fa-twitter"><span
-					class="label">Twitter</span></a></li>
-			<li><a href="#" class="icon circle fa-facebook"><span
-					class="label">Facebook</span></a></li>
-			<li><a href="#" class="icon circle fa-google-plus"><span
-					class="label">Google+</span></a></li>
-			<li><a href="#" class="icon circle fa-github"><span
-					class="label">Github</span></a></li>
-			<li><a href="#" class="icon circle fa-dribbble"><span
-					class="label">Dribbble</span></a></li>
-		</ul>
 
-		<ul class="copyright">
-			<li>&copy; uRent Development</li>
-		</ul>
+	<!--  End of container -->
+	<!-- Footer -->
+	<footer id="footer">
 
-		</footer>
+
+	<ul class="icons">
+		<li><a href="#" class="icon circle fa-twitter"><span
+				class="label">Twitter</span></a></li>
+		<li><a href="#" class="icon circle fa-facebook"><span
+				class="label">Facebook</span></a></li>
+		<li><a href="#" class="icon circle fa-google-plus"><span
+				class="label">Google+</span></a></li>
+		<li><a href="#" class="icon circle fa-github"><span
+				class="label">Github</span></a></li>
+		<li><a href="#" class="icon circle fa-dribbble"><span
+				class="label">Dribbble</span></a></li>
+	</ul>
+
+	<ul class="copyright">
+		<li>&copy; uRent Development</li>
+	</ul>
+
+	</footer>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package at.fh.swenga.urent.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,27 +27,34 @@ public class RentableController {
 	public String addToWishlist(Model model, @RequestParam int id,
 			Principal principal) {
 
+		Rentable currentRentable = rentableDao.getRentable(id);
+
 		try {
 			String name = principal.getName();
 			User currentUser = userDao.getUser(name);
+			String currentUsername = currentUser.getUsername(); 
+			String rentableUsername = currentRentable.getUser().getUsername();
+			
 
-			Rentable currentRentable = rentableDao.getRentable(id);
-
-			User rentableUser = currentRentable.getUser();
-
-			if (rentableUser.equals(currentUser)) {
-
-				return "index";
+			if (rentableUsername.equals(currentUsername)) {
+				model.addAttribute("errorMessage", "It is not possible to add your own products to your wishlist!");
+				return "dashboard";
 			} else {
 				List<User> wishlistUsers = currentRentable.getWishlistUsers();
 				wishlistUsers.add(currentUser);
 				currentRentable.setWishlistUsers(wishlistUsers);
 				rentableDao.merge(currentRentable);
+				model.addAttribute("message", "Added Rentable "
+						+ currentRentable.getTitle() + " to your wishlist!");
 				return "forward:/dashboard";
 			}
 
 		} catch (Exception e) {
-			return "index";
+			model.addAttribute(
+					"errorMessage",
+					"It is not possilbe to add Rentable"
+							+ currentRentable.getTitle()+ " to your wishlist");
+			return "dashboard";
 		}
 
 	}

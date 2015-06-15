@@ -61,135 +61,139 @@
 		<article id="main"> <header class=special container>
 		<span class="icon fa-user"></span>
 		<h2>Sign up</h2>
-		</header> <!-- One --> 
-		<section class="wrapper style4 special container 50%">
+		</header> <!-- One --> <section class="wrapper style4 special container 50%">
 		<div class="content">
 
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
-				<center>
-					<form class="form-horizontal" action="${formAction}" method="post" style="text-align:center">
-						<fieldset>
-							<legend>${legend}</legend>
-
-							<! ----------------  username ---------------- -->
-							<div class="form-group">
-								<label for="inputUsername" class="col-md-1"></label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputUsername" type="text"
-										name="username" placeholder="Username" required autofocus
-										name="username" value="<c:out value="${user.username}"/>">
-								</div>
-							</div>
-							<! ----------------  email ---------------- -->
-							<div class="form-group">
-								<label for="inputEmail" class="col-md-1 control-label"></label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputEmail" type="text"
-										name="email" placeholder="Email" required autofocus
-										name="Email" value="<c:out value="${user.email}"/>">
-								</div>
-							</div>
-							<! ---------------  firstname ---------------- -->
-							<div class="form-group">
-								<label for="inputFirstname" class="col-md-1 control-label"></label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputFirstname" type="text"
-										name="firstname" placeholder="Firstname" required autofocus
-										name="Firstname" value="<c:out value="${user.firstname}"/>">
-								</div>
-							</div>
-							<! ---------------  lastname ---------------- -->
-							<div class="form-group">
-								<label for="inputLastname" class="col-md-1 control-label"></label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputLastname" type="text"
-										name="lastname" placeholder="Lastname" required autofocus
-										name="Lastname" value="<c:out value="${user.lastname}"/>">
-								</div>
-							</div>
-							<! --------------  telephone ---------------- -->
-							<div class="form-group">
-								<label for="inputTelephone" class="col-md-1 control-label"></label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputTelephone" type="text"
-										name="telephone" placeholder="Telephone" required autofocus
-										name="Telephone" value="<c:out value="${user.telephone}"/>">
-								</div>
-							</div>
-							<! ----------------  password  ---------------- -->
-							<div class="form-group">
-								<label for="inputPassword" class="col-md-1 control-label"></label>
-								<div class="col-md-10">
-									<input class="form-control" id="inputPassword" type="password"
-										name="password" placeholder="Password" required autofocus
-										name="Password" value="<c:out value="${user.password}"/>">
-								</div>
-							</div>
-
-							<! ----------------  buttons ---------------- -->
-							<div class="form-group">
-								<div class="col-md-8 col-md-offset-2">
-									<button type="submit" class="btn btn-primary">Submit</button>
-									<a href="list">
-										<button type="button" class="btn btn-default">Cancel</button>
-									
-									</a>
-								</div>
-							</div>
-							</center>
-						</fieldset>
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-						</form>
-						
 					<center>
-		<!--  Error message ----------------------------------------------------------- -->
-		<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger" role="alert">${errorMessage}</div>
-		</c:if>
-		<!--  Error message ----------------------------------------------------------- -->
+						<form class="form-horizontal" action="${formAction}" method="post"
+							style="text-align: center">
+							<fieldset>
+								<legend>${legend}</legend>
 
-		<!--  Warning message ----------------------------------------------------------- -->
-		<c:if test="${not empty warningMessage}">
-			<div class="alert alert-warning" role="warning">${warningMessage}</div>
-		</c:if>
-		<!--  Warning message ----------------------------------------------------------- -->
+								<! ----------------  username ---------------- -->
+								<div class="form-group">
+									<label for="inputUsername" class="col-md-1"></label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputUsername" type="text"
+											name="username" placeholder="Username" required autofocus
+											name="username" value="<c:out value="${user.username}"/>">
+									</div>
+								</div>
+								<! ----------------  email ---------------- -->
+								<div class="form-group">
+									<label for="inputEmail" class="col-md-1 control-label"></label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputEmail" type="text"
+											name="email" placeholder="Email" required autofocus
+											name="Email" value="<c:out value="${user.email}"/>">
+									</div>
+								</div>
+								<! ---------------  firstname ---------------- -->
+								<div class="form-group">
+									<label for="inputFirstname" class="col-md-1 control-label"></label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputFirstname" type="text"
+											name="firstname" placeholder="Firstname" required autofocus
+											name="Firstname" value="<c:out value="${user.firstname}"/>">
+									</div>
+								</div>
+								<! ---------------  lastname ---------------- -->
+								<div class="form-group">
+									<label for="inputLastname" class="col-md-1 control-label"></label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputLastname" type="text"
+											name="lastname" placeholder="Lastname" required autofocus
+											name="Lastname" value="<c:out value="${user.lastname}"/>">
+									</div>
+								</div>
+								<! --------------  telephone ---------------- -->
+								<div class="form-group">
+									<label for="inputTelephone" class="col-md-1 control-label"></label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputTelephone" type="text"
+											name="telephone" placeholder="Telephone" required autofocus
+											name="Telephone" value="<c:out value="${user.telephone}"/>">
+									</div>
+								</div>
+								<! ----------------  password  ---------------- -->
+								<div class="form-group">
+									<label for="inputPassword" class="col-md-1 control-label"></label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputPassword" type="password"
+											name="password" placeholder="Password" required autofocus
+											name="Password" value="<c:out value="${user.password}"/>">
+									</div>
+								</div>
 
-		<!--   message ----------------------------------------------------------- -->
-		<c:if test="${not empty message}">
-			<div class="alert alert-success" role="warning">${message}</div>
-		</c:if>
-		<!--   message ----------------------------------------------------------- -->
-	</center>
-				
-		
-		
+								<! ----------------  buttons ---------------- -->
+								<div class="form-group">
+									<div class="col-md-8 col-md-offset-2">
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<a href="list">
+											<button type="button" class="btn btn-default">Cancel</button>
+
+										</a>
+									</div>
+								</div>
+							</fieldset>
+
+
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</form>
+					</center>
 				</div>
+
+				<center>
+					<!--  Error message ----------------------------------------------------------- -->
+					<c:if test="${not empty errorMessage}">
+						<div class="alert alert-danger" role="alert">${errorMessage}</div>
+					</c:if>
+					<!--  Error message ----------------------------------------------------------- -->
+
+					<!--  Warning message ----------------------------------------------------------- -->
+					<c:if test="${not empty warningMessage}">
+						<div class="alert alert-warning" role="warning">${warningMessage}</div>
+					</c:if>
+					<!--  Warning message ----------------------------------------------------------- -->
+
+					<!--   message ----------------------------------------------------------- -->
+					<c:if test="${not empty message}">
+						<div class="alert alert-success" role="warning">${message}</div>
+					</c:if>
+					<!--   message ----------------------------------------------------------- -->
+				</center>
+
+
+
 			</div>
-</fieldset>
-</section>
 		</div>
-		 <!--  End of container --> <!-- Footer --> <footer id="footer">
+		</section>
+	</div>
+	<!--  End of container -->
+	<!-- Footer -->
+	<footer id="footer">
 
 
-		<ul class="icons">
-			<li><a href="#" class="icon circle fa-twitter"><span
-					class="label">Twitter</span></a></li>
-			<li><a href="#" class="icon circle fa-facebook"><span
-					class="label">Facebook</span></a></li>
-			<li><a href="#" class="icon circle fa-google-plus"><span
-					class="label">Google+</span></a></li>
-			<li><a href="#" class="icon circle fa-github"><span
-					class="label">Github</span></a></li>
-			<li><a href="#" class="icon circle fa-dribbble"><span
-					class="label">Dribbble</span></a></li>
-		</ul>
+	<ul class="icons">
+		<li><a href="#" class="icon circle fa-twitter"><span
+				class="label">Twitter</span></a></li>
+		<li><a href="#" class="icon circle fa-facebook"><span
+				class="label">Facebook</span></a></li>
+		<li><a href="#" class="icon circle fa-google-plus"><span
+				class="label">Google+</span></a></li>
+		<li><a href="#" class="icon circle fa-github"><span
+				class="label">Github</span></a></li>
+		<li><a href="#" class="icon circle fa-dribbble"><span
+				class="label">Dribbble</span></a></li>
+	</ul>
 
-		<ul class="copyright">
-			<li>&copy; uRent Development</li>
-		</ul>
+	<ul class="copyright">
+		<li>&copy; uRent Development</li>
+	</ul>
 
-		</footer>
+	</footer>
 </body>
 </html>

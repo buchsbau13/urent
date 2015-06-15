@@ -119,9 +119,8 @@
 					<div class="form-group">
 						<label for="inputImage" class="col-md-2 control-label">Image</label>
 						<div class="col-md-10">
-							<input type="file" name="file">
+							<input type="file" name="file"">
 						</div>
-
 					</div>
 
 					<! ----------------  buttons ---------------- -->
