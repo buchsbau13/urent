@@ -80,7 +80,8 @@ public class DashboardController {
 			changedRentable.setPrice(rentable.getPrice());
 
 			if (file.isEmpty()) {
-				Rentable oldRentable = rentableDao.getRentable(rentable.getId()); 
+				Rentable oldRentable = rentableDao
+						.getRentable(rentable.getId());
 				changedRentable.setImage(oldRentable.getImage());
 
 			} else {
@@ -123,7 +124,7 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
-	public String editUser(@Valid @ModelAttribute User user, 
+	public String editUser(@Valid @ModelAttribute User user,
 			BindingResult bindingResult,
 			@RequestParam("file") MultipartFile file, Model model)
 			throws IOException {
@@ -140,7 +141,7 @@ public class DashboardController {
 			changedUser.setDescription(user.getDescription());
 
 			if (file.isEmpty()) {
-				User oldUser = userDao.getUser(user.getUsername()); 
+				User oldUser = userDao.getUser(user.getUsername());
 				changedUser.setImage(oldUser.getImage());
 
 			} else {

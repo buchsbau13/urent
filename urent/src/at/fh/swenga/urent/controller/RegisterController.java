@@ -1,5 +1,11 @@
 package at.fh.swenga.urent.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -37,6 +43,9 @@ public class RegisterController {
 	@Autowired
 	@Qualifier("authMgr")
 	private AuthenticationManager authMgr;
+	
+	@Autowired
+	ServletContext servletContext;
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String showSignup(Model model) {
@@ -73,6 +82,16 @@ public class RegisterController {
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 				newUser.setPassword(encoder.encode(user.getPassword()));
 				newUser.setEnabled(true);
+				
+				File rootDir = new File(
+						servletContext.getRealPath("/WEB-INF/images/defaultUser.jpg"));
+				BufferedImage defaultImage = ImageIO.read(rootDir);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(defaultImage, "jpg", baos);
+				baos.flush();
+				byte[] defaultImageByte = baos.toByteArray();
+				baos.close();
+				newUser.setImage(defaultImageByte);
 				
 				userDao.persist(newUser);
 

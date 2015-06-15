@@ -3,6 +3,7 @@ package at.fh.swenga.urent.controller;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -52,6 +55,9 @@ public class IndexController {
 
 	@Autowired
 	UserRoleDao userRoleDao;
+	
+	@Autowired
+	ServletContext servletContext; 
 
 	@RequestMapping(value = { "/", "list" })
 	public String index(Model model) {
@@ -207,8 +213,8 @@ public class IndexController {
 	public String newRentable(
 			@Valid @ModelAttribute RentableForm newRentableForm,
 			BindingResult bindingResult, Principal principal,
-			@RequestParam("file") MultipartFile file, Model model)
-			throws IOException {
+			@RequestParam("file") MultipartFile file,
+			HttpServletRequest request, Model model) throws IOException {
 
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
@@ -238,8 +244,18 @@ public class IndexController {
 			rentable.setLocation(location);
 
 			if (file.isEmpty()) {
-				byte[] image = file.getBytes();
-				rentable.setImage(image);
+				File rootDir = new File(
+						servletContext.getRealPath("/WEB-INF/images/defaultRentable.jpg"));
+				BufferedImage defaultImage = ImageIO.read(rootDir);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write(defaultImage, "jpg", baos);
+				baos.flush();
+				byte[] defaultImageByte = baos.toByteArray();
+				baos.close();
+				rentable.setImage(defaultImageByte);
+
+				//byte[] image = file.getBytes();
+				//rentable.setImage(image);
 
 			} else {
 				BufferedImage croppedImage = cropImageSquare(file.getBytes());
