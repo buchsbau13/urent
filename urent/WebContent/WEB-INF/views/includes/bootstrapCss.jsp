@@ -2602,7 +2602,7 @@ margin-bottom: 10px;
 
 .sidebar {
 position: fixed;
-top: 40px;
+top: 55px;
 left: 0px;
 right: 10px;
 overflow:scroll;
@@ -2651,7 +2651,7 @@ position: relative;
 
 
 
-#map-canvas {
+#map_container {
 	width: 40%;
 	height: 720px;
 	float: right;

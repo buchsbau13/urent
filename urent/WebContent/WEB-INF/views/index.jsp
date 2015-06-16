@@ -136,7 +136,7 @@
 		<div class="row">
 			<div class="6u 12u(narrower)">
 
-				<section> <a href="./categorySport" class="image featured"><img
+				<section> <a href="./categorySport?id=1" class="image featured"><img
 					src="resources/pictures/pic01.jpg" alt="" /></a> 
 				</section>
 
