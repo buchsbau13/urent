@@ -67,7 +67,7 @@
 		</nav> </header>
 
 		<!-- Banner -->
-		
+
 
 		<section id="banner">
 		<div class="inner">
@@ -78,24 +78,20 @@
 				This is <strong>uRent</strong>, a <br /> place to share your Stuff
 				with the World <br />
 				<footer> </footer>
-				<fieldset>
-			<div class="form-group">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="space">
-						
-							<input type="text" name="searchString"
-							class="form-control"
-							placeholder="What are you lookig for?">
-						
-					</div>
-					<ul>
-						<li>
-							<a href="./search" class="button fit">Search</a>
-						</li>
-					</ul>
+			<fieldset>
+				<div class="form-group">
+					<div class="col-md-8 col-md-offset-2">
+						<form action="search" method="post">
+							<div class="space">
 
-				</div>
-			</div>
+								<form action="find" method="post">
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" /> <input type="text"
+										name="searchString"><br> <br> <input
+										type="submit" value="Search">
+								</form>
+							</div>
+					</div>
 			</fieldset>
 		</section>
 
@@ -117,21 +113,17 @@
 		<div class="row">
 			<div class="4u 12u(narrower)">
 
-				<section> <span class="icon featured fa-check"></span> 
-				
-				</section>
+				<section> <span class="icon featured fa-check"></span> </section>
 
 			</div>
 			<div class="4u 12u(narrower)">
 
-				<section> <span class="icon featured fa-lock"></span> 
-				</section>
+				<section> <span class="icon featured fa-lock"></span> </section>
 
 			</div>
 			<div class="4u 12u(narrower)">
 
-				<section> <span class="icon featured fa-laptop"></span>
-				</section>
+				<section> <span class="icon featured fa-laptop"></span> </section>
 
 			</div>
 		</div>
@@ -144,16 +136,15 @@
 		<div class="row">
 			<div class="6u 12u(narrower)">
 
-				<section> <a href="./categorySport?id=1" class="image featured"><img
-					src="resources/pictures/pic01.jpg" alt="" /></a> 
-				</section>
+				<section> <a href="./categorySport?id=1"
+					class="image featured"><img src="resources/pictures/pic01.jpg"
+					alt="" /></a> </section>
 
 			</div>
 			<div class="6u 12u(narrower)">
 
 				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic02.jpg" alt="" /></a> 
-				</section>
+					src="resources/pictures/pic02.jpg" alt="" /></a> </section>
 
 			</div>
 		</div>
@@ -161,15 +152,13 @@
 			<div class="6u 12u(narrower)">
 
 				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic03.jpg" alt="" /></a> 
-				</section>
+					src="resources/pictures/pic03.jpg" alt="" /></a> </section>
 
 			</div>
 			<div class="6u 12u(narrower)">
 
 				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic04.jpg" alt="" /></a>
-				</section>
+					src="resources/pictures/pic04.jpg" alt="" /></a> </section>
 
 			</div>
 		</div>

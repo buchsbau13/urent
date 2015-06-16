@@ -370,10 +370,11 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(value="searchString", defaultValue="Hellio") String searchString) 
+	public String search(Model model, @RequestParam String searchString) 
 	{
 
-		model.addAttribute("searchString", searchString);
+		model.addAttribute("searchString", searchString); 
+		System.out.println(searchString); 
 		
 		return "search";
 
