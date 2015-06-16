@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import at.fh.swenga.urent.dao.CategoryDao;
 import at.fh.swenga.urent.dao.RentableDao;
+import at.fh.swenga.urent.dao.RentableRepository;
 import at.fh.swenga.urent.dao.UserDao;
 import at.fh.swenga.urent.dao.UserRoleDao;
 import at.fh.swenga.urent.model.Address;
@@ -47,6 +48,9 @@ public class IndexController {
 	@Autowired
 	RentableDao rentableDao;
 
+	@Autowired
+	RentableRepository rentableRepository;
+	
 	@Autowired
 	CategoryDao categoryDao;
 
@@ -372,9 +376,24 @@ public class IndexController {
 	@RequestMapping("/search")
 	public String search(Model model, @RequestParam String searchString) 
 	{
-
-		model.addAttribute("searchString", searchString); 
-		System.out.println(searchString); 
+		List<Rentable> rentables = new ArrayList<Rentable>();
+		rentables=rentableRepository.findAll();
+		System.out.println(rentables);
+		System.out.println(rentables.size());
+		rentables=rentableRepository.findByTitle(searchString);
+		System.out.println(rentables);
+		System.out.println(rentables.size());
+		rentables.add(new Rentable());
+		System.out.println(rentables.size());
+		rentables=rentableDao.getRentables();
+		System.out.println(rentables.size());
+		rentables=rentableRepository.findAll();
+		System.out.println("Hello Worlds");
+		model.addAttribute("searchString", searchString);
+		model.addAttribute("rentables", rentables);
+		System.out.println(searchString);
+		
+		
 		
 		return "search";
 
