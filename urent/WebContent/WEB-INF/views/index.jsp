@@ -83,7 +83,9 @@
 				<div class="col-md-8 col-md-offset-2">
 					<div class="space">
 						
-							<input type="text" name="searchString">
+							<input type="text" name="searchString"
+							class="form-control"
+							placeholder="What are you lookig for?">
 						
 					</div>
 					<ul>
