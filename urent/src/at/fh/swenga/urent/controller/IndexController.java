@@ -368,6 +368,16 @@ public class IndexController {
 		return "dashboard";
 
 	}
+	
+	@RequestMapping("/search")
+	public String search(Model model, @RequestParam(value="searchString", defaultValue="Hellio") String searchString) 
+	{
+
+		model.addAttribute("searchString", searchString);
+		
+		return "search";
+
+	}
 
 	@RequestMapping("/delete")
 	public String deleteData(Model model, @RequestParam int id) {

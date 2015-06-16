@@ -32,6 +32,7 @@
 </head>
 <body>
 <body class="index">
+
 	<div id="page-wrapper">
 
 
@@ -81,10 +82,15 @@
 			<div class="form-group">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="space">
-						<input type="text" class="form-control"
-							placeholder="What are you lookig for?">
+						
+							<input type="text" name="searchString">
+						
 					</div>
-					<button type="submit" class="button fit"><a href="./login" style="text-decoration:none;">Search</a></button>
+					<ul>
+						<li>
+							<a href="./search" class="button fit">Search</a>
+						</li>
+					</ul>
 
 				</div>
 			</div>
@@ -136,7 +142,7 @@
 		<div class="row">
 			<div class="6u 12u(narrower)">
 
-				<section> <a href="./categorySport" class="image featured"><img
+				<section> <a href="./categorySport?id=1" class="image featured"><img
 					src="resources/pictures/pic01.jpg" alt="" /></a> 
 				</section>
 
