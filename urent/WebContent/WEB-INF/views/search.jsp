@@ -26,94 +26,82 @@
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <script type="text/javascript">
-	function loadMap() {
-		var myOptions = {
+	function loadMap() 
+	{
+		var myOptions = 
+		{
 			zoom : 12,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		var map = new google.maps.Map(document.getElementById("map_container"),
 				myOptions);
-		/*var geocoder = new google.maps.Geocoder();
-		var address = '${rentables[0].location.street}, ${rentables[0].location.city}, ${rentables[0].location.country}, ${rentables[0].location.zip}';
-		geocoder.geocode
-		(
-			{
-				'address' : address
-			}, 
-			function(results, status) 
-			{
-			if (status == google.maps.GeocoderStatus.OK) 
-				{
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker
-					({
-						map : map,
-						position : results[0].geometry.location
-					});
-				} 
-				else 
-				{
-					alert('Geocode was not successful for the following reason: '
-							+ status);
-				}
-			}
-		);*/
-
-		var javaScriptRentables = [];
-
+				
+		var jsRentablesLocation = [];
+		var jsRentablesTitle = [];
+				
 		<c:forEach items="${rentables}" var="rentable">
-		javaScriptRentables
-				.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
+			jsRentablesLocation.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
+			jsRentablesTitle.push('${rentable.title}');
 		</c:forEach>
-
-		for (i = 0; i < javaScriptRentables.length; i++) {
-			var geocoder = new google.maps.Geocoder();
-			var address = javaScriptRentables[i];
-			//var address = '${rentables[0].location.street}, ${rentables[0].location.city}, ${rentables[0].location.country}, ${rentables[0].location.zip}';
-			geocoder
-					.geocode(
-							{
-								'address' : address
-							},
-							function(results, status) {
-								if (status == google.maps.GeocoderStatus.OK) {
-									map.setCenter(results[0].geometry.location);
-									var marker = new google.maps.Marker({
-										map : map,
-										position : results[0].geometry.location
-									});
-								} else {
-									alert('Geocode was not successful for the following reason: '
-											+ status);
-								}
-							});
-		}
-
-		/*var geocoder2 = new google.maps.Geocoder();
-		var address2 = '${rentables[1].location.street}, ${rentables[1].location.city}, ${rentables[1].location.country}, ${rentables[1].location.zip}';
-		geocoder2.geocode
-		(
-			{
-				'address' : address2
-			}, 
-			function(results, status) 
-			{
-			if (status == google.maps.GeocoderStatus.OK) 
+		
+		for (i = 0; i < jsRentablesLocation.length; i++) 
+		{
+		    var geocoder = new google.maps.Geocoder();
+			var address = jsRentablesLocation[i];
+			var title = jsRentablesTitle[i];
+			geocoder.geocode
+			(
 				{
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker
-					({
-						map : map,
-						position : results[0].geometry.location
-					});
-				} 
-				else 
+					'address' : address
+				}, 
+				function(results, status) 
 				{
-					alert('Geocode was not successful for the following reason: '
-							+ status);
+					if (status == google.maps.GeocoderStatus.OK) 
+					{
+						map.setCenter(results[0].geometry.location);
+						var marker = new google.maps.Marker
+						({
+							map : map,
+							position : results[0].geometry.location
+						});
+						var infowindow = new google.maps.InfoWindow({});
+						google.maps.event.addListener(marker, 'click', 
+					        	function() 
+					        	{
+					        		if (marker.getAnimation() != null) 
+					        		{
+					        	    	marker.setAnimation(null);
+					        	    	infowindow.close();
+					        	  	} 
+					        		else 
+					        		{
+					        	    	marker.setAnimation(google.maps.Animation.BOUNCE);
+					        	    	infowindow.setContent(title+"\r\n"+address);
+							            infowindow.open(map, this);
+					        	  	}
+					        	});
+				        google.maps.event.addListener(map, "click", 
+			    			function(event) 
+			    			{
+			    			    infowindow.close();
+			    			    marker.setAnimation(null);
+			            	  	
+			    			});
+				        google.maps.eventListener(infowwindow, "click",
+				        	function(event)
+				        	{
+				        		infowindow.close();
+				        		marker.setAnimation(null);
+				        	});
+					} 
+					else 
+					{
+						alert('Geocode was not successful for the following reason: '
+								+ status);
+					}
 				}
-			}
-		);*/
+			);
+		}		
 	}
 </script>
 </head>
