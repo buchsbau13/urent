@@ -195,7 +195,7 @@
 								<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
 									height="125px" width="125px" /></td>
 								<td>${rentable.title}</td>
-								<td><a href="showUser?id=${user.username}">${rentable.user.username}</a></td>
+								<td><a href="showUser?id=${rentable.id}">${rentable.user.username}</a></td>
 
 								<td>${rentable.category.name}</td>
 

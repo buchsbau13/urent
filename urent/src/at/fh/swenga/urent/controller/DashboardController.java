@@ -175,20 +175,18 @@ public class DashboardController {
 		out.flush();
 
 	}
-	
+
 	@RequestMapping("/showUser")
-	public String showDashboard(Principal principal, Model model) {
+	public String showDashboard(Principal principal,@RequestParam int id, Model model ) {
 
 		String name = principal.getName();
-
 		List<Rentable> rentables = rentableDao.userRentables(name);
 		model.addAttribute("rentables", rentables);
-		model.addAttribute("user", userDao.getUser(name));
+		model.addAttribute("user", rentableDao.getRentable(id).getUser());
 
 		return "showUser";
 
 	}
-
 
 	private BufferedImage cropImageSquare(byte[] image) throws IOException {
 		InputStream in = new ByteArrayInputStream(image);

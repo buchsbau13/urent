@@ -245,7 +245,7 @@ public class IndexController {
 		Rentable radioRentable = rentableDao.getRentable(5);
 		if (radioRentable == null)
 			radioRentable = new Rentable(julia, entertainment, "Wooden Radio",
-					"Stylisch Radio. Perfect for vaction, because a phone can be conntected to it!", 3.00, radioByte, graz5, null);
+					"Stylisch Radio. Perfect for a camping trip. You can also connect a phone to it!", 3.00, radioByte, graz5, null);
 		rentableDao.persist(radioRentable);
 
 		return "forward:/list";
