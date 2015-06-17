@@ -35,32 +35,7 @@
 		};
 		var map = new google.maps.Map(document.getElementById("map_container"),
 				myOptions);
-		/*var geocoder = new google.maps.Geocoder();
-		var address = '${rentables[0].location.street}, ${rentables[0].location.city}, ${rentables[0].location.country}, ${rentables[0].location.zip}';
-		geocoder.geocode
-		(
-			{
-				'address' : address
-			}, 
-			function(results, status) 
-			{
-			if (status == google.maps.GeocoderStatus.OK) 
-				{
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker
-					({
-						map : map,
-						position : results[0].geometry.location
-					});
-				} 
-				else 
-				{
-					alert('Geocode was not successful for the following reason: '
-							+ status);
-				}
-			}
-		);*/
-		
+				
 		var javaScriptRentables = [];
 				
 		<c:forEach items="${rentables}" var="rentable">
@@ -71,7 +46,6 @@
 		{
 		    var geocoder = new google.maps.Geocoder();
 			var address = javaScriptRentables[i];
-		    //var address = '${rentables[0].location.street}, ${rentables[0].location.city}, ${rentables[0].location.country}, ${rentables[0].location.zip}';
 			geocoder.geocode
 			(
 				{
@@ -95,33 +69,7 @@
 					}
 				}
 			);
-		}
-		
-		/*var geocoder2 = new google.maps.Geocoder();
-		var address2 = '${rentables[1].location.street}, ${rentables[1].location.city}, ${rentables[1].location.country}, ${rentables[1].location.zip}';
-		geocoder2.geocode
-		(
-			{
-				'address' : address2
-			}, 
-			function(results, status) 
-			{
-			if (status == google.maps.GeocoderStatus.OK) 
-				{
-					map.setCenter(results[0].geometry.location);
-					var marker = new google.maps.Marker
-					({
-						map : map,
-						position : results[0].geometry.location
-					});
-				} 
-				else 
-				{
-					alert('Geocode was not successful for the following reason: '
-							+ status);
-				}
-			}
-		);*/
+		}		
 	}
 </script>
 </head>
@@ -176,10 +124,6 @@
 
 				<p>Snowboard, Soccerball or Tennisracket. This is the place to
 					find it!</p>
-
-
-
-
 
 
 				<table data-toggle="table" data-classes="table table-hover "
@@ -241,19 +185,11 @@
 
 			</div>
 
-
-
-
-
 		</div>
-
-
 
 	</div>
 
-
 	<div id="map_container"></div>
-
 
 </body>
 </html>
