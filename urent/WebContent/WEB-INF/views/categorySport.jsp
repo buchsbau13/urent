@@ -24,68 +24,104 @@
 <title>Sport</title>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script>
-	var geocoder;
-	var map;
-	function initialize() {
-		geocoder = new google.maps.Geocoder();
-		var latlng = new google.maps.LatLng(-34.397, 150.644);
-		var mapOptions = {
-			zoom : 8,
-			center : latlng
-		}
-		map = new google.maps.Map(document.getElementById('map-canvas'),
-				mapOptions);
-	}
 
-	function codeAddress() {
-		var address = document.getElementById('address').value;
-		geocoder.geocode({
-			'address' : address
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				map.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
-					map : map,
-					position : results[0].geometry.location
-				});
-			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
-			}
-		});
-	}
-
-	google.maps.event.addDomListener(window, 'load', initialize);
-</script>
 <script type="text/javascript">
-	function loadMap() {
-		
-		var myOptions = {
+	function loadMap() 
+	{
+		var myOptions = 
+		{
 			zoom : 12,
-			
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		var map = new google.maps.Map(document.getElementById("map_container"),
 				myOptions);
-		var geocoder = new google.maps.Geocoder();
+		/*var geocoder = new google.maps.Geocoder();
 		var address = '${rentables[0].location.street}, ${rentables[0].location.city}, ${rentables[0].location.country}, ${rentables[0].location.zip}';
-
-		geocoder.geocode({
-			'address' : address
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				map.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
-					map : map,
-					position : results[0].geometry.location
-				});
-			} else {
-				alert('Geocode was not successful for the following reason: '
-						+ status);
+		geocoder.geocode
+		(
+			{
+				'address' : address
+			}, 
+			function(results, status) 
+			{
+			if (status == google.maps.GeocoderStatus.OK) 
+				{
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker
+					({
+						map : map,
+						position : results[0].geometry.location
+					});
+				} 
+				else 
+				{
+					alert('Geocode was not successful for the following reason: '
+							+ status);
+				}
 			}
-		});
-
+		);*/
+		
+		var javaScriptRentables = [];
+				
+		<c:forEach items="${rentables}" var="rentable">
+			javaScriptRentables.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
+		</c:forEach>
+		
+		for (i = 0; i < javaScriptRentables.length; i++) 
+		{
+		    var geocoder = new google.maps.Geocoder();
+			var address = javaScriptRentables[i];
+		    //var address = '${rentables[0].location.street}, ${rentables[0].location.city}, ${rentables[0].location.country}, ${rentables[0].location.zip}';
+			geocoder.geocode
+			(
+				{
+					'address' : address
+				}, 
+				function(results, status) 
+				{
+					if (status == google.maps.GeocoderStatus.OK) 
+					{
+						map.setCenter(results[0].geometry.location);
+						var marker = new google.maps.Marker
+						({
+							map : map,
+							position : results[0].geometry.location
+						});
+					} 
+					else 
+					{
+						alert('Geocode was not successful for the following reason: '
+								+ status);
+					}
+				}
+			);
+		}
+		
+		/*var geocoder2 = new google.maps.Geocoder();
+		var address2 = '${rentables[1].location.street}, ${rentables[1].location.city}, ${rentables[1].location.country}, ${rentables[1].location.zip}';
+		geocoder2.geocode
+		(
+			{
+				'address' : address2
+			}, 
+			function(results, status) 
+			{
+			if (status == google.maps.GeocoderStatus.OK) 
+				{
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker
+					({
+						map : map,
+						position : results[0].geometry.location
+					});
+				} 
+				else 
+				{
+					alert('Geocode was not successful for the following reason: '
+							+ status);
+				}
+			}
+		);*/
 	}
 </script>
 </head>

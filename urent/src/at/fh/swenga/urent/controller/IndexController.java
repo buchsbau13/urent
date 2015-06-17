@@ -162,42 +162,45 @@ public class IndexController {
 		UserRole roleUser3 = new UserRole(julia, "ROLE_USER");
 		userRoleDao.persist(roleUser3);
 
-		Address graz = new Address("Mandellstraﬂe 3", "Graz", "Austria", "8010");
+		Address graz1 = new Address("Mandellstraﬂe 3", "Graz", "Austria", "8010");
+		Address graz2 = new Address ("Odilienweg 6", "Graz", "Austria", "8010");
+		Address graz3 = new Address ("Neuholdaugasse 51", "Graz", "Austria", "8010");
+		
 
 		Rentable soccerball = rentableDao.getRentable(0);
 		if (soccerball == null)
 			soccerball = new Rentable(julia, sport, "Soccerball",
-					"A very good Ball", 29.99, null, graz, null);
+					"A very good Ball", 29.99, null, graz1, null);
 		rentableDao.persist(soccerball);
 
 		Rentable basketball = rentableDao.getRentable(1);
 		if (basketball == null)
 			basketball = new Rentable(julia, sport, "basketball",
-					"A very good Ball", 19.99, null, graz, null);
+					"A very good Ball", 19.99, null, graz1, null);
 		rentableDao.persist(basketball);
 
 		Rentable tennisracket = rentableDao.getRentable(2);
 		if (tennisracket == null)
 			tennisracket = new Rentable(julia, sport, "tennisracket",
-					"A very good Ball", 39.99, null, graz, null);
+					"A very good Ball", 39.99, null, graz3, null);
 		rentableDao.persist(tennisracket);
 
 		Rentable soccerjersey = rentableDao.getRentable(3);
 		if (soccerjersey == null)
 			soccerjersey = new Rentable(julia, sport, "soccerjersey",
-					"A very good Ball", 29.99, null, graz, null);
+					"A very good Ball", 29.99, null, graz1, null);
 		rentableDao.persist(soccerjersey);
 
 		Rentable basketballjersey = rentableDao.getRentable(4);
 		if (basketballjersey == null)
 			basketballjersey = new Rentable(julia, sport, "basketballjersey",
-					"A very good Ball", 25.99, null, graz, null);
+					"A very good Ball", 25.99, null, graz2, null);
 		rentableDao.persist(basketballjersey);
 
 		Rentable tennisball = rentableDao.getRentable(5);
 		if (tennisball == null)
 			tennisball = new Rentable(julia, sport, "tennisball",
-					"A very good Ball", 25.99, null, graz, null);
+					"A very good Ball", 25.99, null, graz3, null);
 		rentableDao.persist(tennisball);
 
 		return "forward:/list";
