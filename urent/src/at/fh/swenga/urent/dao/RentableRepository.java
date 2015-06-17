@@ -15,4 +15,6 @@ import at.fh.swenga.urent.model.Rentable;
 public interface RentableRepository extends JpaRepository<Rentable, Integer> {
 	
 	public List<Rentable> findByTitle(String title);
+	public List<Rentable> findByDescription (String description);
+	public List<Rentable> findByLocation(String location);
 }

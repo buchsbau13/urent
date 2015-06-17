@@ -69,7 +69,7 @@
 		var map = new google.maps.Map(document.getElementById("map_container"),
 				myOptions);
 		var geocoder = new google.maps.Geocoder();
-		var address = '${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}';
+		var address = '${rentables[0].location.street}, ${rentables[0].location.city}, ${rentables[0].location.country}, ${rentables[0].location.zip}';
 
 		geocoder.geocode({
 			'address' : address

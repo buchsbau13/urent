@@ -344,7 +344,6 @@ public class IndexController {
 		model.addAttribute("rentables", rentables);
 
 		return "categorySport";
-
 	}
 
 	@RequestMapping("/categoryTools")
@@ -379,15 +378,19 @@ public class IndexController {
 		List<Rentable> rentables = new ArrayList<Rentable>();
 		rentables=rentableRepository.findAll();
 		System.out.println(rentables);
-		System.out.println(rentables.size());
+		System.out.println("findAll: "+rentables.size());
 		rentables=rentableRepository.findByTitle(searchString);
 		System.out.println(rentables);
-		System.out.println(rentables.size());
+		System.out.println("findByTitle: "+rentables.size());
+		rentables=rentableRepository.findByDescription(searchString);
+		System.out.println(rentables);
+		System.out.println("findByDescription: "+rentables.size());
 		rentables.add(new Rentable());
-		System.out.println(rentables.size());
+		System.out.println("new added: "+rentables.size());
 		rentables=rentableDao.getRentables();
-		System.out.println(rentables.size());
+		System.out.println("rentableDao.getRentables(): "+rentables.size());
 		rentables=rentableRepository.findAll();
+		System.out.println("findAll: "+rentables.size());
 		System.out.println("Hello Worlds");
 		model.addAttribute("searchString", searchString);
 		model.addAttribute("rentables", rentables);
