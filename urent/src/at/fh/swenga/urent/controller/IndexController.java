@@ -86,7 +86,7 @@ public class IndexController {
 
 	@RequestMapping("/init")
 	@Transactional
-	public String init(Model model) {
+	public String init(Model model) throws IOException {
 
 		Category entertainment = categoryDao.getCategory("Entertainment");
 		if (entertainment == null)
@@ -166,42 +166,53 @@ public class IndexController {
 		Address graz2 = new Address ("Odilienweg 6", "Graz", "Austria", "8010");
 		Address graz3 = new Address ("Neuholdaugasse 51", "Graz", "Austria", "8010");
 		
-
-		Rentable soccerball = rentableDao.getRentable(0);
-		if (soccerball == null)
-			soccerball = new Rentable(julia, sport, "Soccerball",
-					"A very good Ball", 29.99, null, graz1, null);
-		rentableDao.persist(soccerball);
-
-		Rentable basketball = rentableDao.getRentable(1);
-		if (basketball == null)
-			basketball = new Rentable(julia, sport, "basketball",
-					"A very good Ball", 19.99, null, graz1, null);
-		rentableDao.persist(basketball);
-
-		Rentable tennisracket = rentableDao.getRentable(2);
-		if (tennisracket == null)
-			tennisracket = new Rentable(julia, sport, "tennisracket",
-					"A very good Ball", 39.99, null, graz3, null);
-		rentableDao.persist(tennisracket);
-
-		Rentable soccerjersey = rentableDao.getRentable(3);
-		if (soccerjersey == null)
-			soccerjersey = new Rentable(julia, sport, "soccerjersey",
-					"A very good Ball", 29.99, null, graz1, null);
-		rentableDao.persist(soccerjersey);
-
-		Rentable basketballjersey = rentableDao.getRentable(4);
-		if (basketballjersey == null)
-			basketballjersey = new Rentable(julia, sport, "basketballjersey",
-					"A very good Ball", 25.99, null, graz2, null);
-		rentableDao.persist(basketballjersey);
-
-		Rentable tennisball = rentableDao.getRentable(5);
-		if (tennisball == null)
-			tennisball = new Rentable(julia, sport, "tennisball",
-					"A very good Ball", 25.99, null, graz3, null);
-		rentableDao.persist(tennisball);
+		File rootDirStandmixer = new File(
+				servletContext
+						.getRealPath("/WEB-INF/images/standmixer.jpg"));
+		BufferedImage standmixer = ImageIO.read(rootDirStandmixer);
+		ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
+		ImageIO.write(standmixer, "jpg", baos1);
+		baos1.flush();
+		byte[] standmixerByte = baos1.toByteArray();
+		baos1.close();
+		
+		File rootDirMountainbike = new File(
+				servletContext
+						.getRealPath("/WEB-INF/images/mountainbike.jpg"));
+		BufferedImage mountainbike = ImageIO.read(rootDirMountainbike);
+		ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+		ImageIO.write(mountainbike, "jpg", baos2);
+		baos2.flush();
+		byte[] mountainbikeByte = baos2.toByteArray();
+		baos2.close();
+		
+		File rootDirGardentools = new File(
+				servletContext
+						.getRealPath("/WEB-INF/images/gardentools.jpg"));
+		BufferedImage gardentools = ImageIO.read(rootDirGardentools);
+		ByteArrayOutputStream baos3 = new ByteArrayOutputStream();
+		ImageIO.write(gardentools, "jpg", baos3);
+		baos3.flush();
+		byte[] gardentoolsByte = baos3.toByteArray();
+		baos3.close();
+		
+		Rentable mountainbikeRentable = rentableDao.getRentable(1);
+		if (mountainbikeRentable == null)
+			mountainbikeRentable = new Rentable(julia, sport, "Mountainbike",
+					"Santa Cruz Mountainbike. Best Mountainbike ever. You will love it!", 5.00, mountainbikeByte, graz1, null);
+		rentableDao.persist(mountainbikeRentable);
+		
+		Rentable standmixerRentable = rentableDao.getRentable(2);
+		if (standmixerRentable == null)
+			standmixerRentable = new Rentable(julia, kitchen, "Standmixer",
+					"Beautiful standmixer. Very easy to use.", 5.00, standmixerByte, graz3, null);
+		rentableDao.persist(standmixerRentable);
+		
+		Rentable gardentoolsRentable = rentableDao.getRentable(3);
+		if (gardentoolsRentable == null)
+			gardentoolsRentable = new Rentable(julia, garden, "Gardentools",
+					"Beautiful gardentools.", 5.00, gardentoolsByte, graz2, null);
+		rentableDao.persist(gardentoolsRentable);
 
 		return "forward:/list";
 

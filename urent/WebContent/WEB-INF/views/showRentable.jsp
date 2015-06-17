@@ -124,13 +124,14 @@ div#map_container {
 		</div>
 	</div>
 	</nav>
+	<br>
 	<div align="center">
-		<img src="getImage/<c:out value="${rentable.id}" />.do" height="75px"
-			width="75px" />
+		<img src="getImage/<c:out value="${rentable.id}" />.do" height="200px"
+			width="200px" />
 	</div>
-
+	<br>
 	<h1 align="center">${rentable.title}</h1>
-	<h1>test</h1>
+	<h1 align="center">${rentable.description}</h1>
 
 	<div id="map_container"></div>
 

@@ -179,33 +179,32 @@
 
 					<thead>
 						<tr>
+							<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
 							<th data-field="title" data-sortable="true" class="col-md-0.5">Title</th>
 							<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
 							<th data-field="category" data-sortable="true" class="col-md-0.5">Category</th>
-							<th data-field="description" data-sortable="true"
-								class="col-md-3.5">Description</th>
 							<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
 							<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
-							<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
+
 							<th class="col-md-2">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${rentables}" var="rentable">
 							<tr>
+								<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
+									height="125px" width="125px" /></td>
 								<td>${rentable.title}</td>
 								<td><a href="showUser?id=${user.username}">${rentable.user.username}</a></td>
 
 								<td>${rentable.category.name}</td>
 
-								<td>${rentable.description}</td>
 								<td>${rentable.location.street}<br>
 									${rentable.location.zip} ${rentable.location.city}
 								</td>
-								<td>${rentable.price}Euro</td>
+								<td>${rentable.price} Euro/per Day</td>
 
-								<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
-									height="75px" width="75px" /></td>
+
 								<td><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 										<a href="deleteRentable?id=${rentable.id}">
@@ -219,7 +218,7 @@
 												<span class="glyphicon glyphicon-pencil"></span> Rate
 											</button>
 										</a>
-									</sec:authorize> <a href="categorySport?id=${rentable.id}">
+									</sec:authorize> <a href="showRentable?id=${rentable.id}">
 										<button type="button" class="btn btn-xs btn-success">
 											<span class="glyphicon glyphicon-pencil"></span> Show
 										</button>
