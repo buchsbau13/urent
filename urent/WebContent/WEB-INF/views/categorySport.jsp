@@ -203,7 +203,7 @@
 						<c:forEach items="${rentables}" var="rentable">
 							<tr>
 								<td>${rentable.title}</td>
-								<td>${rentable.user.username}</td>
+								<td><a href="showUser?id=${user.username}">${rentable.user.username}</a></td>
 
 								<td>${rentable.category.name}</td>
 

@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.Principal;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -174,6 +175,20 @@ public class DashboardController {
 		out.flush();
 
 	}
+	
+	@RequestMapping("/showUser")
+	public String showDashboard(Principal principal, Model model) {
+
+		String name = principal.getName();
+
+		List<Rentable> rentables = rentableDao.userRentables(name);
+		model.addAttribute("rentables", rentables);
+		model.addAttribute("user", userDao.getUser(name));
+
+		return "showUser";
+
+	}
+
 
 	private BufferedImage cropImageSquare(byte[] image) throws IOException {
 		InputStream in = new ByteArrayInputStream(image);
