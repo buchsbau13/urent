@@ -179,8 +179,8 @@ public class DashboardController {
 	@RequestMapping("/showUser")
 	public String showDashboard(Principal principal,@RequestParam int id, Model model ) {
 
-		String name = principal.getName();
-		List<Rentable> rentables = rentableDao.userRentables(name);
+		String username = rentableDao.getRentable(id).getUser().getUsername();
+		List<Rentable> rentables = rentableDao.userRentables(username);
 		model.addAttribute("rentables", rentables);
 		model.addAttribute("user", rentableDao.getRentable(id).getUser());
 
