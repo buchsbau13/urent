@@ -50,7 +50,7 @@ public class IndexController {
 
 	@Autowired
 	RentableRepository rentableRepository;
-	
+
 	@Autowired
 	CategoryDao categoryDao;
 
@@ -59,9 +59,9 @@ public class IndexController {
 
 	@Autowired
 	UserRoleDao userRoleDao;
-	
+
 	@Autowired
-	ServletContext servletContext; 
+	ServletContext servletContext;
 
 	@RequestMapping(value = { "/", "list" })
 	public String index(Model model) {
@@ -249,7 +249,8 @@ public class IndexController {
 
 			if (file.isEmpty()) {
 				File rootDir = new File(
-						servletContext.getRealPath("/WEB-INF/images/defaultRentable.jpg"));
+						servletContext
+								.getRealPath("/WEB-INF/images/defaultRentable.jpg"));
 				BufferedImage defaultImage = ImageIO.read(rootDir);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				ImageIO.write(defaultImage, "jpg", baos);
@@ -258,8 +259,8 @@ public class IndexController {
 				baos.close();
 				rentable.setImage(defaultImageByte);
 
-				//byte[] image = file.getBytes();
-				//rentable.setImage(image);
+				// byte[] image = file.getBytes();
+				// rentable.setImage(image);
 
 			} else {
 				BufferedImage croppedImage = cropImageSquare(file.getBytes());
@@ -371,33 +372,13 @@ public class IndexController {
 		return "dashboard";
 
 	}
-	
+
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam String searchString) 
-	{
-		List<Rentable> rentables = new ArrayList<Rentable>();
-		rentables=rentableRepository.findAll();
-		System.out.println(rentables);
-		System.out.println("findAll: "+rentables.size());
-		rentables=rentableRepository.findByTitle(searchString);
-		System.out.println(rentables);
-		System.out.println("findByTitle: "+rentables.size());
-		rentables=rentableRepository.findByDescription(searchString);
-		System.out.println(rentables);
-		System.out.println("findByDescription: "+rentables.size());
-		rentables.add(new Rentable());
-		System.out.println("new added: "+rentables.size());
-		rentables=rentableDao.getRentables();
-		System.out.println("rentableDao.getRentables(): "+rentables.size());
-		rentables=rentableRepository.findAll();
-		System.out.println("findAll: "+rentables.size());
-		System.out.println("Hello Worlds");
-		model.addAttribute("searchString", searchString);
+	public String search(Model model, @RequestParam String searchString) {
+		List<Rentable> rentables = null;
+		rentables = rentableRepository.findBySomething(searchString, searchString);
 		model.addAttribute("rentables", rentables);
-		System.out.println(searchString);
-		
-		
-		
+
 		return "search";
 
 	}
