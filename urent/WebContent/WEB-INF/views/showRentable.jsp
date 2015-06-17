@@ -30,21 +30,53 @@ div#map_container {
 				myOptions);
 		var geocoder = new google.maps.Geocoder();
 		var address = '${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}';
-
+		// Creating an InfoWindow          
+		var infowindow = new google.maps.InfoWindow({});
+		
 		geocoder.geocode({
 			'address' : address
-		}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
+		}, 
+		function(results, status) 
+		{
+			if (status == google.maps.GeocoderStatus.OK) 
+			{
 				map.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker({
+				var marker = new google.maps.Marker
+				({
 					map : map,
 					position : results[0].geometry.location
 				});
+				
+				google.maps.event.addListener(marker, 'click', 
+		        	function() 
+		        	{
+		        		if (marker.getAnimation() != null) 
+		        		{
+		        	    	marker.setAnimation(null);
+		        	    	infowindow.close();
+		        	  	} 
+		        		else 
+		        		{
+		        	    	marker.setAnimation(google.maps.Animation.BOUNCE);
+		        	    	infowindow.setContent(address);
+				            infowindow.open(map, this);
+		        	  	}
+		        	});
+		        google.maps.event.addListener(map, "click", 
+	    			function(event) 
+	    			{
+	    			    infowindow.close();
+	    			    marker.setAnimation(null);
+	            	  	
+	    			});
+				
 			} else {
 				alert('Geocode was not successful for the following reason: '
 						+ status);
 			}
 		});
+		
+		
 
 	}
 </script>

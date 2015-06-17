@@ -36,16 +36,19 @@
 		var map = new google.maps.Map(document.getElementById("map_container"),
 				myOptions);
 				
-		var javaScriptRentables = [];
+		var jsRentablesLocation = [];
+		var jsRentablesTitle = [];
 				
 		<c:forEach items="${rentables}" var="rentable">
-			javaScriptRentables.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
+			jsRentablesLocation.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
+			jsRentablesTitle.push('${rentable.title}');
 		</c:forEach>
 		
-		for (i = 0; i < javaScriptRentables.length; i++) 
+		for (i = 0; i < jsRentablesLocation.length; i++) 
 		{
 		    var geocoder = new google.maps.Geocoder();
-			var address = javaScriptRentables[i];
+			var address = jsRentablesLocation[i];
+			var title = jsRentablesTitle[i];
 			geocoder.geocode
 			(
 				{
@@ -61,6 +64,35 @@
 							map : map,
 							position : results[0].geometry.location
 						});
+						var infowindow = new google.maps.InfoWindow({});
+						google.maps.event.addListener(marker, 'click', 
+					        	function() 
+					        	{
+					        		if (marker.getAnimation() != null) 
+					        		{
+					        	    	marker.setAnimation(null);
+					        	    	infowindow.close();
+					        	  	} 
+					        		else 
+					        		{
+					        	    	marker.setAnimation(google.maps.Animation.BOUNCE);
+					        	    	infowindow.setContent(title+"\r\n"+address);
+							            infowindow.open(map, this);
+					        	  	}
+					        	});
+				        google.maps.event.addListener(map, "click", 
+			    			function(event) 
+			    			{
+			    			    infowindow.close();
+			    			    marker.setAnimation(null);
+			            	  	
+			    			});
+				        google.maps.eventListener(infowwindow, "click",
+				        	function(event)
+				        	{
+				        		infowindow.close();
+				        		marker.setAnimation(null);
+				        	});
 					} 
 					else 
 					{
