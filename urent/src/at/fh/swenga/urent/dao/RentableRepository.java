@@ -15,7 +15,7 @@ import at.fh.swenga.urent.model.Rentable;
 @Transactional
 public interface RentableRepository extends JpaRepository<Rentable, Integer> {
 
-	@Query("select r from Rentable r where r.title like :search% or r.location.city like :search2%")
+	@Query("select r from Rentable r where r.title like %:search% or r.location.city like %:search2%")
 	public List<Rentable> findBySomething(@Param("search") String searchString, @Param("search2") String searchString2);
 
 }
