@@ -143,8 +143,8 @@
 												<span class="glyphicon glyphicon-pencil"></span> Edit
 											</button>
 										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="deleteRentable?id=${rentable.id}">
+									</sec:authorize> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+										<a href="delete?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-danger">
 												<span class="glyphicon glyphicon-trash"></span> Delete
 											</button>

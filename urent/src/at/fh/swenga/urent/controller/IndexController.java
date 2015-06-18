@@ -162,90 +162,100 @@ public class IndexController {
 		UserRole roleUser3 = new UserRole(julia, "ROLE_USER");
 		userRoleDao.persist(roleUser3);
 
-		Address graz1 = new Address("Mandellstraﬂe 3", "Graz", "Austria", "8010");
-		Address graz2 = new Address ("Odilienweg 6", "Graz", "Austria", "8010");
-		Address graz3 = new Address ("Neuholdaugasse 51", "Graz", "Austria", "8010");
-		Address graz4 = new Address ("Alte Poststraﬂe 147", "Graz", "Austria", "8010"); 
-		Address graz5 = new Address ("Johann-Strauﬂ-Gasse 6", "Graz", "Austria", "8010"); 
-		
+		Address graz1 = new Address("Mandellstraﬂe 3", "Graz", "Austria",
+				"8010");
+		Address graz2 = new Address("Odilienweg 6", "Graz", "Austria", "8010");
+		Address graz3 = new Address("Neuholdaugasse 51", "Graz", "Austria",
+				"8010");
+		Address graz4 = new Address("Alte Poststraﬂe 147", "Graz", "Austria",
+				"8010");
+		Address graz5 = new Address("Johann-Strauﬂ-Gasse 6", "Graz", "Austria",
+				"8010");
+
 		File rootDirStandmixer = new File(
-				servletContext
-						.getRealPath("/WEB-INF/images/standmixer.jpg"));
+				servletContext.getRealPath("/WEB-INF/images/standmixer.jpg"));
 		BufferedImage standmixer = ImageIO.read(rootDirStandmixer);
 		ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
 		ImageIO.write(standmixer, "jpg", baos1);
 		baos1.flush();
 		byte[] standmixerByte = baos1.toByteArray();
 		baos1.close();
-		
+
 		File rootDirMountainbike = new File(
-				servletContext
-						.getRealPath("/WEB-INF/images/mountainbike.jpg"));
+				servletContext.getRealPath("/WEB-INF/images/mountainbike.jpg"));
 		BufferedImage mountainbike = ImageIO.read(rootDirMountainbike);
 		ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
 		ImageIO.write(mountainbike, "jpg", baos2);
 		baos2.flush();
 		byte[] mountainbikeByte = baos2.toByteArray();
 		baos2.close();
-		
+
 		File rootDirGardentools = new File(
-				servletContext
-						.getRealPath("/WEB-INF/images/gardentools.jpg"));
+				servletContext.getRealPath("/WEB-INF/images/gardentools.jpg"));
 		BufferedImage gardentools = ImageIO.read(rootDirGardentools);
 		ByteArrayOutputStream baos3 = new ByteArrayOutputStream();
 		ImageIO.write(gardentools, "jpg", baos3);
 		baos3.flush();
 		byte[] gardentoolsByte = baos3.toByteArray();
 		baos3.close();
-		
+
 		File rootDirSewingMachine = new File(
-				servletContext
-						.getRealPath("/WEB-INF/images/sewingmachine.jpg"));
+				servletContext.getRealPath("/WEB-INF/images/sewingmachine.jpg"));
 		BufferedImage sewingmachine = ImageIO.read(rootDirSewingMachine);
 		ByteArrayOutputStream baos4 = new ByteArrayOutputStream();
 		ImageIO.write(sewingmachine, "jpg", baos4);
 		baos4.flush();
 		byte[] sewingmachineByte = baos4.toByteArray();
 		baos4.close();
-		
+
 		File rootDirRadio = new File(
-				servletContext
-						.getRealPath("/WEB-INF/images/radio.jpg"));
+				servletContext.getRealPath("/WEB-INF/images/radio.jpg"));
 		BufferedImage radio = ImageIO.read(rootDirRadio);
 		ByteArrayOutputStream baos5 = new ByteArrayOutputStream();
 		ImageIO.write(radio, "jpg", baos5);
 		baos5.flush();
 		byte[] radioByte = baos5.toByteArray();
 		baos5.close();
-		
+
 		Rentable mountainbikeRentable = rentableDao.getRentable(1);
 		if (mountainbikeRentable == null)
-			mountainbikeRentable = new Rentable(julia, sport, "Mountainbike",
-					"Santa Cruz Mountainbike. Best Mountainbike ever. You will love it!", 5.00, mountainbikeByte, graz1, null);
+			mountainbikeRentable = new Rentable(
+					julia,
+					sport,
+					"Mountainbike",
+					"Santa Cruz Mountainbike. Best Mountainbike ever. You will love it!",
+					5.00, mountainbikeByte, graz1, null);
 		rentableDao.persist(mountainbikeRentable);
-		
+
 		Rentable standmixerRentable = rentableDao.getRentable(2);
 		if (standmixerRentable == null)
 			standmixerRentable = new Rentable(julia, kitchen, "Standmixer",
-					"Beautiful standmixer. Very easy to use.", 5.00, standmixerByte, graz3, null);
+					"Beautiful standmixer. Very easy to use.", 5.00,
+					standmixerByte, graz3, null);
 		rentableDao.persist(standmixerRentable);
-		
+
 		Rentable gardentoolsRentable = rentableDao.getRentable(3);
 		if (gardentoolsRentable == null)
 			gardentoolsRentable = new Rentable(julia, garden, "Gardentools",
-					"Beautiful gardentools.", 5.00, gardentoolsByte, graz2, null);
+					"Beautiful gardentools.", 5.00, gardentoolsByte, graz2,
+					null);
 		rentableDao.persist(gardentoolsRentable);
-		
+
 		Rentable sewingmachineRentable = rentableDao.getRentable(4);
 		if (sewingmachineRentable == null)
-			sewingmachineRentable = new Rentable(julia, hobby, "Sewing Machine",
-					"Simple sewing machine for beginners", 6.00, sewingmachineByte, graz4, null);
+			sewingmachineRentable = new Rentable(julia, hobby,
+					"Sewing Machine", "Simple sewing machine for beginners",
+					6.00, sewingmachineByte, graz4, null);
 		rentableDao.persist(sewingmachineRentable);
-		
+
 		Rentable radioRentable = rentableDao.getRentable(5);
 		if (radioRentable == null)
-			radioRentable = new Rentable(julia, entertainment, "Wooden Radio",
-					"Stylisch Radio. Perfect for a camping trip. You can also connect a phone to it!", 3.00, radioByte, graz5, null);
+			radioRentable = new Rentable(
+					julia,
+					entertainment,
+					"Wooden Radio",
+					"Stylisch Radio. Perfect for a camping trip. You can also connect a phone to it!",
+					3.00, radioByte, graz5, null);
 		rentableDao.persist(radioRentable);
 
 		return "forward:/list";
@@ -424,7 +434,8 @@ public class IndexController {
 	@RequestMapping("/search")
 	public String search(Model model, @RequestParam String searchString) {
 		List<Rentable> rentables = null;
-		rentables = rentableRepository.findBySomething(searchString, searchString);
+		rentables = rentableRepository.findBySomething(searchString,
+				searchString);
 		model.addAttribute("rentables", rentables);
 
 		return "search";
@@ -432,11 +443,21 @@ public class IndexController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteData(Model model, @RequestParam int id) {
+	public String deleteData(Model model, Principal principal,
+			@RequestParam int id) {
 
-		rentableDao.delete(id);
-		return "forward:/list";
+		String username = principal.getName();
+		String rentableUsername = rentableDao.getRentable(id).getUser().getUsername();
 
+		if (username.equals(rentableUsername)) {
+			rentableDao.delete(id);
+			model.addAttribute("message", "Rentable deleted!");
+			return "forward:/dashboard";
+		} else {
+			model.addAttribute("errorMessage",
+					"Your are not allowed to delete Rentables from other People!");
+			return "forward:/dashboard";
+		}
 	}
 
 	// @ExceptionHandler(Exception.class)
