@@ -194,10 +194,10 @@
 
 
 								<td><sec:authorize
-										access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-										<a href="deleteRentable?id=${rentable.id}">
+										access="hasRole('ROLE_ADMIN')">
+										<a href="deleteAdmin?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-danger">
-												<span class="glyphicon glyphicon-trash"></span> Delete
+												<span class="glyphicon glyphicon-trash"></span> Delete Admin
 											</button>
 										</a>
 									</sec:authorize> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">

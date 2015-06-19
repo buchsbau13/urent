@@ -134,9 +134,6 @@ public class IndexController {
 		UserRole roleAdmin1 = new UserRole(admin, "ROLE_ADMIN");
 		userRoleDao.persist(roleAdmin1);
 
-		UserRole roleUser1 = new UserRole(admin, "ROLE_USER");
-		userRoleDao.persist(roleUser1);
-
 		User user = userDao.getUser("user");
 		if (user == null)
 			user = new User(
@@ -447,7 +444,8 @@ public class IndexController {
 			@RequestParam int id) {
 
 		String username = principal.getName();
-		String rentableUsername = rentableDao.getRentable(id).getUser().getUsername();
+		String rentableUsername = rentableDao.getRentable(id).getUser()
+				.getUsername();
 
 		if (username.equals(rentableUsername)) {
 			rentableDao.delete(id);
@@ -456,6 +454,21 @@ public class IndexController {
 		} else {
 			model.addAttribute("errorMessage",
 					"Your are not allowed to delete Rentables from other People!");
+			return "forward:/dashboard";
+		}
+	}
+
+	@RequestMapping("/deleteAdmin")
+	public String deleteDataAdmin(Model model, Principal principal,
+			@RequestParam int id) {
+
+		try {
+			rentableDao.delete(id);
+			model.addAttribute("message", "Rentable deleted!");
+			return "forward:/dashboard";
+		} catch (Exception e) {
+			model.addAttribute("errorMessage",
+					"It is not possible to delte this Rentable!");
 			return "forward:/dashboard";
 		}
 	}

@@ -10,13 +10,15 @@
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/dashboard"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/delete"
-			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/delete" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/deleteAdmin" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/editRentable"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/editUser"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/rateRentable"
+			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/addToWishlist"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/signup/**" access="isAnonymous()" />
 		<form-login login-page="/login" />

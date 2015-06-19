@@ -55,14 +55,25 @@ public class DashboardController {
 	UserRoleDao userRoleDao;
 
 	@RequestMapping(value = "/editRentable", method = RequestMethod.GET)
-	public String showEditRentableForm(Model model, @RequestParam int id) {
+	public String showEditRentableForm(Model model, Principal principal,
+			@RequestParam int id) {
 
-		List<Category> categories = categoryDao.getCategories();
-		model.addAttribute("rentable", rentableDao.getRentable(id));
-		model.addAttribute("command", new RentableForm());
-		model.addAttribute("categories", categories);
+		String username = principal.getName();
+		String rentableUsername = rentableDao.getRentable(id).getUser()
+				.getUsername();
 
-		return "editRentable";
+		if (username.equals(rentableUsername)) {
+			List<Category> categories = categoryDao.getCategories();
+			model.addAttribute("rentable", rentableDao.getRentable(id));
+			model.addAttribute("command", new RentableForm());
+			model.addAttribute("categories", categories);
+			return "editRentable";
+		} else {
+			model.addAttribute("errorMessage",
+					"You are not allowed to edit Rentables from other Users!");
+			return "dashboard";
+		}
+
 	}
 
 	@RequestMapping(value = "/editRentable", method = RequestMethod.POST)
@@ -117,11 +128,19 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
-	public String showEditUser(Model model, @RequestParam String username) {
+	public String showEditUser(Model model, Principal principal, @RequestParam String username) {
 
-		model.addAttribute("user", userDao.getUser(username));
+		String currentUsername = principal.getName();
+		String editUsername = userDao.getUser(username).getUsername(); 
+		
+		if (currentUsername.equals(editUsername)) {
+			model.addAttribute("user", userDao.getUser(username));
+			return "editUser";
+		} else {
+			model.addAttribute("errorMessage", "You are not allowed to edit other Users!");
+			return "dashboard";
+		}
 
-		return "editUser";
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
@@ -177,7 +196,8 @@ public class DashboardController {
 	}
 
 	@RequestMapping("/showUser")
-	public String showDashboard(Principal principal,@RequestParam int id, Model model ) {
+	public String showDashboard(Principal principal, @RequestParam int id,
+			Model model) {
 
 		String username = rentableDao.getRentable(id).getUser().getUsername();
 		List<Rentable> rentables = rentableDao.userRentables(username);
