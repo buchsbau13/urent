@@ -8,21 +8,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/jquery.dropotron.min.js"></script>
+<script src="resources/js/jquery.scrolly.min.js"></script>
+<script src="resources/js/jquery.scrollgress.min.js"></script>
+<script src="resources/js/skel.min.js"></script>
+<script src="resources/js/util.js"></script>
+<script src="resources/js/main.js"></script>
+<meta name="viewport" content="width_device-width, initial-scale=1">
 <jsp:include page="includes/bootstrapMeta.jsp" />
+<jsp:include page="includes/bootstrapCss.jsp" />
+<jsp:include page="includes/bootstrapJs.jsp" />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <title>ShowRentable</title>
-<style type="text/css">
-div#map_container {
-	width: 100%;
-	height: 350px;
-}
-</style>
+
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 	function loadMap() {
 		//var latlng = new google.maps.LatLng(4.3695030, 101.1224120);
 		var myOptions = {
-			zoom : 12,
+			zoom : 15,
 			//center: latlng,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
@@ -85,52 +92,64 @@ div#map_container {
 </head>
 <body onload="loadMap()">
 
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./">uRent</a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><sec:authorize access="isAnonymous()">
-						<a href="./login" class="nav-item"><span
-							class="glyphicon glyphicon-log-in"></span> Log In</a>
-					</sec:authorize></li>
-				<li><sec:authorize access="isAuthenticated()">
-						<c:url value="logout" var="logoutUrl" />
-						<form action="${logoutUrl }" method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <label class="nav-item"><span
-								class="glyphicon glyphicon-log-out"></span><input type="submit"
-								value="Log Out" /></label>
-						</form>
-					</sec:authorize></li>
-				<li><a href="./signup" class="nav-item"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./newRentable" class="nav-item"><span
-							class="glyphicon glyphicon-plus"></span> New Rentable</a>
-					</sec:authorize></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./dashboard" class="nav-item"> Dashboard</a>
-					</sec:authorize></li>
-			</ul>
-		</div>
+	<div id="page-wrapper">
+		<!-- Header -->
+
+		<header id="header">
+		<h1>uRent</h1>
+		<nav id="nav"> <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="username" />
+		</sec:authorize>
+
+		<ul>
+			<li class="current"><a href="showRentable?id=${rentable.id}">${rentable.title}</a></li>
+			<li class="current"><a href="./">Welcome</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./login" class="nav-item">Log In</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAuthenticated()">
+					<a href="./logout" class="nav-item">Log Out</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./signup" class="button special">Sign Up</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./dashboard" class="button special">${username}</a>
+				</sec:authorize></li>
+		</ul>
+		</nav> </header>
+
+
+	
+	
+	
+	
+	
+	
+	<div class="row">
+			<div class="sidebar">
+	<div align="left">
+		<img src="getImage/<c:out value="${rentable.id}" />.do" height="300px"
+			width="300px" />
 	</div>
-	</nav>
 	<br>
-	<div align="center">
-		<img src="getImage/<c:out value="${rentable.id}" />.do" height="200px"
-			width="200px" />
-	</div>
-	<br>
-	<h1 align="center">${rentable.title}</h1>
-	<h1 align="center">${rentable.description}</h1>
+	<h1 align="left">${rentable.title}</h1>
+	<h1 align="left">${rentable.description}</h1>
+	<h1 align="left">From: ${rentable.user.username}</h1>
+	<h1 align="left">Price/Day: ${rentable.price} Euro</h1>
+	<h1 align="left">Contact: ${rentable.user.email}</h1>
+	<h1 align="left">Tel: ${rentable.user.telephone}</h1>
+	
 
-	<div id="map_container"></div>
+	
 
-
+</div>
+</div>
+<div id="map_container"></div>
 </body>
 </html>

@@ -8,48 +8,137 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/jquery.dropotron.min.js"></script>
+<script src="resources/js/jquery.scrolly.min.js"></script>
+<script src="resources/js/jquery.scrollgress.min.js"></script>
+<script src="resources/js/skel.min.js"></script>
+<script src="resources/js/util.js"></script>
+<script src="resources/js/main.js"></script>
 <meta name="viewport" content="width_device-width, initial-scale=1">
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <jsp:include page="includes/bootstrapCss.jsp" />
 <jsp:include page="includes/bootstrapJs.jsp" />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <title>Dashboard</title>
+<script type="text/javascript"
+	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<script type="text/javascript">
+	function loadMap() {
+		var myOptions = {
+			zoom : 12,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		var map = new google.maps.Map(document.getElementById("map_container"),
+				myOptions);
+
+		var jsRentablesLocation = [];
+		var jsRentablesTitle = [];
+
+		<c:forEach items="${rentables}" var="rentable">
+		jsRentablesLocation
+				.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
+		jsRentablesTitle.push('${rentable.title}');
+		</c:forEach>
+
+		for (i = 0; i < jsRentablesLocation.length; i++) {
+			var geocoder = new google.maps.Geocoder();
+			var address = jsRentablesLocation[i];
+			var title = jsRentablesTitle[i];
+			geocoder
+					.geocode(
+							{
+								'address' : address
+							},
+							function(results, status) {
+								if (status == google.maps.GeocoderStatus.OK) {
+									map.setCenter(results[0].geometry.location);
+									var marker = new google.maps.Marker({
+										map : map,
+										position : results[0].geometry.location
+									});
+									var infowindow = new google.maps.InfoWindow(
+											{});
+									google.maps.event
+											.addListener(
+													marker,
+													'click',
+													function() {
+														if (marker
+																.getAnimation() != null) {
+															marker
+																	.setAnimation(null);
+															infowindow.close();
+														} else {
+															marker
+																	.setAnimation(google.maps.Animation.BOUNCE);
+															infowindow
+																	.setContent(title
+																			+ "\r\n"
+																			+ address);
+															infowindow.open(
+																	map, this);
+														}
+													});
+									google.maps.event.addListener(map, "click",
+											function(event) {
+												infowindow.close();
+												marker.setAnimation(null);
+
+											});
+									google.maps.eventListener(infowwindow,
+											"click", function(event) {
+												infowindow.close();
+												marker.setAnimation(null);
+											});
+								} else {
+									alert('Geocode was not successful for the following reason: '
+											+ status);
+								}
+							});
+		}
+	}
+</script>
 </head>
 <body>
+<div id="page-wrapper">
+	<!-- Header -->
 
-	<!-- 	<div class="masthead"> -->
-	<!-- 		<div class="container"> -->
+		<header id="header">
+		<h1>uRent</h1>
+		<nav id="nav"> <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="username" />
+		</sec:authorize>
 
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./">uRent</a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><sec:authorize access="isAnonymous()">
-						<a href="./login" class="nav-item"><span
-							class="glyphicon glyphicon-log-in"></span> Log In</a>
-					</sec:authorize></li>
-				<li><sec:authorize access="isAuthenticated()">
-						<a href="./logout" class="nav-item">Log Out</a>
-					</sec:authorize></li>
-				<li><a href="./signup" class="nav-item"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./newRentable" class="nav-item"><span
-							class="glyphicon glyphicon-plus"></span> New Rentable</a>
-					</sec:authorize></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./dashboard" class="nav-item"> Dashboard</a>
-					</sec:authorize></li>
-			</ul>
-		</div>
-	</div>
-	</nav>
-	</ul>
-	</div>
+		<ul>
+			<li class="current"><a href="./categoryMusic">Music</a></li>
+			<li class="current"><a href="./">Welcome</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./login" class="nav-item">Log In</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAuthenticated()">
+					<a href="./logout" class="nav-item">Log Out</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./signup" class="button special">Sign Up</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./dashboard" class="button special">${username}</a>
+				</sec:authorize></li>
+		</ul>
+		</nav> </header>
+
+
+
+
+
 	<center>
 		<!--  Error message ----------------------------------------------------------- -->
 		<c:if test="${not empty errorMessage}">
@@ -69,22 +158,21 @@
 		</c:if>
 		<!--   message ----------------------------------------------------------- -->
 	</center>
-
+<br>
+	<br>
+	<article id="main"> <header class=special container>
+	<span class="icon fa-user"></span>
+	<img src="getUserImage/<c:out value="${user.username}" />.do"
+			height="200px" width="200px" />
+		<h2>${user.description}</h2>
+	
 	<h2 align="center">${user.username}</h2>
 
 	<h2 align="center">${user.email}</h2>
 	<h2 align="center">${user.telephone}</h2>
-
+</header> 
 	<center>
-		<img src="getUserImage/<c:out value="${user.username}" />.do"
-			height="75px" width="75px" />
-		<h2>${user.description}</h2>
-
-	</center>
-	<br>
-
-
-	<center>
+	
 		<sec:authorize access="hasRole('ROLE_USER')">
 			<a href="editUser?username=${user.username}">
 				<button type="button" class="btn btn-xs btn-success">
@@ -95,42 +183,48 @@
 	</center>
 
 	<!--  list all persons ----------------------------------------------------------- -->
-	<center>
-		<h1>My Rentables</h1>
-		<div class="row">
+	
+		
+		
+		<!-- One --> <section class="wrapper style4 special container">
+		
+		<h2>My Rentables</h2>
 
-			<div class="table-index">
-				<table class="table table-hover">
+			<table data-toggle="table" data-classes="table table-hover "
+					data-striped="false" data-sort-name="stargazers_count"
+					data-sort-order="desc" data-search="true">
 
 
 
 
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Category</th>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Price</th>
-							<th>Location</th>
-							<th>Image</th>
-							<th>Action</th>
+							<th data-field="id" data-sortable="true" >ID</th>
+							<th data-field="category" data-sortable="true">Category</th>
+							<th data-field="title" data-sortable="true" >Title</th>
+							<th data-field="description" data-sortable="true"
+								>Description</th>
+							<th data-field="location" data-sortable="true" ">Location</th>
+							<th data-field="price" data-sortable="true" >Price</th>
+							<th data-field="image" data-sortable="true" >Image</th>
+							<th class="col-md-2">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${rentables}" var="rentable">
 							<tr>
-								<td class="col-md-1">${rentable.id}</td>
-								<td class="col-md-1">${rentable.category.name}</td>
-								<td class="col-md-1">${rentable.title}</td>
-								<td class="col-md-1">${rentable.description}</td>
-								<td class="col-md-1">${rentable.price}</td>
-								<td class="col-md-1">${rentable.location.street}
+								<td >${rentable.id}</td>
+								<td >${rentable.category.name}</td>
+								<td >${rentable.title}</td>
+								<td c>${rentable.description}</td>
+								
+								<td >${rentable.location.street}
 									${rentable.location.zip} ${rentable.location.city}</td>
-								<td class="col-md-1"><img
+									<td >${rentable.price}</td>
+								<td ><img
 									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
 									width="75px" /></td>
-								<td class="col-md-1"><sec:authorize
+								<td ><sec:authorize
 										access="hasRole('ROLE_USER')">
 										<a href="showRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-success">
@@ -164,44 +258,44 @@
 			</div>
 		</div>
 
-	</center>
+	
 	<!--  list all persons ----------------------------------------------------------- -->
-	<center>
+	<section class="wrapper style4 special container">
 		<h1>My Wishlist</h1>
-		<div class="row">
-
-			<div class="table-index">
-				<table class="table table-hover">
-
+		<table data-toggle="table" data-classes="table table-hover "
+					data-striped="false" data-sort-name="stargazers_count"
+					data-sort-order="desc" data-search="true">
 
 
 
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Category</th>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Price</th>
-							<th>Location</th>
-							<th>Image</th>
-							<th>Action</th>
+							<th data-field="id" data-sortable="true" >ID</th>
+							<th data-field="category" data-sortable="true">Category</th>
+							<th data-field="title" data-sortable="true" >Title</th>
+							<th data-field="description" data-sortable="true"
+								>Description</th>
+							<th data-field="location" data-sortable="true" ">Location</th>
+							<th data-field="price" data-sortable="true" >Price</th>
+							<th data-field="image" data-sortable="true" >Image</th>
+							<th class="col-md-2">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${wishlistRentables}" var="rentable">
 							<tr>
-								<td class="col-md-1">${rentable.id}</td>
-								<td class="col-md-1">${rentable.category.name}</td>
-								<td class="col-md-1">${rentable.title}</td>
-								<td class="col-md-1">${rentable.description}</td>
-								<td class="col-md-1">${rentable.price}</td>
-								<td class="col-md-1">${rentable.location.street}
+								<td >${rentable.id}</td>
+								<td >${rentable.category.name}</td>
+								<td >${rentable.title}</td>
+								<td >${rentable.description}</td>
+								
+								<td >${rentable.location.street}
 									${rentable.location.zip} ${rentable.location.city}</td>
-								<td class="col-md-1"><img
+									<td >${rentable.price}</td>
+								<td ><img
 									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
 									width="75px" /></td>
-								<td class="col-md-1"><sec:authorize
+								<td ><sec:authorize
 										access="hasRole('ROLE_USER')">
 										<a href="showRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-success">

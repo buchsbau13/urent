@@ -163,9 +163,9 @@
 						<tr>
 							<th data-field="title" data-sortable="true" class="col-md-0.5">Title</th>
 							<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
-							<th data-field="category" data-sortable="true" class="col-md-0.5">Category</th>
+							
 							<th data-field="description" data-sortable="true"
-								class="col-md-3.5">Description</th>
+								class="col-md-6">Description</th>
 							<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
 							<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
 							<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
@@ -178,40 +178,44 @@
 								<td>${rentable.title}</td>
 								<td><a href="showUser?id=${user.username}">${rentable.user.username}</a></td>
 
-								<td>${rentable.category.name}</td>
-
+								
 								<td>${rentable.description}</td>
 								<td>${rentable.location.street}<br>
 									${rentable.location.zip} ${rentable.location.city}
 								</td>
-								<td>${rentable.price}Euro</td>
+								<td>${rentable.price} Euro</td>
 
 								<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
 									height="75px" width="75px" /></td>
-								<td><sec:authorize access="hasRole('ROLE_ADMIN')">
-										<a href="deleteAdmin?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-danger">
-												<span class="glyphicon glyphicon-trash"></span> Delete Admin
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="rateRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Rate
-											</button>
-										</a>
-									</sec:authorize> <a href="showRentable?id=${rentable.id}">
-										<button type="button" class="btn btn-xs btn-success">
-											<span class="glyphicon glyphicon-pencil"></span> Show
-										</button>
-								</a> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+								<td>
+								 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 										<a href="addToWishlist?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Add to
+											<button type="button" class="btn btn-xs btn-default">
+												<span class="glyphicon glyphicon-plus"></span> Add to
 												Wishlist
 											</button>
 										</a>
-									</sec:authorize></td>
+									</sec:authorize>
+									<a href="showRentable?id=${rentable.id}">
+										<button type="button" class="btn btn-xs btn-default">
+											<span class="glyphicon glyphicon-map-marker"></span> Show
+										</button>
+								</a>
+								<sec:authorize access="hasRole('ROLE_USER')">
+										<a href="rateRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-default">
+												<span class="glyphicon glyphicon-star"></span> Rate
+											</button>
+										</a>
+									</sec:authorize> 
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<a href="deleteAdmin?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-danger">
+												<span class="glyphicon glyphicon-trash"></span> Delete
+											</button>
+										</a>
+									</sec:authorize> 
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
