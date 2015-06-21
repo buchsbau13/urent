@@ -2653,9 +2653,9 @@ position: relative;
 
 #map_container {
 	width: 40%;
-	height: 720px;
+	height: 100vh;
 	float: right;
-	top:95px;
+	top:100px;
 }
 
 
