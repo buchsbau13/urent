@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -103,8 +103,8 @@
 </script>
 </head>
 <body>
-<div id="page-wrapper">
-	<!-- Header -->
+	<div id="page-wrapper">
+		<!-- Header -->
 
 		<header id="header">
 		<h1>uRent</h1>
@@ -139,177 +139,166 @@
 
 
 
-	<center>
-		<!--  Error message ----------------------------------------------------------- -->
-		<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger" role="alert">${errorMessage}</div>
-		</c:if>
-		<!--  Error message ----------------------------------------------------------- -->
+		<center>
+			<!--  Error message ----------------------------------------------------------- -->
+			<c:if test="${not empty errorMessage}">
+				<div class="alert alert-danger" role="alert">${errorMessage}</div>
+			</c:if>
+			<!--  Error message ----------------------------------------------------------- -->
 
-		<!--  Warning message ----------------------------------------------------------- -->
-		<c:if test="${not empty warningMessage}">
-			<div class="alert alert-warning" role="warning">${warningMessage}</div>
-		</c:if>
-		<!--  Warning message ----------------------------------------------------------- -->
+			<!--  Warning message ----------------------------------------------------------- -->
+			<c:if test="${not empty warningMessage}">
+				<div class="alert alert-warning" role="warning">${warningMessage}</div>
+			</c:if>
+			<!--  Warning message ----------------------------------------------------------- -->
 
-		<!--   message ----------------------------------------------------------- -->
-		<c:if test="${not empty message}">
-			<div class="alert alert-success" role="warning">${message}</div>
-		</c:if>
-		<!--   message ----------------------------------------------------------- -->
-	</center>
-<br>
-	<br>
-	<article id="main"> <header class=special container>
-	<span class="icon fa-user"></span>
-	<img src="getUserImage/<c:out value="${user.username}" />.do"
+			<!--   message ----------------------------------------------------------- -->
+			<c:if test="${not empty message}">
+				<div class="alert alert-success" role="warning">${message}</div>
+			</c:if>
+			<!--   message ----------------------------------------------------------- -->
+		</center>
+		<br> <br>
+		<article id="main"> <header class=special container>
+		<span class="icon fa-user"></span> <img
+			src="getUserImage/<c:out value="${user.username}" />.do"
 			height="200px" width="200px" />
 		<h2>${user.description}</h2>
-	
-	<h2 align="center">${user.username}</h2>
 
-	<h2 align="center">${user.email}</h2>
-	<h2 align="center">${user.telephone}</h2>
-</header> 
-	<center>
-	
-		<sec:authorize access="hasRole('ROLE_USER')">
-			<a href="editUser?username=${user.username}">
-				<button type="button" class="btn btn-xs btn-success">
-					<span class="glyphicon glyphicon-pencil"></span> Edit User
-				</button>
-			</a>
-		</sec:authorize>
-	</center>
+		<h2 align="center">${user.username}</h2>
 
-	<!--  list all persons ----------------------------------------------------------- -->
-	
-		
-		
+		<h2 align="center">${user.email}</h2>
+		<h2 align="center">${user.telephone}</h2>
+		</header>
+		<center>
+
+			<sec:authorize access="hasRole('ROLE_USER')">
+				<a href="editUser?username=${user.username}">
+					<button type="button" class="btn btn-xs btn-success">
+						<span class="glyphicon glyphicon-pencil"></span> Edit User
+					</button>
+				</a>
+			</sec:authorize>
+		</center>
+
+		<!--  list my rentables ----------------------------------------------------------- -->
+
+
+
 		<!-- One --> <section class="wrapper style4 special container">
-		
+
 		<h2>My Rentables</h2>
 
-			<table data-toggle="table" data-classes="table table-hover "
-					data-striped="false" data-sort-name="stargazers_count"
-					data-sort-order="desc" data-search="true">
-
-
-
-
-					<thead>
-						<tr>
-							<th data-field="id" data-sortable="true" >ID</th>
-							<th data-field="category" data-sortable="true">Category</th>
-							<th data-field="title" data-sortable="true" >Title</th>
-							<th data-field="description" data-sortable="true"
-								>Description</th>
-							<th data-field="location" data-sortable="true" ">Location</th>
-							<th data-field="price" data-sortable="true" >Price</th>
-							<th data-field="image" data-sortable="true" >Image</th>
-							<th class="col-md-2">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${rentables}" var="rentable">
-							<tr>
-								<td >${rentable.id}</td>
-								<td >${rentable.category.name}</td>
-								<td >${rentable.title}</td>
-								<td c>${rentable.description}</td>
-								
-								<td >${rentable.location.street}
-									${rentable.location.zip} ${rentable.location.city}</td>
-									<td >${rentable.price}</td>
-								<td ><img
-									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
-									width="75px" /></td>
-								<td ><sec:authorize
-										access="hasRole('ROLE_USER')">
-										<a href="showRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Show
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="editRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Edit
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="delete?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-danger">
-												<span class="glyphicon glyphicon-trash"></span> Delete
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
-										<a href="deleteAdmin?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-danger">
-												<span class="glyphicon glyphicon-trash"></span> Delete Admin
-											</button>
-										</a>
-									</sec:authorize></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-
-			</div>
-		</div>
-
-	
-	<!--  list all persons ----------------------------------------------------------- -->
-	<section class="wrapper style4 special container">
-		<h1>My Wishlist</h1>
 		<table data-toggle="table" data-classes="table table-hover "
-					data-striped="false" data-sort-name="stargazers_count"
-					data-sort-order="desc" data-search="true">
+			data-striped="false" data-sort-name="stargazers_count"
+			data-sort-order="desc" data-search="true">
 
 
 
-					<thead>
-						<tr>
-							<th data-field="id" data-sortable="true" >ID</th>
-							<th data-field="category" data-sortable="true">Category</th>
-							<th data-field="title" data-sortable="true" >Title</th>
-							<th data-field="description" data-sortable="true"
-								>Description</th>
-							<th data-field="location" data-sortable="true" ">Location</th>
-							<th data-field="price" data-sortable="true" >Price</th>
-							<th data-field="image" data-sortable="true" >Image</th>
-							<th class="col-md-2">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${wishlistRentables}" var="rentable">
-							<tr>
-								<td >${rentable.id}</td>
-								<td >${rentable.category.name}</td>
-								<td >${rentable.title}</td>
-								<td >${rentable.description}</td>
-								
-								<td >${rentable.location.street}
-									${rentable.location.zip} ${rentable.location.city}</td>
-									<td >${rentable.price}</td>
-								<td ><img
-									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
-									width="75px" /></td>
-								<td ><sec:authorize
-										access="hasRole('ROLE_USER')">
-										<a href="showRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Show
-											</button>
-										</a>
-									</sec:authorize>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
 
-			</div>
-		</div>
+			<thead>
+				<tr>
+					<th data-field="image" data-sortable="true">Image</th>
+					<th data-field="category" data-sortable="true">Category</th>
+					<th data-field="title" data-sortable="true">Title</th>
+					<th data-field="location" data-sortable="true"">Location</th>
+					<th data-field="price" data-sortable="true">Price/Day</th>
+					<th class="col-md-2">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${rentables}" var="rentable">
+					<tr>
+						<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
+							height="125px" width="125px" /></td>
+						<td>${rentable.category.name}</td>
+						<td>${rentable.title}</td>
+
+						<td>${rentable.location.street}<br>${rentable.location.zip}
+							${rentable.location.city}
+						</td>
+
+						<td><fmt:setLocale value="de_DE" scope="session" /> <fmt:formatNumber
+								value="${rentable.price}" type="currency" currencySymbol="€" /></td>
+
+						<td><a href="showRentable?id=${rentable.id}">
+								<button type="button" class="btn btn-xs btn-default">
+									<span class="glyphicon glyphicon-map-marker"></span> Show
+								</button>
+						</a> <sec:authorize access="hasRole('ROLE_USER')">
+								<a href="editRentable?id=${rentable.id}">
+									<button type="button" class="btn btn-xs btn-success">
+										<span class="glyphicon glyphicon-pencil"></span> Edit
+									</button>
+								</a>
+							</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
+								<a href="delete?id=${rentable.id}">
+									<button type="button" class="btn btn-xs btn-danger">
+										<span class="glyphicon glyphicon-trash"></span> Delete
+									</button>
+								</a>
+							</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
+								<a href="deleteAdmin?id=${rentable.id}">
+									<button type="button" class="btn btn-xs btn-danger">
+										<span class="glyphicon glyphicon-trash"></span> Delete Admin
+									</button>
+								</a>
+							</sec:authorize></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	</div>
+
+
+	<!--  list all wishlist rentables ----------------------------------------------------------- -->
+	<section class="wrapper style4 special container">
+	<h1>My Wishlist</h1>
+	<table data-toggle="table" data-classes="table table-hover "
+		data-striped="false" data-sort-name="stargazers_count"
+		data-sort-order="desc" data-search="true">
+
+
+
+		<thead>
+			<tr>
+				<th data-field="image" data-sortable="true">Image</th>
+				<th data-field="category" data-sortable="true">Category</th>
+				<th data-field="title" data-sortable="true">Title</th>
+				<th data-field="location" data-sortable="true"">Location</th>
+				<th data-field="price" data-sortable="true">Price/Day</th>
+				<th class="col-md-2">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${wishlistRentables}" var="rentable">
+				<tr>
+					<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
+						height="125px" width="125px" /></td>
+					<td>${rentable.category.name}</td>
+					<td>${rentable.title}</td>
+
+					<td>${rentable.location.street}<br>${rentable.location.zip}
+						${rentable.location.city}
+					</td>
+					<td><fmt:setLocale value="de_DE" scope="session" /> <fmt:formatNumber
+							value="${rentable.price}" type="currency" currencySymbol="€" /></td>
+
+					<td><sec:authorize access="hasRole('ROLE_USER')">
+							<a href="showRentable?id=${rentable.id}">
+								<button type="button" class="btn btn-xs btn-default">
+									<span class="glyphicon glyphicon-map-marker"></span> Show
+								</button>
+							</a>
+						</sec:authorize>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
+	</div>
+	</div>
 
 	</center>
 </body>

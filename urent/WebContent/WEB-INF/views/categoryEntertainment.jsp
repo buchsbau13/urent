@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -137,11 +137,11 @@
 		</nav> </header>
 
 
-	
-	
-	
-	
-	<!--  list rentablesSport-->
+
+
+
+
+		<!--  list rentablesSport-->
 
 
 
@@ -162,62 +162,53 @@
 					data-sort-order="desc" data-search="true" data-show-toggle="true">
 
 					<thead>
-						<tr>
-							<th data-field="title" data-sortable="true" class="col-md-0.5">Title</th>
-							<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
-							
-							<th data-field="description" data-sortable="true"
-								class="col-md-6">Description</th>
-							<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
-							<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
-							<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
-							<th class="col-md-2">Action</th>
+						<th data-field="image" data-sortable="true" class="col-md-1">Image</th>
+						<th data-field="title" data-sortable="true" class="col-md-0.5">Title</th>
+						<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
+						<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
+						<th data-field="price" data-sortable="true" class="col-md-1">Price/Day</th>
+
+						<th class="col-md-2">Action</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${rentables}" var="rentable">
 							<tr>
+								<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
+									height="125px" width="125px" /></td>
 								<td>${rentable.title}</td>
-								<td><a href="showUser?id=${user.username}">${rentable.user.username}</a></td>
-
-								
-								<td>${rentable.description}</td>
+								<td><a href="showUser?id=${rentable.id}">${rentable.user.username}</a></td>
 								<td>${rentable.location.street}<br>
 									${rentable.location.zip} ${rentable.location.city}
 								</td>
-								<td>${rentable.price} Euro</td>
+								<td><fmt:setLocale value="de_DE" scope="session" /> <fmt:formatNumber
+								value="${rentable.price}" type="currency" currencySymbol="€"  /></td>
 
-								<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
-									height="75px" width="75px" /></td>
-								<td>
-								 <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+								<td><sec:authorize
+										access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 										<a href="addToWishlist?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-default">
 												<span class="glyphicon glyphicon-plus"></span> Add to
 												Wishlist
 											</button>
 										</a>
-									</sec:authorize>
-									<a href="showRentable?id=${rentable.id}">
+									</sec:authorize> <a href="showRentable?id=${rentable.id}">
 										<button type="button" class="btn btn-xs btn-default">
 											<span class="glyphicon glyphicon-map-marker"></span> Show
 										</button>
-								</a>
-								<sec:authorize access="hasRole('ROLE_USER')">
+								</a> <sec:authorize access="hasRole('ROLE_USER')">
 										<a href="rateRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-default">
 												<span class="glyphicon glyphicon-star"></span> Rate
 											</button>
 										</a>
-									</sec:authorize> 
-								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
 										<a href="deleteAdmin?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-danger">
 												<span class="glyphicon glyphicon-trash"></span> Delete
 											</button>
 										</a>
-									</sec:authorize> 
-								</td>
+									</sec:authorize></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -232,6 +223,6 @@
 	</div>
 
 	<div id="map_container"></div>
-	
+
 </body>
 </html>

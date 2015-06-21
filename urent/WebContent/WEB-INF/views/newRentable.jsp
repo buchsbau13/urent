@@ -136,7 +136,7 @@
 
 			<! ----------------  location.street  ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationStreet">Location Street</label> <input
+				<label for="inputLocationStreet">Street</label> <input
 					class="form-control" id="inputLocationStreet" type="text"
 					name="street">
 			</div>
@@ -144,14 +144,14 @@
 
 			<! ----------------  location.city ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationCity">Location City</label> <input
+				<label for="inputLocationCity">City</label> <input
 					class="form-control" id="inputLocationCity" type="text" name="city">
 			</div>
 
 
 			<! ----------------  location.country ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationCountry">Location Country</label> <input
+				<label for="inputLocationCountry">Country</label> <input
 					class="form-control" id="inputLocationCountry" type="text"
 					name="country">
 			</div>
@@ -159,7 +159,7 @@
 
 			<! ----------------  location.zip ---------------- -->
 			<div class="form-group">
-				<label for="inputLocationZip">Location ZIP</label> <input
+				<label for="inputLocationZip">ZIP</label> <input
 					class="form-control" id="inputLocationZip" type="text" name="zip">
 			</div>
 
