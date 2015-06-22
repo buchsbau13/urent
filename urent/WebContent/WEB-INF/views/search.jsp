@@ -39,6 +39,7 @@
 		var jsRentablesLocation = [];
 		var jsRentablesTitle = [];
 		var jsGeocodedPositions = [];
+		var jsMarker = [];
 				
 		<c:forEach items="${rentables}" var="rentable">
 			jsRentablesLocation.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
@@ -50,7 +51,11 @@
 		    var geocoder = new google.maps.Geocoder();
 			var address = jsRentablesLocation[i];
 			var title = jsRentablesTitle[i];
-			var infowindow = new google.maps.InfoWindow({});
+			//var infowindow = null
+			var infowindow = new google.maps.InfoWindow
+						({
+							content: "holding..."+i
+						});
 			geocoder.geocode
 			(
 				{
@@ -68,23 +73,20 @@
 							position : results[0].geometry.location
 						});
 						
+						jsMarker.push(marker);
+						
+						
+						
 						google.maps.event.addListener(marker, 'click', 
 				        	function() 
 				        	{
-				        		if (marker.getAnimation() != null) 
-				        		{
-				        	    	marker.setAnimation(null);
-				        	    	infowindow.close();
-				        	  	} 
-				        		else 
-				        		{
-				        	    	//marker.setAnimation(google.maps.Animation.BOUNCE);
-				        	    	//var title = jsRentablesTitle[i];
-				        	    	infowindow.setContent("<p>" + title + "<br />" + 
-				        	                  address +  "<br/>"+jsGeocodedPositions[0]+"</p>");
-				        	    	infowindow.open(map, this);
-				        	  	}
+								//infowindow.setContent(i);
+								
+								//infowindow.setContent("Hello "+ i);
+				        	    infowindow.open(map, this);
+				        	  	
 				        	});
+						/*
 				        google.maps.event.addListener(map, "click", 
 			    			function(event) 
 			    			{
@@ -97,7 +99,7 @@
 				        	{
 				        		infowindow.close();
 				        		marker.setAnimation(null);
-				        	});
+				        	});*/
 					} 
 					else 
 					{
@@ -107,21 +109,27 @@
 				}
 			);
 		}
-		console.log(jsGeocodedPositions[0],jsGeocodedPositions[1],jsGeocodedPositions[2],jsGeocodedPositions[3]);
-		/*for (i = 0; i < jsGeocodedPositions.length; i++) {
-			var marker = new google.maps.Marker
-			({
-				map : map,
-				position : jsGeocodedPositions[0]
-			});
-		}*/
+		console.log("Number of markers:",jsMarker.length);
+		//console.log(jsGeocodedPositions[0],jsGeocodedPositions[1],jsGeocodedPositions[2],jsGeocodedPositions[3]);
+		var infowindow = null;
+		for (i = 0; i < jsMarker.length; i++) {
+			var infowindow = new google.maps.InfoWindow({});
+			
+			infowindow =new google.maps.InfoWindow({});
+			infowindow.setContent("Yello"+i);
+			google.maps.event.addListener(jsMarker[i], 'click', 
+	        	function() 
+	        	{
+		    		infowindow.open(map, this);
+				});	
+		}
 	}
 </script>
 </head>
 <body onload="loadMap()">
 	<div id="page-wrapper">
 		<!-- Header -->
-
+		
 		<header id="header">
 		<h1>uRent</h1>
 		<nav id="nav"> <sec:authorize access="isAuthenticated()">
@@ -166,6 +174,7 @@
 				</header>
 
 				<h2>Searchresults</h2>
+			
 
 
 
@@ -240,19 +249,12 @@
 				</table>
 
 			</div>
-
-
-
-
-
 		</div>
-
-
-
 	</div>
 
 
-	<div id="map_container"></div>
+	<div id="map_container">
+	</div>
 
 
 </body>

@@ -57,24 +57,13 @@
 				google.maps.event.addListener(marker, 'click', 
 		        	function() 
 		        	{
-		        		if (marker.getAnimation() != null) 
-		        		{
-		        	    	marker.setAnimation(null);
-		        	    	infowindow.close();
-		        	  	} 
-		        		else 
-		        		{
-		        	    	marker.setAnimation(google.maps.Animation.BOUNCE);
-		        	    	infowindow.setContent(address);
-				            infowindow.open(map, this);
-		        	  	}
+	        	    	infowindow.setContent(address);
+			            infowindow.open(map, this);		        
 		        	});
 		        google.maps.event.addListener(map, "click", 
 	    			function(event) 
 	    			{
-	    			    infowindow.close();
-	    			    marker.setAnimation(null);
-	            	  	
+	    			    infowindow.close();	    			   	            	  	
 	    			});
 				
 			} else {
