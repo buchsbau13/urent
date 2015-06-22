@@ -26,78 +26,49 @@
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <script type="text/javascript">
-	function loadMap() {
-		var myOptions = {
+	function loadMap() 
+	{
+		var myOptions = 
+		{
 			zoom : 12,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		var map = new google.maps.Map(document.getElementById("map_container"),
 				myOptions);
-
+				
 		var jsRentablesLocation = [];
-		var jsRentablesTitle = [];
-
+			
 		<c:forEach items="${rentables}" var="rentable">
-		jsRentablesLocation
-				.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
-		jsRentablesTitle.push('${rentable.title}');
+			jsRentablesLocation.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
 		</c:forEach>
-
-		for (i = 0; i < jsRentablesLocation.length; i++) {
-			var geocoder = new google.maps.Geocoder();
+		
+		for (i = 0; i < jsRentablesLocation.length; i++) 
+		{
+		    var geocoder = new google.maps.Geocoder();
 			var address = jsRentablesLocation[i];
-			var title = jsRentablesTitle[i];
-			geocoder
-					.geocode(
-							{
-								'address' : address
-							},
-							function(results, status) {
-								if (status == google.maps.GeocoderStatus.OK) {
-									map.setCenter(results[0].geometry.location);
-									var marker = new google.maps.Marker({
-										map : map,
-										position : results[0].geometry.location
-									});
-									var infowindow = new google.maps.InfoWindow(
-											{});
-									google.maps.event
-											.addListener(
-													marker,
-													'click',
-													function() {
-														if (marker
-																.getAnimation() != null) {
-															marker
-																	.setAnimation(null);
-															infowindow.close();
-														} else {
-															marker
-																	.setAnimation(google.maps.Animation.BOUNCE);
-															infowindow
-																	.setContent(title
-																			+ "\r\n"
-																			+ address);
-															infowindow.open(
-																	map, this);
-														}
-													});
-									google.maps.event.addListener(map, "click",
-											function(event) {
-												infowindow.close();
-												marker.setAnimation(null);
-
-											});
-									google.maps.eventListener(infowwindow,
-											"click", function(event) {
-												infowindow.close();
-												marker.setAnimation(null);
-											});
-								} else {
-									alert('Geocode was not successful for the following reason: '
-											+ status);
-								}
-							});
+			geocoder.geocode
+			(
+				{
+					'address' : address
+				}, 
+				function(results, status) 
+				{
+					if (status == google.maps.GeocoderStatus.OK) 
+					{
+						map.setCenter(results[0].geometry.location);
+						var marker = new google.maps.Marker
+						({
+							map : map,
+							position : results[0].geometry.location
+						});						
+					} 
+					else 
+					{
+						alert('Geocode was not successful for the following reason: '
+								+ status);
+					}
+				}
+			);
 		}
 	}
 </script>

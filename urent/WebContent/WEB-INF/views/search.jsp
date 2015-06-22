@@ -37,25 +37,15 @@
 				myOptions);
 				
 		var jsRentablesLocation = [];
-		var jsRentablesTitle = [];
-		var jsGeocodedPositions = [];
-		var jsMarker = [];
-				
+			
 		<c:forEach items="${rentables}" var="rentable">
 			jsRentablesLocation.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
-			jsRentablesTitle.push('${rentable.title}');
 		</c:forEach>
 		
 		for (i = 0; i < jsRentablesLocation.length; i++) 
 		{
 		    var geocoder = new google.maps.Geocoder();
 			var address = jsRentablesLocation[i];
-			var title = jsRentablesTitle[i];
-			//var infowindow = null
-			var infowindow = new google.maps.InfoWindow
-						({
-							content: "holding..."+i
-						});
 			geocoder.geocode
 			(
 				{
@@ -66,40 +56,11 @@
 					if (status == google.maps.GeocoderStatus.OK) 
 					{
 						map.setCenter(results[0].geometry.location);
-						jsGeocodedPositions.push(results[0].geometry.location);
 						var marker = new google.maps.Marker
 						({
 							map : map,
 							position : results[0].geometry.location
-						});
-						
-						jsMarker.push(marker);
-						
-						
-						
-						google.maps.event.addListener(marker, 'click', 
-				        	function() 
-				        	{
-								//infowindow.setContent(i);
-								
-								//infowindow.setContent("Hello "+ i);
-				        	    infowindow.open(map, this);
-				        	  	
-				        	});
-						/*
-				        google.maps.event.addListener(map, "click", 
-			    			function(event) 
-			    			{
-			    			    infowindow.close();
-			    			    marker.setAnimation(null);
-			            	  	
-			    			});
-				        google.maps.eventListener(infowwindow, "click",
-				        	function(event)
-				        	{
-				        		infowindow.close();
-				        		marker.setAnimation(null);
-				        	});*/
+						});						
 					} 
 					else 
 					{
@@ -108,20 +69,6 @@
 					}
 				}
 			);
-		}
-		console.log("Number of markers:",jsMarker.length);
-		//console.log(jsGeocodedPositions[0],jsGeocodedPositions[1],jsGeocodedPositions[2],jsGeocodedPositions[3]);
-		var infowindow = null;
-		for (i = 0; i < jsMarker.length; i++) {
-			var infowindow = new google.maps.InfoWindow({});
-			
-			infowindow =new google.maps.InfoWindow({});
-			infowindow.setContent("Yello"+i);
-			google.maps.event.addListener(jsMarker[i], 'click', 
-	        	function() 
-	        	{
-		    		infowindow.open(map, this);
-				});	
 		}
 	}
 </script>
@@ -174,14 +121,6 @@
 				</header>
 
 				<h2>Searchresults</h2>
-			
-
-
-
-
-
-
-
 
 				<table data-toggle="table" data-classes="table table-hover "
 					data-striped="false" data-sort-name="stargazers_count"
