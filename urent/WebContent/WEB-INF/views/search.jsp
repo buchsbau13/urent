@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -76,7 +76,7 @@
 <body onload="loadMap()">
 	<div id="page-wrapper">
 		<!-- Header -->
-		
+
 		<header id="header">
 		<h1>uRent</h1>
 		<nav id="nav"> <sec:authorize access="isAuthenticated()">
@@ -84,7 +84,6 @@
 		</sec:authorize>
 
 		<ul>
-			<li class="current"><a href="./categorySport">Sport</a></li>
 			<li class="current"><a href="./">Welcome</a></li>
 			<li><sec:authorize access="isAnonymous()">
 					<a href="./login" class="nav-item">Log In</a>
@@ -116,11 +115,18 @@
 		<div class="row">
 			<div class="sidebar">
 				<div class="right">
-					<header class=special>
+					<header class=special> <span class="icon fa-search "></span>
 				</div>
 				</header>
 
 				<h2>Searchresults</h2>
+
+
+
+
+
+
+
 
 				<table data-toggle="table" data-classes="table table-hover "
 					data-striped="false" data-sort-name="stargazers_count"
@@ -133,7 +139,7 @@
 							<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
 							<th data-field="category" data-sortable="true" class="col-md-0.5">Category</th>
 							<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
-							<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
+							<th data-field="price" data-sortable="true" class="col-md-1">Price/Day</th>
 
 							<th class="col-md-2">Action</th>
 						</tr>
@@ -151,35 +157,36 @@
 								<td>${rentable.location.street}<br>
 									${rentable.location.zip} ${rentable.location.city}
 								</td>
-								<td>${rentable.price} Euro/per Day</td>
+								<td><fmt:setLocale value="de_DE" scope="session" /> <fmt:formatNumber
+										value="${rentable.price}" type="currency" currencySymbol="€" /></td>
 
 
 								<td><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-										<a href="deleteRentable?id=${rentable.id}">
+										<a href="addToWishlist?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-default">
+												<span class="glyphicon glyphicon-plus"></span> Add to
+												Wishlist
+											</button>
+										</a>
+									</sec:authorize> <a href="showRentable?id=${rentable.id}">
+										<button type="button" class="btn btn-xs btn-default">
+											<span class="glyphicon glyphicon-map-marker"></span> Show
+										</button>
+								</a> <sec:authorize access="hasRole('ROLE_USER')">
+										<a href="rateRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-default">
+												<span class="glyphicon glyphicon-star"></span> Rate
+											</button>
+										</a>
+									</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
+										<a href="deleteAdmin?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-danger">
 												<span class="glyphicon glyphicon-trash"></span> Delete
 											</button>
 										</a>
-									</sec:authorize> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-										<a href="rateRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Rate
-											</button>
-										</a>
-									</sec:authorize> <a href="showRentable?id=${rentable.id}">
-										<button type="button" class="btn btn-xs btn-success">
-											<span class="glyphicon glyphicon-pencil"></span> Show
-										</button>
-								</a> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-										<a href="addToWishlist?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Add to
-												Wishlist
-											</button>
-										</a>
 									</sec:authorize></td>
-								</td>
+
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -188,12 +195,19 @@
 				</table>
 
 			</div>
+
+
+
+
+
 		</div>
+
+
+
 	</div>
 
 
-	<div id="map_container">
-	</div>
+	<div id="map_container"></div>
 
 
 </body>

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -39,33 +39,25 @@
 		var address = '${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}';
 		// Creating an InfoWindow          
 		var infowindow = new google.maps.InfoWindow({});
-		
+
 		geocoder.geocode({
 			'address' : address
-		}, 
-		function(results, status) 
-		{
-			if (status == google.maps.GeocoderStatus.OK) 
-			{
+		}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
 				map.setCenter(results[0].geometry.location);
-				var marker = new google.maps.Marker
-				({
+				var marker = new google.maps.Marker({
 					map : map,
 					position : results[0].geometry.location
 				});
-				
-				google.maps.event.addListener(marker, 'click', 
-		        	function() 
-		        	{
-	        	    	infowindow.setContent(address);
-			            infowindow.open(map, this);		        
-		        	});
-		        google.maps.event.addListener(map, "click", 
-	    			function(event) 
-	    			{
-	    			    infowindow.close();	    			   	            	  	
-	    			});
-				
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent(address);
+					infowindow.open(map, this);
+				});
+				google.maps.event.addListener(map, "click", function(event) {
+					infowindow.close();
+				});
+
 			} else {
 				alert('Geocode was not successful for the following reason: '
 						+ status);
@@ -111,31 +103,40 @@
 		</nav> </header>
 
 
-	
-	
-	
-	
-	
-	
-	<div class="row">
+
+
+
+
+
+
+		<div class="row">
 			<div class="sidebar">
-	<div align="left">
-		<img src="getImage/<c:out value="${rentable.id}" />.do" height="300px"
-			width="300px" />
-	</div>
-	<br>
-	<h1 align="left">${rentable.title}</h1>
-	<h1 align="left">${rentable.description}</h1>
-	<h1 align="left">From: ${rentable.user.username}</h1>
-	<h1 align="left">Price/Day: ${rentable.price} Euro</h1>
-	<h1 align="left">Contact: ${rentable.user.email}</h1>
-	<h1 align="left">Tel: ${rentable.user.telephone}</h1>
-	
-
-	
-
-</div>
-</div>
-<div id="map_container"></div>
+				<div align="left">
+					<img src="getImage/<c:out value="${rentable.id}" />.do"
+						height="300px" width="300px" />
+				</div>
+				<br>
+				<h2 align="left">
+					<font color="#83d3c9">${rentable.title}</font>
+					</h1>
+					<h1 align="left">${rentable.description}</h1>
+					<br>
+					<h1 align="left">
+						<font color="#83d3c9">From:</font> ${rentable.user.username}
+					</h1>
+					<h1 align="left">
+						<font color="#83d3c9">Price/Day: </font>
+						<fmt:setLocale value="de_DE" scope="session" />
+						<fmt:formatNumber value="${rentable.price}" type="currency"
+							currencySymbol="€" />
+					</h1>
+					<h1 align="left">
+						<font color="#83d3c9">E-Mail:</font> ${rentable.user.email}
+					</h1>
+					<h1 align="left">
+						<font color="#83d3c9">Tel: </font>${rentable.user.telephone}</h1>
+			</div>
+		</div>
+		<div id="map_container"></div>
 </body>
 </html>

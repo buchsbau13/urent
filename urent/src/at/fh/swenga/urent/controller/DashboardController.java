@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -35,6 +36,7 @@ import at.fh.swenga.urent.model.Category;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.RentableForm;
 import at.fh.swenga.urent.model.User;
+import at.fh.swenga.urent.model.UserRole;
 
 @Controller
 public class DashboardController {
@@ -128,16 +130,18 @@ public class DashboardController {
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
-	public String showEditUser(Model model, Principal principal, @RequestParam String username) {
+	public String showEditUser(Model model, Principal principal,
+			@RequestParam String username) {
 
 		String currentUsername = principal.getName();
-		String editUsername = userDao.getUser(username).getUsername(); 
-		
+		String editUsername = userDao.getUser(username).getUsername();
+
 		if (currentUsername.equals(editUsername)) {
 			model.addAttribute("user", userDao.getUser(username));
 			return "editUser";
 		} else {
-			model.addAttribute("errorMessage", "You are not allowed to edit other Users!");
+			model.addAttribute("errorMessage",
+					"You are not allowed to edit other Users!");
 			return "dashboard";
 		}
 
@@ -205,6 +209,48 @@ public class DashboardController {
 		model.addAttribute("user", rentableDao.getRentable(id).getUser());
 
 		return "showUser";
+
+	}
+
+	@RequestMapping("/deleteUsers")
+	public String showDeleteUsers(Model model) {
+
+		List<User> users = userDao.getUsers();
+		model.addAttribute("users", users);
+
+		return "deleteUsers";
+
+	}
+
+	@RequestMapping("/deleteUser")
+	public String deleteUser(@RequestParam String username, Model model) {
+
+		try {
+
+			Set<Rentable> userRentables = userDao.getUser(username)
+					.getRentables();
+			if (!userRentables.isEmpty()) {
+				for (Rentable rentable : userRentables) {
+					rentableDao.delete(rentable.getId());
+				}
+			}
+
+			Set<UserRole> userRoles = userDao.getUser(username).getUserRole();
+			for (UserRole userRole : userRoles) {
+				userRoleDao.delete(userRole);
+			}
+
+			userDao.delete(userDao.getUser(username));
+
+			model.addAttribute("message", "User deleted!");
+			return "forward:/deleteUsers";
+		}
+
+		catch (Exception e) {
+			model.addAttribute("errorMessage",
+					"It is not possible to delete this User!");
+			return "forward:/deleteUsers";
+		}
 
 	}
 

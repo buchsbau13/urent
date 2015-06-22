@@ -468,7 +468,7 @@ public class IndexController {
 			return "forward:/dashboard";
 		} catch (Exception e) {
 			model.addAttribute("errorMessage",
-					"It is not possible to delte this Rentable!");
+					"It is not possible to delete this Rentable!");
 			return "forward:/dashboard";
 		}
 	}

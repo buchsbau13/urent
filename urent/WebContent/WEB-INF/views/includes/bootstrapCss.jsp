@@ -2655,7 +2655,7 @@ position: relative;
 	width: 40%;
 	height: 100vh;
 	float: right;
-	top:100px;
+	top:90px;
 }
 
 

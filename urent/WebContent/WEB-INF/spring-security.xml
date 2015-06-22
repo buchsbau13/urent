@@ -12,6 +12,8 @@
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/delete" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/deleteAdmin" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/deleteUsers" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/deleteUser" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/editRentable"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/editUser"

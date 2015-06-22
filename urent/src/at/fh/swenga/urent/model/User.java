@@ -120,7 +120,7 @@ public class User implements java.io.Serializable {
 		this.enabled = enabled;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	public Set<UserRole> getUserRole() {
 		return userRole;
 	}

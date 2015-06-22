@@ -71,9 +71,15 @@
 				<div class="row 50%">
 					<c:url value="/login" var="loginUrl" />
 					<form action="${loginUrl}" method="post">
+						<h2 class="form-signin-heading">Please sign in</h2>
+						<c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message != null}">
+							<div class="alert alert-danger" role="alert">
+								<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+							</div>
+						</c:if>
 						<label for="inputUsername" class="sr-only">Username</label> <label>
 							<input type="text" id="username" class="form-control"
-							placeholder="User" required autofocus name="username">
+							placeholder="User" required name="username">
 						</label> <label for="inputPassword" class="sr-only">Password</label><label>
 							<input type="password" id="password" class="form-control"
 							placeholder="Password" required name="password">

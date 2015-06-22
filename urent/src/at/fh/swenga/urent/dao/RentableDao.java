@@ -40,7 +40,7 @@ public class RentableDao {
 
 
 	public void delete(Rentable rentable) {
-		entityManager.remove(rentable);
+		entityManager.remove(entityManager.contains(rentable) ? rentable : entityManager.merge(rentable));
 	}
 
 	public int delteAllRentables() {

@@ -129,7 +129,7 @@
 
 			<! ----------------  price  ---------------- -->
 			<div class="form-group">
-				<label for="inputPrice">Price</label> <input class="form-control"
+				<label for="inputPrice">Price/Day</label> <input class="form-control"
 					id="inputPrice" type="text" name="price">
 			</div>
 

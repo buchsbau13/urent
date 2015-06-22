@@ -44,7 +44,6 @@
 		</property>
 	</bean>
 
-
 	<!-- if no Controller can handle a request, ask Servlet Container, if he 
 		can handle it, otherwise return 404 -->
 	<mvc:default-servlet-handler />
@@ -91,11 +90,11 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
+
 	<mvc:resources location="/resources/" mapping="/resources/**" />
-	
-	
-	
+
+
+
 	<tx:annotation-driven />
 
 </beans>

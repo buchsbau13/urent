@@ -1,5 +1,7 @@
 package at.fh.swenga.urent.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -8,6 +10,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import at.fh.swenga.urent.model.Category;
+import at.fh.swenga.urent.model.User;
 import at.fh.swenga.urent.model.UserRole;
 
 @Repository
@@ -34,6 +38,10 @@ public class UserRoleDao {
 	public void persist(UserRole userRole) {
 		entityManager.persist(userRole);
 
+	}
+
+	public void delete(UserRole userRole) {
+		entityManager.remove(entityManager.contains(userRole) ? userRole : entityManager.merge(userRole));
 	}
 
 }

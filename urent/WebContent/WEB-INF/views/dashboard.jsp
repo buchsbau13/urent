@@ -113,7 +113,6 @@
 		</sec:authorize>
 
 		<ul>
-			<li class="current"><a href="./categoryMusic">Music</a></li>
 			<li class="current"><a href="./">Welcome</a></li>
 			<li><sec:authorize access="isAnonymous()">
 					<a href="./login" class="nav-item">Log In</a>
@@ -137,8 +136,7 @@
 
 
 
-
-
+		<br> <br>
 		<center>
 			<!--  Error message ----------------------------------------------------------- -->
 			<c:if test="${not empty errorMessage}">
@@ -158,27 +156,41 @@
 			</c:if>
 			<!--   message ----------------------------------------------------------- -->
 		</center>
-		<br> <br>
 		<article id="main"> <header class=special container>
 		<span class="icon fa-user"></span> <img
 			src="getUserImage/<c:out value="${user.username}" />.do"
 			height="200px" width="200px" />
-		<h2>${user.description}</h2>
 
-		<h2 align="center">${user.username}</h2>
 
-		<h2 align="center">${user.email}</h2>
-		<h2 align="center">${user.telephone}</h2>
+		<h2 align="center">
+			<font color="#83d3c9">${user.username}</font>
+		</h2>
+		<br>
+		<h1 align="center">${user.description}</h1>
+		<br>
+		<h1 align="center">
+			<font color="#83d3c9">E-Mail: </font>${user.email}</h1>
+		<h1 align="center">
+			<font color="#83d3c9">Tel.:</font>${user.telephone}</h1>
+
 		</header>
 		<center>
 
-			<sec:authorize access="hasRole('ROLE_USER')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 				<a href="editUser?username=${user.username}">
-					<button type="button" class="btn btn-xs btn-success">
+					<button type="button" class="button special">
 						<span class="glyphicon glyphicon-pencil"></span> Edit User
 					</button>
 				</a>
 			</sec:authorize>
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="deleteUsers">
+					<button type="button" class="button special">
+						<span class="glyphicon glyphicon-pencil"></span> Delete Users
+					</button>
+				</a>
+			</sec:authorize>
+			<br>
 		</center>
 
 		<!--  list my rentables ----------------------------------------------------------- -->

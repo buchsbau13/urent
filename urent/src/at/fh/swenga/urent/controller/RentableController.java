@@ -32,12 +32,12 @@ public class RentableController {
 		try {
 			String name = principal.getName();
 			User currentUser = userDao.getUser(name);
-			String currentUsername = currentUser.getUsername(); 
+			String currentUsername = currentUser.getUsername();
 			String rentableUsername = currentRentable.getUser().getUsername();
-			
 
 			if (rentableUsername.equals(currentUsername)) {
-				model.addAttribute("errorMessage", "It is not possible to add your own products to your wishlist!");
+				model.addAttribute("errorMessage",
+						"It is not possible to add your own products to your wishlist!");
 				return "dashboard";
 			} else {
 				List<User> wishlistUsers = currentRentable.getWishlistUsers();
@@ -53,9 +53,10 @@ public class RentableController {
 			model.addAttribute(
 					"errorMessage",
 					"It is not possilbe to add Rentable"
-							+ currentRentable.getTitle()+ " to your wishlist");
+							+ currentRentable.getTitle() + " to your wishlist");
 			return "dashboard";
 		}
 
 	}
+
 }
