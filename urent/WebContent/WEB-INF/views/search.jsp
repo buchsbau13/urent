@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -26,79 +26,95 @@
 	src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <script type="text/javascript">
-	function loadMap() {
-		var myOptions = {
+	function loadMap() 
+	{
+		var myOptions = 
+		{
 			zoom : 12,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
 		var map = new google.maps.Map(document.getElementById("map_container"),
 				myOptions);
-
+				
 		var jsRentablesLocation = [];
 		var jsRentablesTitle = [];
-
+		var jsGeocodedPositions = [];
+				
 		<c:forEach items="${rentables}" var="rentable">
-		jsRentablesLocation
-				.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
-		jsRentablesTitle.push('${rentable.title}');
+			jsRentablesLocation.push('${rentable.location.street}, ${rentable.location.city}, ${rentable.location.country}, ${rentable.location.zip}');
+			jsRentablesTitle.push('${rentable.title}');
 		</c:forEach>
-
-		for (i = 0; i < jsRentablesLocation.length; i++) {
-			var geocoder = new google.maps.Geocoder();
+		
+		for (i = 0; i < jsRentablesLocation.length; i++) 
+		{
+		    var geocoder = new google.maps.Geocoder();
 			var address = jsRentablesLocation[i];
 			var title = jsRentablesTitle[i];
-			geocoder
-					.geocode(
-							{
-								'address' : address
-							},
-							function(results, status) {
-								if (status == google.maps.GeocoderStatus.OK) {
-									map.setCenter(results[0].geometry.location);
-									var marker = new google.maps.Marker({
-										map : map,
-										position : results[0].geometry.location
-									});
-									var infowindow = new google.maps.InfoWindow(
-											{});
-									google.maps.event
-											.addListener(
-													marker,
-													'click',
-													function() {
-														if (marker
-																.getAnimation() != null) {
-															marker
-																	.setAnimation(null);
-															infowindow.close();
-														} else {
-															marker
-																	.setAnimation(google.maps.Animation.BOUNCE);
-															infowindow
-																	.setContent(title
-																			+ "\r\n"
-																			+ address);
-															infowindow.open(
-																	map, this);
-														}
-													});
-									google.maps.event.addListener(map, "click",
-											function(event) {
-												infowindow.close();
-												marker.setAnimation(null);
-
-											});
-									google.maps.eventListener(infowwindow,
-											"click", function(event) {
-												infowindow.close();
-												marker.setAnimation(null);
-											});
-								} else {
-									alert('Geocode was not successful for the following reason: '
-											+ status);
-								}
-							});
+			var infowindow = new google.maps.InfoWindow({});
+			geocoder.geocode
+			(
+				{
+					'address' : address
+				}, 
+				function(results, status) 
+				{
+					if (status == google.maps.GeocoderStatus.OK) 
+					{
+						map.setCenter(results[0].geometry.location);
+						jsGeocodedPositions.push(results[0].geometry.location);
+						var marker = new google.maps.Marker
+						({
+							map : map,
+							position : results[0].geometry.location
+						});
+						
+						google.maps.event.addListener(marker, 'click', 
+				        	function() 
+				        	{
+				        		if (marker.getAnimation() != null) 
+				        		{
+				        	    	marker.setAnimation(null);
+				        	    	infowindow.close();
+				        	  	} 
+				        		else 
+				        		{
+				        	    	//marker.setAnimation(google.maps.Animation.BOUNCE);
+				        	    	//var title = jsRentablesTitle[i];
+				        	    	infowindow.setContent("<p>" + title + "<br />" + 
+				        	                  address +  "<br/>"+jsGeocodedPositions[0]+"</p>");
+				        	    	infowindow.open(map, this);
+				        	  	}
+				        	});
+				        google.maps.event.addListener(map, "click", 
+			    			function(event) 
+			    			{
+			    			    infowindow.close();
+			    			    marker.setAnimation(null);
+			            	  	
+			    			});
+				        google.maps.eventListener(infowwindow, "click",
+				        	function(event)
+				        	{
+				        		infowindow.close();
+				        		marker.setAnimation(null);
+				        	});
+					} 
+					else 
+					{
+						alert('Geocode was not successful for the following reason: '
+								+ status);
+					}
+				}
+			);
 		}
+		console.log(jsGeocodedPositions[0],jsGeocodedPositions[1],jsGeocodedPositions[2],jsGeocodedPositions[3]);
+		/*for (i = 0; i < jsGeocodedPositions.length; i++) {
+			var marker = new google.maps.Marker
+			({
+				map : map,
+				position : jsGeocodedPositions[0]
+			});
+		}*/
 	}
 </script>
 </head>
@@ -113,6 +129,7 @@
 		</sec:authorize>
 
 		<ul>
+			<li class="current"><a href="./categorySport">Sport</a></li>
 			<li class="current"><a href="./">Welcome</a></li>
 			<li><sec:authorize access="isAnonymous()">
 					<a href="./login" class="nav-item">Log In</a>
@@ -168,7 +185,7 @@
 							<th data-field="from" data-sortable="true" class="col-md-0.5">From</th>
 							<th data-field="category" data-sortable="true" class="col-md-0.5">Category</th>
 							<th data-field="location" data-sortable="true" class="col-md-3">Location</th>
-							<th data-field="price" data-sortable="true" class="col-md-1">Price/Day</th>
+							<th data-field="price" data-sortable="true" class="col-md-1">Price</th>
 
 							<th class="col-md-2">Action</th>
 						</tr>
@@ -186,36 +203,35 @@
 								<td>${rentable.location.street}<br>
 									${rentable.location.zip} ${rentable.location.city}
 								</td>
-								<td><fmt:setLocale value="de_DE" scope="session" /> <fmt:formatNumber
-										value="${rentable.price}" type="currency" currencySymbol="€" /></td>
+								<td>${rentable.price} Euro/per Day</td>
 
 
 								<td><sec:authorize
 										access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-										<a href="addToWishlist?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-default">
-												<span class="glyphicon glyphicon-plus"></span> Add to
-												Wishlist
-											</button>
-										</a>
-									</sec:authorize> <a href="showRentable?id=${rentable.id}">
-										<button type="button" class="btn btn-xs btn-default">
-											<span class="glyphicon glyphicon-map-marker"></span> Show
-										</button>
-								</a> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="rateRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-default">
-												<span class="glyphicon glyphicon-star"></span> Rate
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
-										<a href="deleteAdmin?id=${rentable.id}">
+										<a href="deleteRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-danger">
 												<span class="glyphicon glyphicon-trash"></span> Delete
 											</button>
 										</a>
+									</sec:authorize> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+										<a href="rateRentable?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-success">
+												<span class="glyphicon glyphicon-pencil"></span> Rate
+											</button>
+										</a>
+									</sec:authorize> <a href="showRentable?id=${rentable.id}">
+										<button type="button" class="btn btn-xs btn-success">
+											<span class="glyphicon glyphicon-pencil"></span> Show
+										</button>
+								</a> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+										<a href="addToWishlist?id=${rentable.id}">
+											<button type="button" class="btn btn-xs btn-success">
+												<span class="glyphicon glyphicon-pencil"></span> Add to
+												Wishlist
+											</button>
+										</a>
 									</sec:authorize></td>
-
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
