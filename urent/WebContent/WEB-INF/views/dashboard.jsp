@@ -239,7 +239,7 @@
 								</button>
 						</a> <sec:authorize access="hasRole('ROLE_USER')">
 								<a href="editRentable?id=${rentable.id}">
-									<button type="button" class="btn btn-xs btn-success">
+									<button type="button" class="btn btn-xs btn-default">
 										<span class="glyphicon glyphicon-pencil"></span> Edit
 									</button>
 								</a>

@@ -71,7 +71,7 @@
 				<div class="row 50%">
 					<c:url value="/login" var="loginUrl" />
 					<form action="${loginUrl}" method="post">
-						<h2 class="form-signin-heading">Please sign in</h2>
+						
 						<c:if test="${SPRING_SECURITY_LAST_EXCEPTION.message != null}">
 							<div class="alert alert-danger" role="alert">
 								<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />

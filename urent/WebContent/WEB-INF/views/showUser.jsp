@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -8,48 +8,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/jquery.dropotron.min.js"></script>
+<script src="resources/js/jquery.scrolly.min.js"></script>
+<script src="resources/js/jquery.scrollgress.min.js"></script>
+<script src="resources/js/skel.min.js"></script>
+<script src="resources/js/util.js"></script>
+<script src="resources/js/main.js"></script>
 <meta name="viewport" content="width_device-width, initial-scale=1">
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <jsp:include page="includes/bootstrapCss.jsp" />
 <jsp:include page="includes/bootstrapJs.jsp" />
+<link rel="stylesheet" type="text/css"
+	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <title>User Detail</title>
 </head>
 <body>
+<div id="page-wrapper">
+		<!-- Header -->
 
-	<!-- 	<div class="masthead"> -->
-	<!-- 		<div class="container"> -->
+		<header id="header">
+		<h1>uRent</h1>
+		<nav id="nav"> <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="username" />
+		</sec:authorize>
 
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./">uRent</a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><sec:authorize access="isAnonymous()">
-						<a href="./login" class="nav-item"><span
-							class="glyphicon glyphicon-log-in"></span> Log In</a>
-					</sec:authorize></li>
-				<li><sec:authorize access="isAuthenticated()">
-						<a href="./logout" class="nav-item">Log Out</a>
-					</sec:authorize></li>
-				<li><a href="./signup" class="nav-item"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./newRentable" class="nav-item"><span
-							class="glyphicon glyphicon-plus"></span> New Rentable</a>
-					</sec:authorize></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./dashboard" class="nav-item"> Dashboard</a>
-					</sec:authorize></li>
-			</ul>
-		</div>
-	</div>
-	</nav>
-	</ul>
-	</div>
+		<ul>
+			<li class="current"><a href="./">Welcome</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./login" class="nav-item">Log In</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAuthenticated()">
+					<a href="./logout" class="nav-item">Log Out</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./signup" class="button special">Sign Up</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./dashboard" class="button special">${username}</a>
+				</sec:authorize></li>
+		</ul>
+		</nav> </header>
+
+	
+	
+	
+	
+	
+	
+	
+	
 	<center>
 		<!--  Error message ----------------------------------------------------------- -->
 		<c:if test="${not empty errorMessage}">
@@ -70,95 +83,98 @@
 		<!--   message ----------------------------------------------------------- -->
 	</center>
 
-	<h2 align="center">${user.username}</h2>
+	<article id="main"> <header class=special container>
+		<span class="icon fa-user"></span> <img
+			src="getUserImage/<c:out value="${user.username}" />.do"
+			height="200px" width="200px" />
 
-	<h2 align="center">${user.email}</h2>
-	<h2 align="center">${user.telephone}</h2>
 
-	<center>
-		<img src="getUserImage/<c:out value="${user.username}" />.do"
-			height="75px" width="75px" />
-		<h2>${user.description}</h2>
+		<h2 align="center">
+			<font color="#83d3c9">${user.username}</font>
+		</h2>
+		<br>
+		<h1 align="center">${user.description}</h1>
+		<br>
+		<h1 align="center">
+			<font color="#83d3c9">E-Mail: </font>${user.email}</h1>
+		<h1 align="center">
+			<font color="#83d3c9">Tel.:</font>${user.telephone}</h1>
 
+		</header>
 	</center>
 	<br>
 
 
-	<center>
-		<sec:authorize access="hasRole('ROLE_USER')">
-			<a href="editUser?username=${user.username}">
-				<button type="button" class="btn btn-xs btn-success">
-					<span class="glyphicon glyphicon-pencil"></span> Edit User
-				</button>
-			</a>
-		</sec:authorize>
-	</center>
+	
+<!--  list my rentables ----------------------------------------------------------- -->
 
-	<!--  list all persons ----------------------------------------------------------- -->
-	<center>
-		<h1>My Rentables</h1>
-		<div class="row">
 
-			<div class="table-index">
-				<table class="table table-hover">
+
+		<!-- One --> <section class="wrapper style4 special container">
+
+		<h2>My Rentables</h2>
+
+		<table data-toggle="table" data-classes="table table-hover "
+			data-striped="false" data-sort-name="stargazers_count"
+			data-sort-order="desc" data-search="true">
 
 
 
 
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Category</th>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Price</th>
-							<th>Location</th>
-							<th>Image</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${rentables}" var="rentable">
-							<tr>
-								<td class="col-md-1">${rentable.id}</td>
-								<td class="col-md-1">${rentable.category.name}</td>
-								<td class="col-md-1">${rentable.title}</td>
-								<td class="col-md-1">${rentable.description}</td>
-								<td class="col-md-1">${rentable.price}</td>
-								<td class="col-md-1">${rentable.location.street}
-									${rentable.location.zip} ${rentable.location.city}</td>
-								<td class="col-md-1"><img
-									src="getImage/<c:out value="${rentable.id}"/>.do" height="75px"
-									width="75px" /></td>
-								<td class="col-md-1"><sec:authorize
-										access="hasRole('ROLE_USER')">
-										<a href="showRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Show
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="editRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-success">
-												<span class="glyphicon glyphicon-pencil"></span> Edit
-											</button>
-										</a>
-									</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
-										<a href="deleteRentable?id=${rentable.id}">
-											<button type="button" class="btn btn-xs btn-danger">
-												<span class="glyphicon glyphicon-trash"></span> Delete
-											</button>
-										</a>
-									</sec:authorize></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+			<thead>
+				<tr>
+					<th data-field="image" data-sortable="true">Image</th>
+					<th data-field="category" data-sortable="true">Category</th>
+					<th data-field="title" data-sortable="true">Title</th>
+					<th data-field="location" data-sortable="true"">Location</th>
+					<th data-field="price" data-sortable="true">Price/Day</th>
+					<th class="col-md-2">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${rentables}" var="rentable">
+					<tr>
+						<td><img src="getImage/<c:out value="${rentable.id}"/>.do"
+							height="125px" width="125px" /></td>
+						<td>${rentable.category.name}</td>
+						<td>${rentable.title}</td>
 
-			</div>
-		</div>
+						<td>${rentable.location.street}<br>${rentable.location.zip}
+							${rentable.location.city}
+						</td>
 
-	</center>
+						<td><fmt:setLocale value="de_DE" scope="session" /> <fmt:formatNumber
+								value="${rentable.price}" type="currency" currencySymbol="€" /></td>
+
+						<td><a href="showRentable?id=${rentable.id}">
+								<button type="button" class="btn btn-xs btn-default">
+									<span class="glyphicon glyphicon-map-marker"></span> Show
+								</button>
+						</a> <sec:authorize access="hasRole('ROLE_USER')">
+								<a href="editRentable?id=${rentable.id}">
+									<button type="button" class="btn btn-xs btn-default">
+										<span class="glyphicon glyphicon-pencil"></span> Edit
+									</button>
+								</a>
+							</sec:authorize> <sec:authorize access="hasRole('ROLE_USER')">
+								<a href="delete?id=${rentable.id}">
+									<button type="button" class="btn btn-xs btn-danger">
+										<span class="glyphicon glyphicon-trash"></span> Delete
+									</button>
+								</a>
+							</sec:authorize> <sec:authorize access="hasRole('ROLE_ADMIN')">
+								<a href="deleteAdmin?id=${rentable.id}">
+									<button type="button" class="btn btn-xs btn-danger">
+										<span class="glyphicon glyphicon-trash"></span> Delete Admin
+									</button>
+								</a>
+							</sec:authorize></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	
 
 </body>
 </html>
