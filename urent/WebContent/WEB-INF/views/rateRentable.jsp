@@ -11,122 +11,145 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width_device-width, initial-scale=1">
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/jquery.dropotron.min.js"></script>
+<script src="resources/js/jquery.scrolly.min.js"></script>
+<script src="resources/js/jquery.scrollgress.min.js"></script>
+<script src="resources/js/skel.min.js"></script>
+<script src="resources/js/util.js"></script>
+<script src="resources/js/main.js"></script>
+<jsp:include page="includes/bootstrapMeta.jsp" />
+
+<link rel="stylesheet" type="text/css"
+	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <title>Rate Rentable</title>
 <jsp:include page="includes/bootstrapCss.jsp" />
 </head>
 <body>
 
-		<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./">uRent</a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><sec:authorize access="isAnonymous()">
-						<a href="./login" class="nav-item"><span
-							class="glyphicon glyphicon-log-in"></span> Log In</a>
-					</sec:authorize></li>
-				<li><sec:authorize access="isAuthenticated()">
-						<c:url value="logout" var="logoutUrl" />
-						<form action="${logoutUrl }" method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <label class="nav-item"><span
-							class="glyphicon glyphicon-log-out"></span><input
-								type="submit" value="Log Out" /></label>
-						</form>
-					</sec:authorize></li>
-				<li><a href="./signup" class="nav-item"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./newRentable" class="nav-item"><span
-							class="glyphicon glyphicon-plus"></span> New Rentable</a>
-					</sec:authorize></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./dashboard" class="nav-item"> Dashboard</a>
-					</sec:authorize></li>
-			</ul>
-		</div>
+	<div id="page-wrapper">
+		<!-- Header -->
+
+
+		<header id="header">
+		<h1>uRent</h1>
+		<nav id="nav"> <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="username" />
+		</sec:authorize>
+
+		<ul>
+			<li class="current"><a href="./">Welcome</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./login" class="nav-item">Log In</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAuthenticated()">
+					<a href="./logout" class="nav-item">Log Out</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./signup" class="button special">Sign Up</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./dashboard" class="button special">${username}</a>
+				</sec:authorize></li>
+		</ul>
+		</nav> </header>
+
+
+
+
+		<!-- Main -->
+
+		<article id="main"> <header class=special container>
+		<span class="icon fa-star"></span>
+		<h2>Rate Rentable</h2>
+		</header> <!-- One --> <section class="wrapper style4 special container 50%">
+
+
+
+		<center>
+			<!--  Error message ----------------------------------------------------------- -->
+			<c:if test="${not empty errorMessage}">
+				<div class="alert alert-danger" role="alert">${errorMessage}</div>
+			</c:if>
+			<!--  Error message ----------------------------------------------------------- -->
+
+			<!--  Warning message ----------------------------------------------------------- -->
+			<c:if test="${not empty warningMessage}">
+				<div class="alert alert-warning" role="warning">${warningMessage}</div>
+			</c:if>
+			<!--  Warning message ----------------------------------------------------------- -->
+
+			<!--   message ----------------------------------------------------------- -->
+			<c:if test="${not empty message}">
+				<div class="alert alert-success" role="warning">${message}</div>
+			</c:if>
+			<!--   message ----------------------------------------------------------- -->
+		</center>
+
+
+		<form:form class="form" method="post"
+			action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
+			enctype="multipart/form-data" role="form">
+
+
+			<legend>${legend}</legend>
+
+			<! ----------------  id ---------------- -->
+			<div class="form-group">
+				<div class="col-md-10">
+					<input type="hidden" class="form-control" id="inputID" type="text"
+						name="id" value="<c:out value="${rentable.id}"/>">
+				</div>
+			</div>
+
+			<! ----------------  user ---------------- -->
+			<div class="form-group">
+
+				<input type="hidden" class="form-control" id="inputUser" type="text"
+					name="user" value="<c:out value="${rentable.user}"/>">
+
+			</div>
+
+			<! ----------------  title ---------------- -->
+
+
+			<div class="form-group">
+
+				<label for="inputTitle" class="control-label">Title</label> <input
+					class="form-control" id="inputTitle" type="text" name="title">
+
+			</div>
+
+
+			<! ----------------  text  ---------------- -->
+			<div class="form-group">
+				<label for="inputText" class="control-label">Text</label>
+
+				<textarea class="form-control" rows="5" cols="35"
+					id="inputDescription" type="text" name="description"></textarea>
+
+			</div>
+
+			<! ----------------  buttons ---------------- -->
+			<div class="form-group">
+
+				<button type="submit" class="btn btn-default">Submit</button>
+				<a href="list">
+					<button type="button" class="btn btn-default">Cancel</button>
+				</a>
+			</div>
 	</div>
-	</nav>
-	
-	<center>
-		<!--  Error message ----------------------------------------------------------- -->
-		<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger" role="alert">${errorMessage}</div>
-		</c:if>
-		<!--  Error message ----------------------------------------------------------- -->
-
-		<!--  Warning message ----------------------------------------------------------- -->
-		<c:if test="${not empty warningMessage}">
-			<div class="alert alert-warning" role="warning">${warningMessage}</div>
-		</c:if>
-		<!--  Warning message ----------------------------------------------------------- -->
-
-		<!--   message ----------------------------------------------------------- -->
-		<c:if test="${not empty message}">
-			<div class="alert alert-success" role="warning">${message}</div>
-		</c:if>
-		<!--   message ----------------------------------------------------------- -->
-	</center>
-	
-
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<form class="form-horizontal" method="post" action="${formAction}">
-				<fieldset>
-					<legend>${legend}</legend>
-
-					<! ----------------  id ---------------- -->
-					<div class="form-group">
-						<div class="col-md-10">
-							<input type="hidden" class="form-control" id="inputID"
-								type="text" name="id" value="<c:out value="${rentable.id}"/>">
-						</div>
-					</div>
-
-					<! ----------------  user ---------------- -->
-					<div class="form-group">
-						<div class="col-md-10">
-							<input type="hidden" class="form-control" id="inputUser"
-								type="text" name="user" value="<c:out value="${rentable.user}"/>">
-						</div>
-					</div>
-
-					<! ----------------  title ---------------- -->
-					<div class="form-group">
-						<label for="inputTitel" class="col-md-2 control-label">Title</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputTitle" type="text"
-								name="title" value="<c:out value="${rating.title}"/>">
-						</div>
-					</div>
-					<! ----------------  text  ---------------- -->
-					<div class="form-group">
-						<label for="inputText" class="col-md-2 control-label">Text</label>
-						<div class="col-md-10">
-							<input class="form-control" id="inputText" type="text"
-								name="text" value="<c:out value="${rating.text}"/>">
-						</div>
-					</div>
-
-					<! ----------------  buttons ---------------- -->
-					<div class="form-group">
-						<div class="col-md-10 col-md-offset-2">
-							<button type="submit" class="btn btn-primary">Submit</button>
-							<a href="list">
-								<button type="button" class="btn btn-default">Cancel</button>
-							</a>
-						</div>
-					</div>
-				</fieldset>
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
-			</form>
-		</div>
+	</fieldset>
+	<input type="hidden" name="${_csrf.parameterName}">
+	</form:form>
+	</div>
 	</div>
 
 	</div>
