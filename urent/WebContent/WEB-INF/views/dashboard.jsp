@@ -186,7 +186,7 @@
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<a href="deleteUsers">
 					<button type="button" class="button special">
-						<span class="glyphicon glyphicon-pencil"></span> Delete Users
+						<span class="glyphicon glyphicon-trash"></span> Delete Users
 					</button>
 				</a>
 			</sec:authorize>

@@ -77,9 +77,12 @@
 			</c:if>
 			<!--   message ----------------------------------------------------------- -->
 		</center>
-		<article id="main"> <header class=special container>
 		
-
+		
+<article id="main"> <header class=special container>
+		<span class="icon fa-trash-o"></span>
+		<h2>Delete Users</h2>
+		</header>
 
 
 		<!-- One --> <section class="wrapper style4 special container">

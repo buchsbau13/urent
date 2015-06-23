@@ -1738,6 +1738,7 @@ input[type="button"].small, input[type="submit"].small, input[type="reset"].smal
 .wrapper {
 	margin-bottom: 5em;
 	padding: 5em;
+	margin-top: 1em;
 }
 
 .wrapper.style1 {
