@@ -13,157 +13,190 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta name="viewport" content="width_device-width, initial-scale=1">
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/jquery.dropotron.min.js"></script>
+<script src="resources/js/jquery.scrolly.min.js"></script>
+<script src="resources/js/jquery.scrollgress.min.js"></script>
+<script src="resources/js/skel.min.js"></script>
+<script src="resources/js/util.js"></script>
+<script src="resources/js/main.js"></script>
+<jsp:include page="includes/bootstrapMeta.jsp" />
+
+<link rel="stylesheet" type="text/css"
+	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <jsp:include page="includes/bootstrapMeta.jsp" />
 <title>Edit Rentable</title>
 <jsp:include page="includes/bootstrapCss.jsp" />
 </head>
 <body>
 
-	<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./">uRent</a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><sec:authorize access="isAnonymous()">
-						<a href="./login" class="nav-item"><span
-							class="glyphicon glyphicon-log-in"></span> Log In</a>
-					</sec:authorize></li>
-				<li><sec:authorize access="isAuthenticated()">
-						<c:url value="logout" var="logoutUrl" />
-						<form action="${logoutUrl }" method="post">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" /> <label class="nav-item"><span
-								class="glyphicon glyphicon-log-out"></span><input type="submit"
-								value="Log Out" /></label>
-						</form>
-					</sec:authorize></li>
-				<li><a href="./signup" class="nav-item"><span
-						class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./newRentable" class="nav-item"><span
-							class="glyphicon glyphicon-plus"></span> New Rentable</a>
-					</sec:authorize></li>
-				<li><sec:authorize
-						access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<a href="./dashboard" class="nav-item"> Dashboard</a>
-					</sec:authorize></li>
-			</ul>
-		</div>
-	</div>
-	</nav>
+	<div id="page-wrapper">
+		<!-- Header -->
 
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<form class="form-horizontal" method="post"
-				action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
-				enctype="multipart/form-data">
-				<fieldset>
-					<legend>${legend}</legend>
+		<header id="header">
+		<h1>uRent</h1>
+		<nav id="nav"> <sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal.username" var="username" />
+		</sec:authorize>
+
+		<ul>
+			<li class="current"><a href="./">Welcome</a></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./login" class="nav-item">Log In</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAuthenticated()">
+					<a href="./logout" class="nav-item">Log Out</a>
+				</sec:authorize></li>
+			<li><sec:authorize access="isAnonymous()">
+					<a href="./signup" class="button special">Sign Up</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./newRentable" class="nav-item"></span>New Rentable</a>
+				</sec:authorize></li>
+			<li><sec:authorize
+					access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<a href="./dashboard" class="button special">${username}</a>
+				</sec:authorize></li>
+		</ul>
+		</nav> </header>
+	
+	<!-- Main -->
+
+		<article id="main"> <header class=special container>
+		<span class="icon fa-pencil "></span>
+		<h2>Edit Rentable</h2>
+		</header> <!-- One --> <section class="wrapper style4 special container 50%">
+	
+	<center>
+			<!--  Error message ------------------------------------------------------------->
+			<c:if test="${not empty errorMessage}">
+				<div class="alert alert-danger" role="alert">${errorMessage}</div>
+			</c:if>
+			<!--  Error message ------------------------------------------------------------->
+
+			<!--  Warning message ------------------------------------------------------------->
+			<c:if test="${not empty warningMessage}">
+				<div class="alert alert-warning" role="warning">${warningMessage}</div>
+			</c:if>
+			<!--  Warning message ------------------------------------------------------------->
+
+			<!--   message ------------------------------------------------------------->
+			<c:if test="${not empty message}">
+				<div class="alert alert-success" role="warning">${message}</div>
+			</c:if>
+			<!--   message ------------------------------------------------------------->
+		</center>
+		
+
+	<form:form class="form" method="post"
+			action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
+			enctype="multipart/form-data" role="form">
+
+
+			<legend>${legend}</legend>
 
 					<! ----------------  id ---------------- -->
 					<div class="form-group">
-						<div class="col-md-10">
+						
 							<input type="hidden" class="form-control" id="inputID"
 								type="text" name="id" value="<c:out value="${rentable.id}"/>">
-						</div>
+						
 					</div>
 					<! ----------------  title ---------------- -->
 					<div class="form-group">
-						<label for="inputTitel" class="col-md-2 control-label">Title</label>
-						<div class="col-md-10">
+						<label for="inputTitel" class="control-label">Title</label>
+					
 							<input class="form-control" id="inputTitle" type="text"
 								name="title" value="<c:out value="${rentable.title}"/>">
-						</div>
+					
 					</div>
 					<! ----------------  description  ---------------- -->
 					<div class="form-group">
-						<label for="inputDescription" class="col-md-2 control-label">Description</label>
-						<div class="col-md-10">
+						<label for="inputDescription" class="control-label">Description</label>
+				
 							<input class="form-control" id="inputDescription" type="text"
 								name="description"
 								value="<c:out value="${rentable.description}"/>">
-						</div>
+
 					</div>
 
 					<! ----------------  price  ---------------- -->
 					<div class="form-group">
-						<label for="inputPrice" class="col-md-2 control-label">Price</label>
-						<div class="col-md-10">
+						<label for="inputPrice" class="control-label">Price</label>
+					
 							<input class="form-control" id="inputPrice" type="text"
 								name="price" value="<c:out value="${rentable.price}"/>">
-						</div>
+					
 					</div>
 
 					<! ----------------  location.street  ---------------- -->
 					<div class="form-group">
-						<label for="inputLocationStreet" class="col-md-2 control-label">Location
+						<label for="inputLocationStreet" class="control-label">Location
 							Street</label>
-						<div class="col-md-10">
+					
 							<input class="form-control" id="inputLocationStreet" type="text"
 								name="street"
 								value="<c:out value="${rentable.location.street}"/>">
-						</div>
+						
 					</div>
 
 					<! ----------------  location.city ---------------- -->
 					<div class="form-group">
-						<label for="inputLocationCity" class="col-md-2 control-label">Location
+						<label for="inputLocationCity" class="control-label">Location
 							City</label>
-						<div class="col-md-10">
+					
 							<input class="form-control" id="inputLocationCity" type="text"
 								name="city" value="<c:out value="${rentable.location.city}"/>">
-						</div>
+						
 					</div>
 
 					<! ----------------  location.country ---------------- -->
 					<div class="form-group">
-						<label for="inputLocationCountry" class="col-md-2 control-label">Location
+						<label for="inputLocationCountry" class="control-label">Location
 							Country</label>
-						<div class="col-md-10">
+					
 							<input class="form-control" id="inputLocationCountry" type="text"
 								name="country"
 								value="<c:out value="${rentable.location.country}"/>">
-						</div>
+						
 					</div>
 
 					<! ----------------  location.zip ---------------- -->
 					<div class="form-group">
-						<label for="inputLocationZip" class="col-md-2 control-label">Location
+						<label for="inputLocationZip" class="control-label">Location
 							ZIP</label>
-						<div class="col-md-10">
+						
 							<input class="form-control" id="inputLocationZip" type="text"
 								name="zip" value="<c:out value="${rentable.location.zip}"/>">
-						</div>
+					
 					</div>
 
 					<! ----------------  image  ---------------- -->
 					<div class="form-group">
-						<label for="inputImage" class="col-md-2 control-label">Image</label>
-						<div class="col-md-10">
+						<label for="inputImage">Image</label>
+						<center>
 							<input type="file" name="file">
-						</div>
+							</center>
+					
 
 					</div>
 
 					<! ----------------  buttons ---------------- -->
 					<div class="form-group">
-						<div class="col-md-10 col-md-offset-2">
-							<button type="submit" class="btn btn-primary">Submit</button>
+					
+							<button type="submit" class="btn btn-default">Submit</button>
 							<a href="list">
 								<button type="button" class="btn btn-default">Cancel</button>
 							</a>
 						</div>
-					</div>
-				</fieldset>
+					
+				
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
-			</form>
-		</div>
-	</div>
-
+				</form:form>
+	
 	</div>
 	<!--  End of container -->
 
