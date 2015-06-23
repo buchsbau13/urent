@@ -28,11 +28,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import at.fh.swenga.urent.dao.CategoryDao;
+import at.fh.swenga.urent.dao.RatingDao;
 import at.fh.swenga.urent.dao.RentableDao;
 import at.fh.swenga.urent.dao.UserDao;
 import at.fh.swenga.urent.dao.UserRoleDao;
 import at.fh.swenga.urent.model.Address;
 import at.fh.swenga.urent.model.Category;
+import at.fh.swenga.urent.model.Rating;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.RentableForm;
 import at.fh.swenga.urent.model.User;
@@ -52,6 +54,9 @@ public class DashboardController {
 
 	@Autowired
 	ServletContext servletContext;
+
+	@Autowired
+	RatingDao ratingDao;
 
 	@Autowired
 	UserRoleDao userRoleDao;
@@ -119,14 +124,6 @@ public class DashboardController {
 		}
 
 		return "forward:/dashboard";
-	}
-
-	@RequestMapping(value = "/showRentable", method = RequestMethod.GET)
-	public String showRentable(Model model, @RequestParam int id) {
-
-		model.addAttribute("rentable", rentableDao.getRentable(id));
-
-		return "showRentable";
 	}
 
 	@RequestMapping(value = "/editUser", method = RequestMethod.GET)
@@ -231,15 +228,23 @@ public class DashboardController {
 					.getRentables();
 			if (!userRentables.isEmpty()) {
 				for (Rentable rentable : userRentables) {
+					Set<Rating> rentableRatings = rentable.getRatings();
+					if (!rentableRatings.isEmpty()) {
+						for (Rating rating : rentableRatings) {
+							ratingDao.delete(rating.getId());
+						}
+					}
+
 					rentableDao.delete(rentable.getId());
 				}
 			}
 
 			Set<UserRole> userRoles = userDao.getUser(username).getUserRole();
-			for (UserRole userRole : userRoles) {
-				userRoleDao.delete(userRole);
+			if (!userRoles.isEmpty()) {
+				for (UserRole userRole : userRoles) {
+					userRoleDao.delete(userRole);
+				}
 			}
-
 			userDao.delete(userDao.getUser(username));
 
 			model.addAttribute("message", "User deleted!");

@@ -122,9 +122,6 @@
 			<div class="form-group">
 				<label for="inputDescription" class="control-label">Description
 				</label>
-
-
-
 				<textarea class="form-control" rows="5" cols="35"
 					id="inputDescription" type="text" name="description"></textarea>
 			</div>

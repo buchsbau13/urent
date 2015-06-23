@@ -266,7 +266,7 @@
 
 	<!--  list all wishlist rentables ----------------------------------------------------------- -->
 	<section class="wrapper style4 special container">
-	<h1>My Wishlist</h1>
+	<h2>My Wishlist</h2>
 	<table data-toggle="table" data-classes="table table-hover "
 		data-striped="false" data-sort-name="stargazers_count"
 		data-sort-order="desc" data-search="true">
@@ -308,10 +308,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
-	</div>
-	</div>
-
-	</center>
 </body>
 </html>

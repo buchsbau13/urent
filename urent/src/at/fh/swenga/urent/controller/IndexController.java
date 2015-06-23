@@ -63,15 +63,6 @@ public class IndexController {
 	@Autowired
 	ServletContext servletContext;
 
-	@RequestMapping(value = { "/", "list" })
-	public String index(Model model) {
-
-		List<Rentable> rentables = rentableDao.getRentables();
-		model.addAttribute("rentables", rentables);
-
-		return "index";
-	}
-
 	@RequestMapping(value = "/getImage/{id}")
 	public void showImage(HttpServletResponse response,
 			@PathVariable("id") int rentableId) throws IOException {
@@ -82,6 +73,11 @@ public class IndexController {
 		out.write(rentable.getImage());
 		out.flush();
 
+	}
+	
+	@RequestMapping(value = { "/", "list" })
+	public String index(Model model) {
+		return "index";
 	}
 
 	@RequestMapping("/init")
@@ -123,16 +119,35 @@ public class IndexController {
 			tools = new Category("Tools");
 		categoryDao.persist(tools);
 
+		File rootDirAdmin = new File(
+				servletContext.getRealPath("/WEB-INF/images/admin.jpg"));
+		BufferedImage adminPic = ImageIO.read(rootDirAdmin);
+		ByteArrayOutputStream baos8 = new ByteArrayOutputStream();
+		ImageIO.write(adminPic, "jpg", baos8);
+		baos8.flush();
+		byte[] adminByte = baos8.toByteArray();
+		baos8.close();
+		
 		User admin = userDao.getUser("admin");
 		if (admin == null)
 			admin = new User(
 					"admin",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
 					"Admin", "Admin", "admin@urent.com", 123, true);
+		admin.setImage(adminByte);
 		userDao.persist(admin);
 
 		UserRole roleAdmin1 = new UserRole(admin, "ROLE_ADMIN");
 		userRoleDao.persist(roleAdmin1);
+		
+		File rootDirEmma = new File(
+				servletContext.getRealPath("/WEB-INF/images/emma.jpg"));
+		BufferedImage emmaPic = ImageIO.read(rootDirEmma);
+		ByteArrayOutputStream baos7 = new ByteArrayOutputStream();
+		ImageIO.write(emmaPic, "jpg", baos7);
+		baos7.flush();
+		byte[] emmaByte = baos7.toByteArray();
+		baos7.close();
 
 		User user = userDao.getUser("user");
 		if (user == null)
@@ -140,10 +155,20 @@ public class IndexController {
 					"user",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
 					"User", "User", "user@urent.com", 123, true);
+		user.setImage(emmaByte);
 		userDao.persist(user);
 
 		UserRole roleUser2 = new UserRole(user, "ROLE_USER");
 		userRoleDao.persist(roleUser2);
+		
+		File rootDirJulia = new File(
+				servletContext.getRealPath("/WEB-INF/images/julia.jpg"));
+		BufferedImage juliaPic = ImageIO.read(rootDirJulia);
+		ByteArrayOutputStream baos6 = new ByteArrayOutputStream();
+		ImageIO.write(juliaPic, "jpg", baos6);
+		baos6.flush();
+		byte[] juliaByte = baos6.toByteArray();
+		baos6.close();
 
 		User julia = userDao.getUser("julia");
 		if (julia == null)
@@ -151,6 +176,7 @@ public class IndexController {
 					"julia",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
 					"Julia", "Buchsbaum", "julia@urent.com", 123, true);
+		julia.setImage(juliaByte);
 		userDao.persist(julia);
 
 		UserRole roleAdmin2 = new UserRole(julia, "ROLE_ADMIN");

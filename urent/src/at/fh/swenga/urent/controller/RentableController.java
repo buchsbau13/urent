@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import at.fh.swenga.urent.dao.RatingDao;
 import at.fh.swenga.urent.dao.RentableDao;
 import at.fh.swenga.urent.dao.UserDao;
+import at.fh.swenga.urent.model.Rating;
 import at.fh.swenga.urent.model.Rentable;
 import at.fh.swenga.urent.model.User;
 
@@ -22,6 +25,19 @@ public class RentableController {
 
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	RatingDao ratingDao; 
+	
+	@RequestMapping(value = "/showRentable", method = RequestMethod.GET)
+	public String showRentable(Model model, @RequestParam int id) {
+
+		List<Rating> ratings = ratingDao.getRentableRatings(id);
+		model.addAttribute("ratings", ratings);
+		model.addAttribute("rentable", rentableDao.getRentable(id));
+
+		return "showRentable";
+	}
 
 	@RequestMapping(value = "/addToWishlist")
 	public String addToWishlist(Model model, @RequestParam int id,

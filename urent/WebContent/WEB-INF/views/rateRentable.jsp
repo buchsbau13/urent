@@ -4,6 +4,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -94,66 +96,52 @@
 		</center>
 
 
-		<form:form class="form" method="post"
-			action="${formAction}?${_csrf.parameterName}=${_csrf.token}"
-			enctype="multipart/form-data" role="form">
+		<form class="form" method="post" action="${formAction}">
+			<fieldset>
+				<legend>${legend}</legend>
 
-
-			<legend>${legend}</legend>
-
-			<! ----------------  id ---------------- -->
-			<div class="form-group">
-				<div class="col-md-10">
-					<input type="hidden" class="form-control" id="inputID" type="text"
-						name="id" value="<c:out value="${rentable.id}"/>">
+				<! ----------------  id ---------------- -->
+				<div class="form-group">
+					<div class="col-md-10">
+						<input type="hidden" class="form-control" id="inputID" type="text"
+							name="id" value="<c:out value="${rentable.id}"/>">
+					</div>
 				</div>
-			</div>
 
-			<! ----------------  user ---------------- -->
-			<div class="form-group">
+				<! ----------------  user ---------------- -->
+				<div class="form-group">
 
-				<input type="hidden" class="form-control" id="inputUser" type="text"
-					name="user" value="<c:out value="${rentable.user}"/>">
+					<input type="hidden" class="form-control" id="inputUser"
+						type="text" name="user" value="<c:out value="${rentable.user}"/>">
 
-			</div>
+				</div>
 
-			<! ----------------  title ---------------- -->
-
-
-			<div class="form-group">
-
-				<label for="inputTitle" class="control-label">Title</label> <input
-					class="form-control" id="inputTitle" type="text" name="title">
-
-			</div>
+				<! ----------------  title ---------------- -->
+				<div class="form-group">
+					<label for="inputTitle" class="control-label">Title</label> <input
+						class="form-control" id="inputTitle" type="text" name="title">
+				</div>
 
 
-			<! ----------------  text  ---------------- -->
-			<div class="form-group">
-				<label for="inputText" class="control-label">Text</label>
+				<! ----------------  description  ------------------>
+				<div class="form-group">
+					<label for="inputText" class="control-label">Text
+					</label>
+					<textarea class="form-control" rows="5" cols="35"
+						id="inputText" type="text" name="text"></textarea>
+				</div>
 
-				<textarea class="form-control" rows="5" cols="35"
-					id="inputDescription" type="text" name="description"></textarea>
+				<! ----------------  buttons ---------------- -->
+				<div class="form-group">
 
-			</div>
-
-			<! ----------------  buttons ---------------- -->
-			<div class="form-group">
-
-				<button type="submit" class="btn btn-default">Submit</button>
-				<a href="list">
+					<button type="submit" class="btn btn-default">Submit</button>
 					<button type="button" class="btn btn-default">Cancel</button>
-				</a>
-			</div>
-	</div>
-	</fieldset>
-	<input type="hidden" name="${_csrf.parameterName}">
-	</form:form>
-	</div>
-	</div>
-
-	</div>
-	<!--  End of container -->
-
+					</a>
+				</div>
+			</fieldset>
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<!--  End of container -->
 </body>
 </html>

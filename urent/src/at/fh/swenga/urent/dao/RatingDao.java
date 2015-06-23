@@ -45,4 +45,15 @@ public class RatingDao {
 		entityManager.persist(rating);
 
 	}
+	
+	public void delete(Rating rating) {
+		entityManager.remove(entityManager.contains(rating) ? rating : entityManager.merge(rating));
+	}
+
+	public void delete(int id) {
+		Rating rating = getRating(id);
+		if (rating != null)
+			delete(rating);
+		
+	}
 }

@@ -70,18 +70,19 @@ public class RatingController {
 
 			model.addAttribute("message", "Rentable " + rentable.getTitle()
 					+ " successfully rated!");
-			return "forward:/list";
+			return "forward:/dashboard";
 		}
 
 	}
+	
+	@RequestMapping("/showAuthor")
+	public String showDashboard(Principal principal, @RequestParam String username,
+			Model model) {
 
-	@RequestMapping(value = "/ratings", method = RequestMethod.GET)
-	public String showRatings(Model model, @RequestParam int id) {
+		model.addAttribute("user", userDao.getUser(username));
 
-		List<Rating> ratings = ratingDao.getRentableRatings(id);
-		model.addAttribute("ratings", ratings);
+		return "showUser";
 
-		return "ratings";
 	}
 
 }

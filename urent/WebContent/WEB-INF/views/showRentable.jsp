@@ -135,8 +135,40 @@
 					</h1>
 					<h1 align="left">
 						<font color="#83d3c9">Tel: </font>${rentable.user.telephone}</h1>
+
+					<section class="wrapper style4 special container">
+					<h2>Ratings</h2>
+					<table data-toggle="table" data-classes="table table-hover "
+						data-striped="false" data-sort-name="stargazers_count"
+						data-sort-order="desc" data-search="true">
+
+						<thead>
+							<tr>
+								<th data-field="author" data-sortable="true">Author</th>
+								<th data-field="date" data-sortable="true">Date</th>
+								<th data-field="title" data-sortable="true">Title</th>
+								<th data-field="text" data-sortable="true"">Text</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${ratings}" var="rating">
+								<tr>
+									<td><a href="showAuthor?username=${rating.author.username}">${rating.author.username}</a></td>
+									<td><fmt:formatDate
+											value="${rating.date}" pattern="dd.MM.yyyy" /></td>
+									<td>${rating.title}</td>
+									<td>${rating.text}</td>
+
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					</section>
 			</div>
 		</div>
+
+
+
 		<div id="map_container"></div>
 </body>
 </html>
