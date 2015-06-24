@@ -220,43 +220,53 @@ public class DashboardController {
 	}
 
 	@RequestMapping("/deleteUser")
-	public String deleteUser(@RequestParam String username, Model model) {
+	public String deleteUser(@RequestParam String username,
+			Principal principal, Model model) {
 
-		try {
+		String loggedUsername = principal.getName();
+		String currentUsername = userDao.getUser(username).getUsername();
 
-			Set<Rentable> userRentables = userDao.getUser(username)
-					.getRentables();
-			if (!userRentables.isEmpty()) {
-				for (Rentable rentable : userRentables) {
-					Set<Rating> rentableRatings = rentable.getRatings();
-					if (!rentableRatings.isEmpty()) {
-						for (Rating rating : rentableRatings) {
-							ratingDao.delete(rating.getId());
+		if (!loggedUsername.equals(currentUsername)) {
+			try {
+
+				Set<Rentable> userRentables = userDao.getUser(username)
+						.getRentables();
+				if (!userRentables.isEmpty()) {
+					for (Rentable rentable : userRentables) {
+						Set<Rating> rentableRatings = rentable.getRatings();
+						if (!rentableRatings.isEmpty()) {
+							for (Rating rating : rentableRatings) {
+								ratingDao.delete(rating.getId());
+							}
 						}
+
+						rentableDao.delete(rentable.getId());
 					}
-
-					rentableDao.delete(rentable.getId());
 				}
+
+				Set<UserRole> userRoles = userDao.getUser(username)
+						.getUserRole();
+				if (!userRoles.isEmpty()) {
+					for (UserRole userRole : userRoles) {
+						userRoleDao.delete(userRole);
+					}
+				}
+				userDao.delete(userDao.getUser(username));
+
+				model.addAttribute("message", "User deleted!");
+				return "forward:/deleteUsers";
 			}
 
-			Set<UserRole> userRoles = userDao.getUser(username).getUserRole();
-			if (!userRoles.isEmpty()) {
-				for (UserRole userRole : userRoles) {
-					userRoleDao.delete(userRole);
-				}
+			catch (Exception e) {
+				model.addAttribute("errorMessage",
+						"It is not possible to delete this User!");
+				return "forward:/deleteUsers";
 			}
-			userDao.delete(userDao.getUser(username));
-
-			model.addAttribute("message", "User deleted!");
-			return "forward:/deleteUsers";
-		}
-
-		catch (Exception e) {
+		} else {
 			model.addAttribute("errorMessage",
-					"It is not possible to delete this User!");
+					"You are not allowed to delete yourself!");
 			return "forward:/deleteUsers";
 		}
-
 	}
 
 	private BufferedImage cropImageSquare(byte[] image) throws IOException {

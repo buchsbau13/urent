@@ -144,10 +144,10 @@
 
 						<thead>
 							<tr>
-								<th data-field="author" data-sortable="true">Author</th>
-								<th data-field="date" data-sortable="true">Date</th>
-								<th data-field="title" data-sortable="true">Title</th>
-								<th data-field="text" data-sortable="true"">Text</th>
+								<th data-field="author" data-sortable="true" class="col-md-1">Author</th>
+								<th data-field="date" data-sortable="true" class="col-md-1">Date</th>
+								<th data-field="title" data-sortable="true" class="col-md-1"> Title</th>
+								<th data-field="text" data-sortable="true" class="col-md-3">Text</th>
 							</tr>
 						</thead>
 						<tbody>

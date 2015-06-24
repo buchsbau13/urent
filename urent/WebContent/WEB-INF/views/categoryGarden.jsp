@@ -163,7 +163,7 @@
 										<button type="button" class="btn btn-xs btn-default">
 											<span class="glyphicon glyphicon-map-marker"></span> Show
 										</button>
-								</a> <sec:authorize access="hasRole('ROLE_USER')">
+								</a> <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 										<a href="rateRentable?id=${rentable.id}">
 											<button type="button" class="btn btn-xs btn-default">
 												<span class="glyphicon glyphicon-star"></span> Rate

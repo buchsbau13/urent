@@ -1292,7 +1292,7 @@ a {
 		background-color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out,
 		background-color 0.2s ease-in-out;
-	color: #ffffff;
+	color: #83d3c9;
 	text-decoration: none;
 	
 }
