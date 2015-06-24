@@ -171,7 +171,7 @@
 		<h1 align="center">
 			<font color="#83d3c9">E-Mail: </font>${user.email}</h1>
 		<h1 align="center">
-			<font color="#83d3c9">Tel.:</font>${user.telephone}</h1>
+			<font color="#83d3c9">Tel.: </font>${user.telephone}</h1>
 
 		</header>
 		<center>

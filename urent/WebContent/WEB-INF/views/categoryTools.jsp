@@ -148,7 +148,7 @@
 
 			<h2>Your place for all your tools</h2>
 
-			<p>Repair everything. Find the right tools right here</p>
+			<p>Repair everything. Find the right tools right here!</p>
 
 
 			<table data-toggle="table" data-classes="table table-hover "

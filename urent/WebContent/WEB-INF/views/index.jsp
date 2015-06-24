@@ -110,10 +110,10 @@
 
 		<article id="main"> <header class="special container">
 		<span class="icon fa-user"></span>
-		<h2>uRent is a place for rent stuff</h2>
-		<p>Wether you need a bike for your weekendtrip, a guitar for a jam
+		<h2>uRent is a place for your stuff</h2>
+		<p>Whether you need a bike for your weekend trip, a guitar for a jam
 			session or tools to finish your work. Find everything you need. In
-			one place. Share your belongings with the world and earn money</p>
+			one place. Share your belongings with the world and earn some money.</p>
 		</header> <!-- Three --> <section class="wrapper style4 container special">
 
 		<header class="major">
@@ -168,7 +168,7 @@
 		
 		<div class="row">
 	<div class="6u 12u(narrower)">
-			<section> <a href="./categoryEntertainment"
+			<section> <a href="./categoryHobby"
 				class="image featured"><img
 				src="resources/pictures/hobby.jpg" alt="" /></a> </section>
 </div>
@@ -179,13 +179,11 @@
 		<!-- CTA -->
 		<section id="cta"> <header>
 		<h2>
-			Ready to do <strong>explore uRent</strong>?
+			Ready to <strong>explore uRent</strong>?
 		</h2>
 
 		</header> <footer>
-		<ul class="buttons">
-			<li><a href="./categoryHobby" class="button special">Browse</a></li>
-		</ul>
+
 		</footer> </section>
 
 

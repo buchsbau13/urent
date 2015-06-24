@@ -124,7 +124,7 @@
 
 				<h2>One place for all your hobbies</h2>
 
-				<p>Everything you ever want</p>
+				<p>Everything you ever wanted!</p>
 
 
 				<table data-toggle="table" data-classes="table table-hover "

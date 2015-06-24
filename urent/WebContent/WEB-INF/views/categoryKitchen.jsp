@@ -126,7 +126,7 @@
 
 				<h2>Everything for your Kitchen</h2>
 
-				<p>Find everything you need for delicious dishes</p>
+				<p>Find everything you need for delicious dishes!</p>
 
 
 				<table data-toggle="table" data-classes="table table-hover "

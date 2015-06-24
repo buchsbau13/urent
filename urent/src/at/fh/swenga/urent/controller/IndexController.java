@@ -499,13 +499,6 @@ public class IndexController {
 		}
 	}
 
-	// @ExceptionHandler(Exception.class)
-	public String handleAllException(Exception ex) {
-
-		return "showError";
-
-	}
-
 	private BufferedImage cropImageSquare(byte[] image) throws IOException {
 		InputStream in = new ByteArrayInputStream(image);
 		BufferedImage originalImage = ImageIO.read(in);

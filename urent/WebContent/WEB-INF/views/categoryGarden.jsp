@@ -121,7 +121,7 @@
 
 				<h2>The place for your graden</h2>
 
-				<p>Everthing you need to keep your garden nice and neat</p>
+				<p>Everthing you need to keep your garden nice and neat!</p>
 
 
 				<table data-toggle="table" data-classes="table table-hover "

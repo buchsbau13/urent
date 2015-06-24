@@ -123,7 +123,6 @@ public class RegisterController {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 				username, password);
 
-		// generate session if one doesn't exist
 		request.getSession();
 
 		token.setDetails(new WebAuthenticationDetails(request));

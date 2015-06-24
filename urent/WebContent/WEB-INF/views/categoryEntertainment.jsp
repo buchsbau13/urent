@@ -125,7 +125,7 @@
 
 				<h2>Your place for Entertainment</h2>
 
-				<p>Everything to keep you entertained</p>
+				<p>Everything to keep you entertained!</p>
 
 
 				<table data-toggle="table" data-classes="table table-hover "
