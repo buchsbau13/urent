@@ -111,8 +111,9 @@
 		<article id="main"> <header class="special container">
 		<span class="icon fa-user"></span>
 		<h2>uRent is a place for rent stuff</h2>
-		<p>Wether you need a bike for your weekendtrip, a guitar for a jam session or tools to finish your work.
-		Find everything you need. In one place. Share your belongings with the world and earn money </p>
+		<p>Wether you need a bike for your weekendtrip, a guitar for a jam
+			session or tools to finish your work. Find everything you need. In
+			one place. Share your belongings with the world and earn money</p>
 		</header> <!-- Three --> <section class="wrapper style4 container special">
 
 		<header class="major">
@@ -121,11 +122,10 @@
 
 		<div class="row">
 			<div class="6u 12u(narrower)">
-				
-					<section> <a href="./categorySport"
-						class="image featured"><img src="resources/pictures/pic01.jpg"
-						alt="" /></a> </section>
-				
+
+				<section> <a href="./categorySport" class="image featured"><img
+					src="resources/pictures/pic01.jpg" alt="" /></a> </section>
+
 			</div>
 			<div class="6u 12u(narrower)">
 
@@ -152,8 +152,9 @@
 		<div class="row">
 			<div class="6u 12u">
 
-				<section> <a href="./categoryGarden" class="image featured"><img
-					src="resources/pictures/garden.jpg" alt="" /></a> </section>
+				<section> <a href="./categoryGarden"
+					class="image featured"><img src="resources/pictures/garden.jpg"
+					alt="" /></a> </section>
 
 			</div>
 			<div class="6u 12u(narrower)">
@@ -164,8 +165,14 @@
 
 			</div>
 		</div>
-
-
+		
+		<div class="row">
+	<div class="6u 12u(narrower)">
+			<section> <a href="./categoryEntertainment"
+				class="image featured"><img
+				src="resources/pictures/hobby.jpg" alt="" /></a> </section>
+</div>
+</div>
 		</section> </article>
 
 
@@ -174,7 +181,7 @@
 		<h2>
 			Ready to do <strong>explore uRent</strong>?
 		</h2>
-		
+
 		</header> <footer>
 		<ul class="buttons">
 			<li><a href="./categoryHobby" class="button special">Browse</a></li>
