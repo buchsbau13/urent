@@ -133,7 +133,7 @@ public class IndexController {
 			admin = new User(
 					"admin",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
-					"Admin", "Admin", "admin@urent.com", 123, true);
+					"Admin", "Admin", "admin@urent.com", "123", true);
 		admin.setImage(adminByte);
 		userDao.persist(admin);
 
@@ -154,7 +154,7 @@ public class IndexController {
 			user = new User(
 					"user",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
-					"User", "User", "user@urent.com", 123, true);
+					"User", "User", "user@urent.com", "123", true);
 		user.setImage(emmaByte);
 		userDao.persist(user);
 
@@ -175,7 +175,7 @@ public class IndexController {
 			julia = new User(
 					"julia",
 					"$2a$10$2BZh7qw/FSh23ZCbojA.OOoo7vzg7KaqHUp34l8/i9.ktxzcr3vJm",
-					"Julia", "Buchsbaum", "julia@urent.com", 123, true);
+					"Julia", "Buchsbaum", "julia@urent.com", "123", true);
 		julia.setImage(juliaByte);
 		userDao.persist(julia);
 

@@ -24,7 +24,7 @@ public class User implements java.io.Serializable {
 	private String firstname;
 	private String lastname;
 	private String email;
-	private int telephone;
+	private String telephone;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 	private Set<Rentable> rentables;
@@ -37,7 +37,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(String username, String password, String firstname,
-			String lastname, String email, int telephone, boolean enabled) {
+			String lastname, String email, String telephone, boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
@@ -102,12 +102,12 @@ public class User implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(nullable = false)
-	public int getTelephone() {
+	@Column(nullable = false, length = 20)
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
