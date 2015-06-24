@@ -297,7 +297,7 @@
 					<td><fmt:setLocale value="de_DE" scope="session" /> <fmt:formatNumber
 							value="${rentable.price}" type="currency" currencySymbol="€" /></td>
 
-					<td><sec:authorize access="hasRole('ROLE_USER')">
+					<td><sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 							<a href="showRentable?id=${rentable.id}">
 								<button type="button" class="btn btn-xs btn-default">
 									<span class="glyphicon glyphicon-map-marker"></span> Show
