@@ -24,8 +24,18 @@
 <link rel="stylesheet" type="text/css"
 	href=<c:url value='/resources/css/font-awesome.min.css'/> />
 <meta charset="utf-8" />
+<script type="text/javascript">
+	var button = document.getElementById('buttonToggle');
 
-
+	button.onclick = function() {
+		var div = document.getElementById('newpost');
+		if (div.style.display !== 'none') {
+			div.style.display = 'none';
+		} else {
+			div.style.display = 'block';
+		}
+	};
+</script>
 
 
 <title>uRent</title>
@@ -99,35 +109,11 @@
 		<!-- Main -->
 
 		<article id="main"> <header class="special container">
-		<span class="icon fa-bar-chart-o"></span>
-		<h2>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-			diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-			erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-			et ea rebum.</h2>
-		<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-			ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-			sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-			dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-			et justo duo dolores et ea rebum.</p>
-		</header> <section class="wrapper style1 container special">
-		<div class="row">
-			<div class="4u 12u(narrower)">
-
-				<section> <span class="icon featured fa-check"></span> </section>
-
-			</div>
-			<div class="4u 12u(narrower)">
-
-				<section> <span class="icon featured fa-lock"></span> </section>
-
-			</div>
-			<div class="4u 12u(narrower)">
-
-				<section> <span class="icon featured fa-laptop"></span> </section>
-
-			</div>
-		</div>
-		</section> <!-- Three --> <section class="wrapper style3 container special">
+		<span class="icon fa-user"></span>
+		<h2>uRent is a place for rent stuff</h2>
+		<p>Wether you need a bike for your weekendtrip, a guitar for a jam session or tools to finish your work.
+		Find everything you need. In one place. Share your belongings with the world and earn money </p>
+		</header> <!-- Three --> <section class="wrapper style4 container special">
 
 		<header class="major">
 		<h2>Things to Rent</h2>
@@ -135,39 +121,52 @@
 
 		<div class="row">
 			<div class="6u 12u(narrower)">
-
-				<section> <a href="./categorySport"
-					class="image featured"><img src="resources/pictures/pic01.jpg"
-					alt="" /></a> </section>
-
+				
+					<section> <a href="./categorySport"
+						class="image featured"><img src="resources/pictures/pic01.jpg"
+						alt="" /></a> </section>
+				
 			</div>
 			<div class="6u 12u(narrower)">
 
-				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic02.jpg" alt="" /></a> </section>
+				<section> <a href="./categoryMusic" class="image featured"><img
+					src="resources/pictures/music.jpg" alt="" /></a> </section>
 
 			</div>
 		</div>
 		<div class="row">
 			<div class="6u 12u(narrower)">
 
-				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic03.jpg" alt="" /></a> </section>
+				<section> <a href="./categoryTools" class="image featured"><img
+					src="resources/pictures/tools.jpg" alt="" /></a> </section>
 
 			</div>
 			<div class="6u 12u(narrower)">
 
-				<section> <a href="#" class="image featured"><img
-					src="resources/pictures/pic04.jpg" alt="" /></a> </section>
+				<section> <a href="./categoryKitchen"
+					class="image featured"><img
+					src="resources/pictures/kitchen.jpg" alt="" /></a> </section>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="6u 12u">
+
+				<section> <a href="./categoryGarden" class="image featured"><img
+					src="resources/pictures/garden.jpg" alt="" /></a> </section>
+
+			</div>
+			<div class="6u 12u(narrower)">
+
+				<section> <a href="./categoryEntertainment"
+					class="image featured"><img
+					src="resources/pictures/entertainment.jpg" alt="" /></a> </section>
 
 			</div>
 		</div>
 
-		<footer class="major">
-		<ul class="buttons">
-			<li><a href="#" class="button">See More</a></li>
-		</ul>
-		</footer> </section> </article>
+
+		</section> </article>
 
 
 		<!-- CTA -->
@@ -175,11 +174,10 @@
 		<h2>
 			Ready to do <strong>explore uRent</strong>?
 		</h2>
-		<p>Proin a ullamcorper elit, et sagittis turpis integer ut
-			fermentum.</p>
+		
 		</header> <footer>
 		<ul class="buttons">
-			<li><a href="#" class="button special">Browse</a></li>
+			<li><a href="./categoryHobby" class="button special">Browse</a></li>
 		</ul>
 		</footer> </section>
 
